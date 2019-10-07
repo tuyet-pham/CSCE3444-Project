@@ -4,9 +4,9 @@ Dev Members : Avery Clariday, Tuyet Pham, Peyton Pritchard, Pedro Sanchez, Joe M
 Created on : November 2019
 ```
 
-<br>
+
 **About ScholarScrape** 
-<br>
+
 For some, the process of applying for Scholarships is on the level of intimidating to extremely intimidating. Apart from applying for Scholarships, the process of finding the scholarships to apply to can be just as difficult. With public scholarships being in abundant, ScholarScrape was made to make to public scholarships more available using our webscraping program.
 <br>
 <br>
