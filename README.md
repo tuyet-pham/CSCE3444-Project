@@ -1,4 +1,4 @@
-# CSCE3444-Project
+# ScholarScrape
 ```
 Dev Members : Avery Clariday, Tuyet Pham, Peyton Pritchard, Pedro Sanchez, Joe Maggio
 Created on : November 2019
