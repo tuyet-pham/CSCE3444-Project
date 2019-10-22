@@ -2,5 +2,5 @@ version: '0.1'
 services:
   scraper:
     build: .
-    ports:
-      - "5000:5000"
+    volumes:
+      -  .:/code
