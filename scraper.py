@@ -1,5 +1,6 @@
+#!/usr/bin/python
 #scholscrape_new.py -- optimized for Python v3.7.3.
-#CONTRIBUTORS: Peyton Pritchard, 
+#CONTRIBUTORS: Peyton Pritchard,
 
 #REFERENCES:
 # https://www.geeksforgeeks.org/implementing-web-scraping-python-beautiful-soup/
@@ -16,44 +17,77 @@
 # its data, then back out. If so, we can use CollegeBoard and ScholarshipMonkey,
 # as well as other sections of Scholarships.com, as data sources.
 
-from bs4 import BeautifulSoup 	# BeautifulSoup4, the parse tree module
-import requests			# For querying HTML from websites
-import html5lib 		# For parsing HTML
-import csv			# For writing data to .CSV file
-from datetime import date	# For titling the CSV file
-
-url = "https://www.scholarships.com/financial-aid/college-scholarships/scholarship-directory/academic-major/computer-science"
-appendable_url = "https://www.scholarships.com" # Use to make URL attribute of scholarship object usable
-# Connect to website, stopping the program if response code not OK
-try:
-	response = requests.get(url)
-except exceptions.RequestException as e:
-	print(e)
-	sys.exit(1)
-
-soup = BeautifulSoup(response.content, 'html5lib')
-scholarshipList = []
-table = soup.find('tbody')
-
-# Get elements from table
-for row in table.findAll('tr'):
-	scholarship = {}
-	scholarship['name'] = row.find('td', attrs = {'class':'scholtitle'}).text
-	scholarship['url'] = appendable_url+str(row.a['href'])
-	scholarship['amount'] = row.find('td', attrs = {'class':'scholamt'}).text
-	scholarship['deadline'] = row.find('td', attrs = {'class':'scholdd'}).text
-	scholarshipList.append(scholarship)
-
-print(scholarshipList)
-
-scan_time = date.today()
-filename = 'scan_'+str(scan_time)+'.csv'
-
-with open(filename, 'w') as f:
-	w = csv.DictWriter(f, ['name','url','amount','deadline'])
-	w.writeheader()
-	for scholarship in scholarshipList:
-		w.writerow(scholarship)
+import csv  # For writing data to .CSV file
+from datetime import date  # For titling the CSV file
+import html5lib  # For parsing HTML
+import requests  # For querying HTML from websites
+from time import sleep
+from bs4 import BeautifulSoup  # BeautifulSoup4, the parse tree module
 
 
-print("Done")
+def get_scholarshipscom_details(url, appendable_url, filename):
+	# Get the details from the academic major pages
+	response = get_response(appendable_url + url)
+	soup = BeautifulSoup(response.content, 'html5lib')
+
+	# Get scholarship table
+	scholarshipList = []
+	table = soup.find('tbody')
+
+	# Get elements from table
+	for row in table.findAll('tr'):
+		scholarship = {}
+		scholarship['name'] = row.find('td', attrs = {'class':'scholtitle'}).text
+		scholarship['url'] = appendable_url+str(row.a['href'])
+		scholarship['amount'] = row.find('td', attrs = {'class':'scholamt'}).text
+		scholarship['deadline'] = row.find('td', attrs = {'class':'scholdd'}).text
+		scholarshipList.append(scholarship)
+
+	print(scholarshipList)
+
+	# Write scholarships to file
+	with open(filename, 'a') as f:
+		w = csv.DictWriter(f, ['name','url','amount','deadline'])
+		w.writeheader()
+		for scholarship in scholarshipList:
+			w.writerow(scholarship)
+
+
+
+def get_response(url):
+	# Connect to website, stopping the program if response code not OK
+	try:
+		response = requests.get(url)
+	except exceptions.RequestException as e:
+		print(e)
+		sys.exit(1)
+
+	return response
+
+
+def main():
+	# Main code for scraper
+	url = "https://www.scholarships.com/financial-aid/college-scholarships/scholarship-directory/academic-major"
+	appendable_url = "https://www.scholarships.com" # Use to make URL attribute of scholarship object usable
+
+	# Setup output file
+	scan_time = date.today()
+	filename = 'scan_'+str(scan_time)+'.csv'
+	with open(filename, 'w') as f:
+		w = csv.DictWriter(f, ['name','url','amount','deadline'])
+
+	# get response
+	response = get_response(url)
+
+	soup = BeautifulSoup(response.content, 'html5lib')
+	url_table = soup.find(id="ullist")
+	url_list = url_table.find_all('a')
+	for link in url_list:
+		get_scholarshipscom_details(link.get('href'), appendable_url, filename)
+		# Wait 1 second between requests
+		sleep(1)
+
+	print("done")
+
+if __name__== "__main__":
+  main()
