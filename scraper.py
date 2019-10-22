@@ -11,11 +11,13 @@
 #	3. Output data as importable CSB (Outdated step: Turn the collected data into JSON)
 #	4. Store the JSON to file, where it can be accessed by the Py-SQL script
 
-#UPDATES: Last updated 15 Oct - removed glitchy ScholarshipMonkey code.
-#
+#UPDATES:
+# 15 Oct - removed glitchy ScholarshipMonkey code.
+# 22 Oct - added link following
 # Need help from Joe - says there's a way to go into a link, scrape
 # its data, then back out. If so, we can use CollegeBoard and ScholarshipMonkey,
 # as well as other sections of Scholarships.com, as data sources.
+#TODO Delete duplicate scholarships from .csv file or decide to remove duplicates at Database level.
 
 import csv  # For writing data to .CSV file
 from datetime import date  # For titling the CSV file
@@ -26,7 +28,13 @@ from bs4 import BeautifulSoup  # BeautifulSoup4, the parse tree module
 
 
 def get_scholarshipscom_details(url, appendable_url, filename):
-	# Get the details from the academic major pages
+	"""Get the details from the academic major page and save them to a .csv file.
+
+	Args:
+		url (str): Url to scholarship page
+		appendable_url (str): Base site url
+		filename (str): .csv to save scholarships to
+	"""
 	response = get_response(appendable_url + url)
 	soup = BeautifulSoup(response.content, 'html5lib')
 
@@ -55,7 +63,14 @@ def get_scholarshipscom_details(url, appendable_url, filename):
 
 
 def get_response(url):
-	# Connect to website, stopping the program if response code not OK
+	"""Connect to website, stopping the program if response code not OK
+
+	Args:
+		url (str): String url to get request
+
+	Returns:
+		response: Response object
+	"""
 	try:
 		response = requests.get(url)
 	except exceptions.RequestException as e:
@@ -66,7 +81,8 @@ def get_response(url):
 
 
 def main():
-	# Main code for scraper
+	"""Main code for scraper
+	"""
 	url = "https://www.scholarships.com/financial-aid/college-scholarships/scholarship-directory/academic-major"
 	appendable_url = "https://www.scholarships.com" # Use to make URL attribute of scholarship object usable
 
