@@ -1,4 +1,5 @@
 
+
 -- -----------------------------------------------------
 -- Schema ScholarScrape
 -- -----------------------------------------------------
@@ -47,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `scholarscrape`.`Scholarship`
     `name`          VARCHAR(300) NOT NULL,  #
     `amount`        CHAR(19)     NOT NULL,  #
     `deadline`      VARCHAR(10)     NULL,      #
-    #`idScholarshipSource` INT REFERENCES Scholarship_source(idScholarship_source), # URL
+     #`idScholarshipSource` INT REFERENCES Scholarship_source(idScholarship_source), # URL
     `url`                  VARCHAR(300) NULL,   #
     `accp_status`   INT DEFAULT 0,
     PRIMARY KEY (`idScholarship`)
@@ -76,8 +77,8 @@ CREATE TABLE IF NOT EXISTS `scholarscrape`.`reqtag`
     `idreqtag`      INT         NOT NULL auto_increment,
     `sex`           INT         NULL,
     `education_lvl` INT         NULL,
-    `citizenship`   BOOLEAN     NOT NULL DEFAULT TRUE
-    `essay`         BOOLEAN     DEFAULT FALSE
+    `citizenship`   TINYINT     NOT NULL DEFAULT 0,
+    `essay`         TINYINT     NULL,
     `GPA`           VARCHAR(5)  NULL,
     `ethnicity`     VARCHAR(20) NULL,
     `idScholarship` INT         NOT NULL REFERENCES Scholarship (idScholarship),    #from Scholarship table
@@ -86,3 +87,5 @@ CREATE TABLE IF NOT EXISTS `scholarscrape`.`reqtag`
 
 ALTER TABLE reqtag AUTO_INCREMENT= 145;
 
+
+SELECT * from Scholarship;
