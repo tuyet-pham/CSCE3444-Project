@@ -14,15 +14,16 @@ try:
 
     for row in reader:
         cursor.execute("INSERT INTO Scholarship (name, URL, amount, deadline) VALUES (%s,%s,%s,%s)", row)
+    conx.commit()
+    cursor.close()
+    print("done") 
 
 except sql.Error as er:
     if er.errno == errorcode.ER_ACCESS_DENIED_ERROR:
         print("Something is wrong with username or password")
     elif er.errno == errorcode.ER_BAD_DB_ERROR:
-        print("Databas does not exit")
+        print("Database does not exit")
     else:
         print(er)
 
-conx.commit()
-cursor.close()
-print("done")        
+       
