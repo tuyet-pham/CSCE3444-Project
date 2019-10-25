@@ -1,6 +1,6 @@
 #!/usr/bin/python
 #scholscrape_new.py -- optimized for Python v3.7.3.
-#CONTRIBUTORS: Peyton Pritchard,
+#CONTRIBUTORS: Peyton Pritchard, Joe Maggio
 
 #REFERENCES:
 # https://www.geeksforgeeks.org/implementing-web-scraping-python-beautiful-soup/
@@ -11,12 +11,6 @@
 #	3. Output data as importable CSB (Outdated step: Turn the collected data into JSON)
 #	4. Store the JSON to file, where it can be accessed by the Py-SQL script
 
-#UPDATES:
-# 15 Oct - removed glitchy ScholarshipMonkey code.
-# 22 Oct - added link following
-# Need help from Joe - says there's a way to go into a link, scrape
-# its data, then back out. If so, we can use CollegeBoard and ScholarshipMonkey,
-# as well as other sections of Scholarships.com, as data sources.
 #TODO Delete duplicate scholarships from .csv file or decide to remove duplicates at Database level.
 
 import csv  # For writing data to .CSV file
