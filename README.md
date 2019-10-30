@@ -40,11 +40,11 @@ For some, the process of applying for Scholarships is on the level of intimidati
 <br>
 
 **Dev Setup**
-Clone repository
-[Install Docker on your machine](https://hub.docker.com/)
-Build docker instances:
+* Clone repository
+* [Install Docker on your machine](https://hub.docker.com/)
+* Build docker instances:
     - ```docker-compose build```
-Run Docker:
+* Run Docker:
     - Start and run full system: ```docker-compose up```
     - Run one service: ```docker-compose run --rm <service Name>```
     - Start bash in one service: ```docker-compose run --rm <service Name> /bin/sh```
