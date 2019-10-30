@@ -1,10 +1,4 @@
 
-
--- -----------------------------------------------------
--- Schema ScholarScrape
--- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `scholarscrape` ;
-
 -- -----------------------------------------------------
 -- Schema ScholarScrape
 -- -----------------------------------------------------
@@ -18,16 +12,14 @@ CREATE TABLE IF NOT EXISTS `scholarscrape`.`Admin`
 (
     `idAdmin`       INT NOT NULL auto_increment,
     `privilege_lvl` INT NOT NULL DEFAULT 0,
-    `idaccount`     INT NULL REFERENCES account (idaccount),
+    `idaccount`     INT NULL REFERENCES Account (idaccount),
     PRIMARY KEY (`idAdmin`)
 );
-
-ALTER TABLE Admin AUTO_INCREMENT=2000;
 
 -- -----------------------------------------------------
 -- Table `ScholarScrape`.`account`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `scholarscrape`.`account`
+CREATE TABLE IF NOT EXISTS `scholarscrape`.`Account`
 (
     `idaccount` INT          NOT NULL auto_increment,
     `username`  VARCHAR(20)  NOT NULL,
@@ -35,8 +27,6 @@ CREATE TABLE IF NOT EXISTS `scholarscrape`.`account`
     `idAdmin`   INT          NOT NULL REFERENCES Admin (idAdmin),
     PRIMARY KEY (`idaccount`, `idAdmin`)
 );
-
-ALTER TABLE account AUTO_INCREMENT=9786;
 
 -- -----------------------------------------------------
 -- Table `ScholarScrape`.`Scholarship`
@@ -54,7 +44,6 @@ CREATE TABLE IF NOT EXISTS `scholarscrape`.`Scholarship`
     PRIMARY KEY (`idScholarship`)
 );
 
-ALTER TABLE Scholarship AUTO_INCREMENT=5678;
 
 -- -----------------------------------------------------
 -- Table `ScholarScrape`.`Scholarship_source`
@@ -67,12 +56,11 @@ CREATE TABLE IF NOT EXISTS `scholarscrape`.`Scholarship_source`
     PRIMARY KEY (`idScholarship_source`, `idScholarship`)
 );
 
-ALTER TABLE Scholarship_source AUTO_INCREMENT=12123;
 
 -- -----------------------------------------------------
 -- Table `ScholarScrape`.`reqtag`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `scholarscrape`.`reqtag`
+CREATE TABLE IF NOT EXISTS `scholarscrape`.`Reqtag`
 (
     `idreqtag`      INT         NOT NULL auto_increment,
     `sex`           INT         NULL,
@@ -84,8 +72,3 @@ CREATE TABLE IF NOT EXISTS `scholarscrape`.`reqtag`
     `idScholarship` INT         NOT NULL REFERENCES Scholarship (idScholarship),    #from Scholarship table
     PRIMARY KEY (`idreqtag`, `idScholarship`)
 );
-
-ALTER TABLE reqtag AUTO_INCREMENT= 145;
-
-
-SELECT * from Scholarship;
