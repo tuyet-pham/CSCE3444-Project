@@ -1,5 +1,6 @@
 #!/usr/bin/python
 #scholscrape_new.py -- optimized for Python v3.7.3.
+
 #CONTRIBUTORS: Peyton Pritchard, Joe Maggio
 
 #REFERENCES:
@@ -10,6 +11,7 @@
 #	2. Scrape the first page of listings (<td> elements inside <tr>)
 #	3. Output data as importable CSB (Outdated step: Turn the collected data into JSON)
 #	4. Store the JSON to file, where it can be accessed by the Py-SQL script
+
 
 #TODO Delete duplicate scholarships from .csv file or decide to remove duplicates at Database level.
 
