@@ -13,22 +13,24 @@ import sys, os
 from mysql.connector import errorcode
 import csv 
 from datetime import date
+import datetime
 
 def scrape(usern, passwd, hostl, databasen):
     try:
-        conx = sql.connect(user=usern, password=passwd , host=hostl, database=databasen)
-        cursor = conx.cursor()
+        self.conx = sql.connect(user=usern, password=passwd , host=hostl, database=databasen)
+        self.cursor = conx.cursor()
 
         time=date.today()
         filename='scan_'+str(time)+'.csv'
         reader = csv.reader(open(filename))
 
+
         # for each row in the csv file the cursor will make a relation in the table `Scholarship` with name, URL, amount and deadline.
         for row in reader:
-            cursor.execute("INSERT INTO Scholarship (name, url, amount, deadline ) VALUES (%s,%s,%s,%s)", row)
+            self.cursor.execute("INSERT INTO Scholarship (name, url, amount, deadline ) VALUES (%s,%s,%s,%s)", row)
 
 
-
+        print("Successful Scrape! Scraped filename : %s" %filename)
         # Close 
         conx.commit()
         cursor.close()
@@ -42,4 +44,21 @@ def scrape(usern, passwd, hostl, databasen):
             print(er)
 
 
-        
+
+def toDate(date_str):
+    if date_str=='Varies' or date_str=='varies':
+        # newdate = '00/00/0000'
+        # format_str = '%d/%m/%Y' # The format
+        # datetime_obj = datetime.datetime.strptime(newdate, format_str)
+        return None
+    else:
+        format_str = '%m/%d/%Y' # The format
+        datetime_obj = datetime.datetime.strptime(date_str, format_str)
+        return datetime_obj.date() 
+
+def toAmount(amount):
+     if amount=='Varies' or amount=='varies':
+        return None
+    else:
+        intAmount = int(amount)
+        return intAmount

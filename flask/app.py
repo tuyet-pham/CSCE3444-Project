@@ -11,10 +11,6 @@ def index():
     data = db.displayListing()
     return render_template('index.html', data=data)
 
-@app.route('/about.html')
-def about():
-    return render_template('about.html')
-
 
 if __name__ == "__main__":
     app.run(debug=True)
