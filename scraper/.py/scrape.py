@@ -34,6 +34,7 @@ def scrape(usern, passwd, hostl, databasen):
             else:
                 cursor.execute("INSERT INTO Scholarship (name, url, amount, deadline ) VALUES (%s,%s,%s,%s)", (row[0], row[1], int(row[2]), row[3]))
 
+        # queries to NULL where deadline = '1000-01-01' and where amount = 0
         cursor.execute("UPDATE Scholarship set deadline = NULL where deadline = '1000-01-01';")
         cursor.execute("UPDATE Scholarship set amount = NULL where amount = 0;")
 
