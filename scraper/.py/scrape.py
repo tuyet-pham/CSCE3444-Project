@@ -58,7 +58,7 @@ def scrape(usern, passwd, hostl, databasen):
 def toDate(date_str):
     
     # Return the earliest date possible - This can't be NULL or empty here, so this is why I did this. 
-    if date_str == 'Varies' or date_str == 'varies':
+    if date_str == 'Varies' or date_str == 'varies' or date_str == 'deadline':
         return '1000-01-01'
     else:
         format_str = '%m/%d/%Y'                                             # The old format
@@ -70,7 +70,7 @@ def toDate(date_str):
 # This function formats the amount where if equals to 'varies' then return 0. It also takes out any spaces or ',' 
 # @param : string in the format of '%m/%d/%Y'
 def toAmount(amount):
-    if amount == 'Varies' or amount == 'varies' or amount == '' or amount == ' ':
+    if amount == 'Varies' or amount == 'varies' or amount == '' or amount == 'amount':
         return 0
     else:
         line = re.sub('[Variesv!,@#$ ]', '', amount)            # subtracting characters with regex
