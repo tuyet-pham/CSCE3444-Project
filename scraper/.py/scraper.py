@@ -44,7 +44,7 @@ def get_scholarshipscom_details(url, appendable_url, filename):
 		scholarship = {}
 		scholarship['name'] = row.find('td', attrs = {'class':'scholtitle'}).text
 		scholarship['url'] = appendable_url+str(row.a['href'])
-		scholarship['amount'] = toAmount(row.find('td', attrs = {'class':'scholamt'}).text)
+		scholarship['amount'] = toAmount(row.find('td', attrs = {'class':'scholamt'}))
 		scholarship['deadline'] = toDate(row.find('td', attrs = {'class':'scholdd'}).text)
 		scholarshipList.append(scholarship)
 

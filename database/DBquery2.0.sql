@@ -36,8 +36,8 @@ CREATE TABLE IF NOT EXISTS `scholarscrape`.`Scholarship`
     `idScholarship` INT          NOT NULL auto_increment,
     `desc`          VARCHAR(500) NULL,      # Do we need a description?
     `name`          VARCHAR(300) NOT NULL,  #
-    `amount`        CHAR(19)     NOT NULL,  #
-    `deadline`      VARCHAR(10)     NULL,      #
+    `amount`        INT,
+    `deadline`      DATE,
      #`idScholarshipSource` INT REFERENCES Scholarship_source(idScholarship_source), # URL
     `url`                  VARCHAR(300) NULL,   #
     `accp_status`   INT DEFAULT 0,
