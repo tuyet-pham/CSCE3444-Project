@@ -1,8 +1,12 @@
 #!usr/bin/env python
 # mysql.connector & it's corresponding error code for to be able to connect to the mysql database
 #
-# The following code is to 'insert into' the scraped scholarships ONLY. 
+# The following code is to 'insert into' the scraped scholarships
 # This script is not used for the scholarships that are pending for removal or acceptance.
+#
+# This file also has two necessary functions that formats the date and the amount.
+#   (1). def toAmount(str) 
+#   (2). def toDate(str)
 #
 # The following packages :
 #   $ pip install MySQL-python

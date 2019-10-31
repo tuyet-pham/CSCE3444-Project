@@ -44,8 +44,8 @@ def get_scholarshipscom_details(url, appendable_url, filename):
 		scholarship = {}
 		scholarship['name'] = row.find('td', attrs = {'class':'scholtitle'}).text
 		scholarship['url'] = appendable_url+str(row.a['href'])
-		scholarship['amount'] = toAmount(row.find('td', attrs = {'class':'scholamt'}).text)
-		scholarship['deadline'] = toDate(row.find('td', attrs = {'class':'scholdd'}).text)
+		scholarship['amount'] = toAmount(row.find('td', attrs = {'class':'scholamt'}).text)			# Using the func toAmount from scrape.py to format
+		scholarship['deadline'] = toDate(row.find('td', attrs = {'class':'scholdd'}).text)			# Using the func toDate from scrape.py to format
 		scholarshipList.append(scholarship)
 
 	# print(scholarshipList)
