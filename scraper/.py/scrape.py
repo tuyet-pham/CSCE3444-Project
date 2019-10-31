@@ -14,7 +14,7 @@ from mysql.connector import errorcode
 import csv 
 from datetime import date
 import datetime
-import re
+import re                               #re : regular expression
 
 def scrape(usern, passwd, hostl, databasen):
     try:
@@ -52,20 +52,27 @@ def scrape(usern, passwd, hostl, databasen):
             print(er)
 
 
-# This function formats the date from 
+# This function formats the date from '%m/%d/%Y' to '%Y-%m-%d' so we can add it to MYSQL
+# @param : string in the format of '%m/%d/%Y'
 def toDate(date_str):
-    if date_str=='Varies' or date_str=='varies':
+    
+    # Return the earliest date possible - This can't be NULL or empty here, so this is why I did this. 
+    if date_str == 'Varies' or date_str == 'varies':
         return '1000-01-01'
     else:
-        format_str = '%m/%d/%Y' # The format
-        datetime_obj = datetime.datetime.strptime(date_str, format_str)
+        format_str = '%m/%d/%Y'                                             # The old format
+        datetime_obj = datetime.datetime.strptime(date_str, format_str)     # This will give use the formatted object which is then turned into a date string. 
         return datetime_obj.date() 
 
+
+
+# This function formats the amount where if equals to 'varies' then return 0. It also takes out any spaces or ',' 
+# @param : string in the format of '%m/%d/%Y'
 def toAmount(amount):
-    if amount=='Varies' or amount=='varies' or amount=='' or amount==' ':
+    if amount == 'Varies' or amount == 'varies' or amount == '' or amount == ' ':
         return 0
     else:
-        line = re.sub('[Variesv!,@#$ ]', '', amount)
+        line = re.sub('[Variesv!,@#$ ]', '', amount)            # subtracting characters with regex
         if line == '':
             line = 0
         return int(line)
