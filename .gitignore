@@ -4,3 +4,5 @@
 env
 *.pyc
 node_modules
+venv/
+.mypy_cache

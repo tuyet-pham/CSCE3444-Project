@@ -12,16 +12,21 @@ services:
       - 3306:3306
     command: --init-file /data/application/init.sql
     environment:
-       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_P}
-       MYSQL_DATABASE: ${MYSQL_DB_NAME}
-       MYSQL_USER: ${MYSQL_USER_1}
-       MYSQL_PASSWORD: ${MYSQL_PASSWORD_1}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_P}
+      MYSQL_DATABASE: ${MYSQL_DB_NAME}
+      MYSQL_USER: ${MYSQL_USER_1}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD_1}
 
   scraper:
     build: ./scraper
     volumes:
       -  ./scraper:/code
-
+    depends_on:
+      - db
+    environment:
+      MYSQL_USER: ${MYSQL_USER_1}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD_1}
+      MYSQL_DB_NAME: ${MYSQL_DB_NAME}
 
 volumes:
   db-data:

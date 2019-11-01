@@ -29,6 +29,7 @@ import html5lib  # For parsing HTML
 import requests  # For querying HTML from websites
 from time import sleep
 from bs4 import BeautifulSoup  # BeautifulSoup4, the parse tree module
+from scrape import scrape, toAmount, toDate
 
 
 def get_scholarshipscom_details(url, appendable_url, filename):
@@ -53,10 +54,10 @@ def get_scholarshipscom_details(url, appendable_url, filename):
         scholarship['name'] = row.find(
             'td', attrs={'class': 'scholtitle'}).text
         scholarship['url'] = appendable_url + str(row.a['href'])
-        scholarship['amount'] = row.find(
-            'td', attrs={'class': 'scholamt'}).text
-        scholarship['deadline'] = row.find(
-            'td', attrs={'class': 'scholdd'}).text
+        scholarship['amount'] = toAmount(row.find(
+            'td', attrs={'class': 'scholamt'}).text)
+        scholarship['deadline'] = toDate(row.find(
+            'td', attrs={'class': 'scholdd'}).text)
         scholarshipList.append(scholarship)
 
     print(scholarshipList)
@@ -110,6 +111,8 @@ def main():
         get_scholarshipscom_details(link.get('href'), appendable_url, filename)
         # Wait 1 second between requests
         sleep(1)
+
+    scrape(MYSQL_USER, MYSQL_PASSWORD, db, MYSQL_DB_NAME)
 
     print("done")
 
