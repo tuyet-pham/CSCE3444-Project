@@ -7,7 +7,7 @@ from datetime import date
 class dbScholarscrape():
     def __init__(self):
         try:
-            self.conx = sql.connect(user='snow', password='Skylarstanley12', host='localhost', database='scholarscrape')
+            self.conx = sql.connect(user='', password='', host='localhost', database='scholarscrape')
             self.cur = self.conx.cursor()
 
             print("Setup Done.") 
