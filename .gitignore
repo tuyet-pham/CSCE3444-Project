@@ -2,3 +2,5 @@
 *.csv
 .env
 env
+*.pyc
+node_modules

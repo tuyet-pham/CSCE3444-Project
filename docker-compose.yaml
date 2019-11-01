@@ -4,11 +4,14 @@ services:
     image: mysql:5.7
     volumes:
       - db-data:/var/lib/mysql
+      # - ./database/init/docker-entrypoint-initdb.d
+      - ./database/init/init.sql:/data/application/init.sql
     restart: always
     expose:
       - '3306'
     ports:
       - 3306:3306
+    command: --init-file /data/application/init.sql
     environment:
        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT}
        MYSQL_DATABASE: 'scholarscrape'
