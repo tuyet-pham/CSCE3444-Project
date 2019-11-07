@@ -2,10 +2,7 @@ import mysql.connector as sql
 import sys, os
 from mysql.connector import errorcode
 from datetime import date
-
-insertQuery="""
-    INSERT INTO Scholarship (name, url, amount, deadline, accp_status ) VALUES (%s,%s,%s,%s,%s)
-    """
+from sqlScript import *
 
 class dbScholarscrape:
     def __init__(self, usern, password, host):
