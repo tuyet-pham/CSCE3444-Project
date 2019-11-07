@@ -32,8 +32,8 @@ def scrape(usern, passwd, hostl, databasen):
         i = 0
         # for each row in the csv file the cursor will make a relation in the table `Scholarship` with name, URL, amount and deadline.
         for row in reader:
-            if i==0:
-                i=i+1
+            if i == 0:
+                i = i + 1
                 continue
             else:
                 cursor.execute("INSERT INTO Scholarship (name, url, amount, deadline ) VALUES (%s,%s,%s,%s)", (row[0], row[1], int(row[2]), row[3]))
