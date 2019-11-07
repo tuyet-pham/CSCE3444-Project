@@ -22,7 +22,6 @@ services:
       - ./frontend/my-app:/code
     ports:
       - 8080:3000
-    command: npm start
 
   scraper:
     build: ./scraper
