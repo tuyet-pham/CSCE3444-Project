@@ -23,7 +23,7 @@ class dbScholarscrape:
                 print(er)
         
     def displayListing(self):
-        self.cur.execute("SELECT * FROM Scholarship where amount ==")
+        self.cur.execute("SELECT * FROM Scholarship")
         result = self.cur.fetchall()
         return result
     
@@ -32,7 +32,6 @@ class dbScholarscrape:
     def requestListing(self, name, url, amount, deadline, accp_status):
         try:
             self.cur.execute(insertQuery, (name, url, int (amount), deadline, int (accp_status)))
-            #self.cur.execute("""INSERT INTO Scholarship (name, url, amount, deadline, accp_status) VALUES (%s, %s, %s, %s, %s)""", (name, url, int (amount), deadline, int (accp_status)))
             self.conx.commit()
         except sql.Error as er:
             print(er)
