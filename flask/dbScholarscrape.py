@@ -8,9 +8,9 @@ insertQuery="""
     """
 
 class dbScholarscrape:
-    def __init__(self, usern, password, host, database):
+    def __init__(self, usern, password, host):
         try:
-            self.conx = sql.connect(user=usern, password=password, host=host, database=database)
+            self.conx = sql.connect(user=usern, password=password, host=host, database='scholarscrape')
             self.cur = self.conx.cursor()
 
             print("Setup Done.") 
