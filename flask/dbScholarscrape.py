@@ -3,11 +3,14 @@ import sys, os
 from mysql.connector import errorcode
 from datetime import date
 
+insertQuery="""
+    INSERT INTO Scholarship (name, url, amount, deadline, accp_status ) VALUES (%s,%s,%s,%s,%s)
+    """
 
-class dbScholarscrape():
-    def __init__(self):
+class dbScholarscrape:
+    def __init__(self, usern, password, host, database):
         try:
-            self.conx = sql.connect(user='', password='', host='localhost', database='scholarscrape')
+            self.conx = sql.connect(user=usern, password=password, host=host, database=database)
             self.cur = self.conx.cursor()
 
             print("Setup Done.") 
@@ -26,8 +29,14 @@ class dbScholarscrape():
     
         
     # Will be added into our db awaiting admin approval
-    def requestListing(self, name, url, amount, deadline):
-        return "hello"
+    def requestListing(self, name, url, amount, deadline, accp_status):
+        try:
+            self.cur.execute(insertQuery, (name, url, int (amount), deadline, int (accp_status)))
+            #self.cur.execute("""INSERT INTO Scholarship (name, url, amount, deadline, accp_status) VALUES (%s, %s, %s, %s, %s)""", (name, url, int (amount), deadline, int (accp_status)))
+            self.conx.commit()
+        except sql.Error as er:
+            print(er)
 
     def displayBy(self):
         return "Hello"
+
