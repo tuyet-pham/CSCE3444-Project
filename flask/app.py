@@ -7,8 +7,8 @@ app = Flask(__name__)
 
 @app.route('/index.html')
 def index():
-    db = dbScholarscrape()
-    data = db.displayListing()
+    #db = dbScholarscrape()
+    #data = db.displayListing()
     return render_template('index.html', data=data)
 
 
