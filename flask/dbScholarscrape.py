@@ -29,9 +29,9 @@ class dbScholarscrape:
     
         
     # Will be added into our db awaiting admin approval
-    def requestListing(self, name, url, amount, deadline, accp_status):
+    def requestListing(self, name, url, amount, deadline):
         try:
-            self.cur.execute(insertQuery, (name, url, int (amount), deadline, int (accp_status)))
+            self.cur.execute(insertQuery, (name, url, int (amount), deadline, -1))
             self.conx.commit()
         except sql.Error as er:
             print(er)
