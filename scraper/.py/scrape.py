@@ -9,8 +9,7 @@
 #   (2). def toDate(str)
 #
 # The following packages :
-#   $ pip install MySQL-python
-#   $ pip install mysql-connector-python
+#   $ pip3 install mysqlclient
 
 import mysql.connector as sql
 import sys, os
@@ -18,10 +17,13 @@ from mysql.connector import errorcode
 import csv 
 from datetime import date
 import datetime
-import re                               #re : regular expression
+import re                               # re : regular expression
 
 def scrape(usern, passwd, hostl, databasen):
     try:
+        #
+        # This function will 
+        #
         conx = sql.connect(user=usern, password=passwd , host=hostl, database=databasen)
         cursor = conx.cursor()
 
@@ -39,11 +41,11 @@ def scrape(usern, passwd, hostl, databasen):
                 cursor.execute("INSERT INTO Scholarship (name, url, amount, deadline ) VALUES (%s,%s,%s,%s)", (row[0], row[1], int(row[2]), row[3]))
 
         # queries to NULL where deadline = '1000-01-01' and where amount = 0
-        cursor.execute("UPDATE Scholarship set deadline = NULL where deadline = '1000-01-01';")
+        cursor.execute("UPDATE Scholarship set deadline = NULL where deadline = '100`0-01-01';")
         cursor.execute("UPDATE Scholarship set amount = NULL where amount = 0;")
 
 
-        print("Successful Scrape! Scraped filename : %s" %filename)
+        print("Successful insertion of scraped scholarship - Scraped filename : %s" %filename)
         # Close 
         conx.commit()
         cursor.close()
