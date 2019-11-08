@@ -8,7 +8,7 @@
 #   (1). def toAmount(str) 
 #   (2). def toDate(str)
 #
-# The following packages :
+# The following packages:
 #   $ pip3 install mysqlclient
 
 import mysql.connector as sql
@@ -19,16 +19,22 @@ from datetime import date
 import datetime
 import re                               # re : regular expression
 
+
+
+
+ 
+# scrape 
+# @param username, password, host IP or name 
+# feature :  
+# 
+#
 def scrape(usern, passwd, hostl, databasen):
     try:
-        #
-        # This function will 
-        #
         conx = sql.connect(user=usern, password=passwd , host=hostl, database=databasen)
         cursor = conx.cursor()
 
-        time=date.today()
-        filename='scan_'+str(time)+'.csv'
+        time = date.today()
+        filename = 'scan_'+str(time)+'.csv'
         reader = csv.reader(open(filename))
 
         i = 0
@@ -39,11 +45,14 @@ def scrape(usern, passwd, hostl, databasen):
                 continue
             else:
                 cursor.execute("INSERT INTO Scholarship (name, url, amount, deadline ) VALUES (%s,%s,%s,%s)", (row[0], row[1], int(row[2]), row[3]))
+                lastid = cursor.execute("SELECT * FROM Scholarship WHERE idScholarship = (SELECT LAST_INSERT_ID()")
+                makeMajor(cursor, row[1], lastid)
 
         # queries to NULL where deadline = '1000-01-01' and where amount = 0
         cursor.execute("UPDATE Scholarship set deadline = NULL where deadline = '100`0-01-01';")
         cursor.execute("UPDATE Scholarship set amount = NULL where amount = 0;")
 
+        
 
         print("Successful insertion of scraped scholarship - Scraped filename : %s" %filename)
         # Close 
@@ -83,3 +92,15 @@ def toAmount(amount):
         if line == '':
             line = 0
         return int(line)
+
+
+
+def makeMajor(cur, url, lastid):
+    temp = url
+    # parse url to get major with flag 'academic-major'
+    data = (temp, lastid)
+    try:
+        cur.execute("INSERT INTO Regtag (major, idScholarship) VALUES (%s, %s)", data)
+    except sql.Error as er:
+        print(er)
+
