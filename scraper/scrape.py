@@ -9,8 +9,7 @@
 #   (2). def toDate(str)
 #
 # The following packages :
-#   $ pip install MySQL-python
-#   $ pip install mysql-connector-python
+#
 
 import sys
 import os
@@ -18,12 +17,11 @@ import csv
 from datetime import date
 import datetime
 import re                               #re : regular expression
-import mysql.connector as sql
-from mysql.connector import errorcode
+import MySQLdb as sql
 
-def scrape(usern, passwd, hostl, databasen):
+def scrape(usern, password, hostl, databasen):
     try:
-        conx = sql.connect(user=usern, password=passwd , host=hostl, database=databasen)
+        conx = sql.connect(user=usern, passwd=password , host=hostl, db=databasen)
         cursor = conx.cursor()
 
         time=date.today()
