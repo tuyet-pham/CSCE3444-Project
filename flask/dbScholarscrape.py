@@ -26,10 +26,24 @@ class dbScholarscrape:
     
         
     # Will be added into our db awaiting admin approval
+    # Will accept empty string of name, amount, deadline
+    # Will return error if url is empty
     def requestListing(self, name, url, amount, deadline):
         try:
+            if name == '':
+                name = 'Default'
+            if url == '':
+                print('Your URL is invalid/cannot be empty')
+                return 0
+            if amount == 'Varies' or amount == 'varies' or amount == '' or amount == 'amount':
+                amount = 0
+            if deadline == '':
+                deadline = '1000-01-01'
             self.cur.execute(insertQuery, (name, url, int (amount), deadline, -1))
+            self.cur.execute("UPDATE Scholarship set deadline = NULL where deadline = '1000-01-01';")
+            self.cur.execute("UPDATE Scholarship set amount = NULL where amount = 0;")
             self.conx.commit()
+            print('Successfully inserted data to database!')
         except sql.Error as er:
             print(er)
 

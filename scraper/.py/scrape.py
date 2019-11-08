@@ -67,7 +67,7 @@ def toDate(date_str):
     if date_str == 'Varies' or date_str == 'varies' or date_str == 'deadline':
         return '1000-01-01'
     else:
-        format_str = '%m/%d/%Y'                                             # The old format
+        format_str = '%m/%d/%Y'                                             # The old date format
         datetime_obj = datetime.datetime.strptime(date_str, format_str)     # This will give use the formatted object which is then turned into a date string. 
         return datetime_obj.date() 
 
@@ -76,7 +76,7 @@ def toDate(date_str):
 # This function formats the amount where if equals to 'varies' then return 0. It also takes out any spaces or ',' 
 # @param : string in the format of '%m/%d/%Y'
 def toAmount(amount):
-    if amount == 'Varies' or amount == 'varies' or amount == '' or amount == 'amount':
+    if amount == 'Varies' or amount == 'varies':
         return 0
     else:
         line = re.sub('[Variesv!,@#$ ]', '', amount)            # subtracting characters with regex
