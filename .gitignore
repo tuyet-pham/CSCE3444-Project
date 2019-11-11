@@ -3,4 +3,4 @@
 run.py
 .env
 env
-env/
+flask/env
