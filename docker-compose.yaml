@@ -5,6 +5,7 @@ services:
     volumes:
       - db-data:/var/lib/mysql
       - ./database/init/init.sql:/data/application/init.sql
+      - ./database/init/new_config.cnf:/etc/mysql/conf.d/custom.cnf
     restart: always
     expose:
       - '3306'

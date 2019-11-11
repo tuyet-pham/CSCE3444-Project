@@ -23,6 +23,10 @@ def scrape(usern, password, hostl, databasen):
     try:
         conx = sql.connect(user=usern, passwd=password , host=hostl, db=databasen)
         cursor = conx.cursor()
+        conx.set_character_set('utf8')
+        cursor.execute('SET NAMES utf8;')
+        cursor.execute('SET CHARACTER SET utf8;')
+        cursor.execute('SET character_set_connection=utf8;')
 
         time=date.today()
         filename='scan_'+str(time)+'.csv'
