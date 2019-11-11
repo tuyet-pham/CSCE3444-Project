@@ -53,12 +53,12 @@ CREATE TABLE IF NOT EXISTS `scholarscrape`.`Reqtag`
 (
     `idreqtag`      INT         NOT NULL auto_increment,
     `sex`           INT         NULL,
-    `major`         VARCHAR(40) NULL,
-    `citizenship`   TINYINT     NOT NULL DEFAULT 0,
-    `essay`         TINYINT     NULL,
+    `major`         VARCHAR(70) NULL,
+    `citizenship`   TINYINT     DEFAULT 0,
+    `essay`         TINYINT     DEFAULT 0,
     `GPA`           VARCHAR(5)  NULL,
     `ethnicity`     VARCHAR(20) NULL,
-    `idScholarship` INT         NOT NULL REFERENCES Scholarship (idScholarship),    #from Scholarship table
+    `idScholarship` INT         NOT NULL REFERENCES Scholarship (idScholarship),  
     PRIMARY KEY (`idreqtag`, `idScholarship`)
 );
 

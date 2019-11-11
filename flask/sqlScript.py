@@ -11,3 +11,6 @@ feature="""
 AND %s = %s;
 """
 
+tagQuery = """
+    INSERT INTO Reqtag (sex, major, citizenship, essay, GPA, ethnicity, idScholarship) 
+    VALUES (%s, %s, %s, %s, %s, %s %s)"""
