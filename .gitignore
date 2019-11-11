@@ -1,6 +1,4 @@
 .vscode
 *.csv
 run.py
-.env
 env
-flask/env
