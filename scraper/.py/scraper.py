@@ -100,7 +100,7 @@ def main():
 		# Wait 1 second between requests
 		sleep(1)
 
-	# scrape("", "", "", "")				#inserting after the scraper is finished
+	scrape("","","","")				#inserting after the scraper is finished
 	print("Done\nFilename : " %filename)
 
 if __name__== "__main__":

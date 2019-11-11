@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `scholarscrape`.`Reqtag`
 (
     `idreqtag`      INT         NOT NULL auto_increment,
     `sex`           INT         NULL,
-    `major`         VARCHAR(70) NULL,
+    `major`         VARCHAR(200) NULL,
     `citizenship`   TINYINT     DEFAULT 0,
     `essay`         TINYINT     DEFAULT 0,
     `GPA`           VARCHAR(5)  NULL,
