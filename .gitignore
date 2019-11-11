@@ -1,3 +1,6 @@
 .vscode
 *.csv
 run.py
+.env
+env
+env/
