@@ -29,6 +29,9 @@ import html5lib  # For parsing HTML
 import requests  # For querying HTML from websites
 from time import sleep
 from bs4 import BeautifulSoup  # BeautifulSoup4, the parse tree module
+from os import environ
+from scrape import scrape, toAmount, toDate
+
 
 
 def get_scholarshipscom_details(url, appendable_url, filename):
@@ -53,16 +56,16 @@ def get_scholarshipscom_details(url, appendable_url, filename):
         scholarship['name'] = row.find(
             'td', attrs={'class': 'scholtitle'}).text
         scholarship['url'] = appendable_url + str(row.a['href'])
-        scholarship['amount'] = row.find(
-            'td', attrs={'class': 'scholamt'}).text
-        scholarship['deadline'] = row.find(
-            'td', attrs={'class': 'scholdd'}).text
+        scholarship['amount'] = toAmount(row.find(
+            'td', attrs={'class': 'scholamt'}).text)
+        scholarship['deadline'] = toDate(row.find(
+            'td', attrs={'class': 'scholdd'}).text)
         scholarshipList.append(scholarship)
 
-    print(scholarshipList)
+    # print(scholarshipList)
 
     # Write scholarships to file
-    with open(filename, 'a') as f:
+    with open(filename, 'a', encoding='utf-8-sig') as f:
         w = csv.DictWriter(f, ['name', 'url', 'amount', 'deadline'])
         for scholarship in scholarshipList:
             w.writerow(scholarship)
@@ -96,7 +99,7 @@ def main():
     # Setup output file
     scan_time = date.today()
     filename = 'scan_' + str(scan_time) + '.csv'
-    with open(filename, 'w') as f:
+    with open(filename, 'w',encoding='utf-8-sig') as f:
         w = csv.DictWriter(f, ['name', 'url', 'amount', 'deadline'])
         w.writeheader()
 
@@ -110,6 +113,8 @@ def main():
         get_scholarshipscom_details(link.get('href'), appendable_url, filename)
         # Wait 1 second between requests
         sleep(1)
+
+    scrape(environ['MYSQL_USER'], environ['MYSQL_PASSWORD'], "db", environ['MYSQL_DB_NAME'])
 
     print("done")
 
