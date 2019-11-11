@@ -62,7 +62,7 @@ def get_scholarshipscom_details(url, appendable_url, filename):
             'td', attrs={'class': 'scholdd'}).text)
         scholarshipList.append(scholarship)
 
-    print(scholarshipList)
+    # print(scholarshipList)
 
     # Write scholarships to file
     with open(filename, 'a', encoding='utf-8-sig') as f:
