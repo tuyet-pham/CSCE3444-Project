@@ -3,6 +3,7 @@
 -- Schema ScholarScrape
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `scholarscrape` ;
+
 USE `scholarscrape` ;
 
 -- -----------------------------------------------------
