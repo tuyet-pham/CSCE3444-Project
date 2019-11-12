@@ -1,4 +1,9 @@
 .vscode
 *.csv
 run.py
+.env
 env
+*.pyc
+node_modules
+venv/
+.mypy_cache

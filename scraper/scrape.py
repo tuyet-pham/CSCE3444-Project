@@ -150,3 +150,4 @@ def tagBuilder(idscholarship, url, desc):
         major, other = back.split('/')
         s[1] = major
         return s
+

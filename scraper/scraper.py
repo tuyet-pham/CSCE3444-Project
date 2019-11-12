@@ -26,7 +26,6 @@ from scrape import *
 
 def get_scholarshipscom_details(url, appendable_url, filename):
 	"""Get the details from the academic major page and save them to a .csv file.
-
 	Args:
 		url (str): Url to scholarship page
 		appendable_url (str): Base site url
@@ -106,3 +105,33 @@ def main():
 if __name__== "__main__":
   main()
 
+=======
+    """Code for scraper."""
+    url = "https://www.scholarships.com/financial-aid/college-scholarships/scholarship-directory/academic-major"
+    # Use to make URL attribute of scholarship object usable
+    appendable_url = "https://www.scholarships.com"
+
+    # Setup output file
+    scan_time = date.today()
+    filename = 'scan_' + str(scan_time) + '.csv'
+    with open(filename, 'w',encoding='utf-8-sig') as f:
+        w = csv.DictWriter(f, ['name', 'url', 'amount', 'deadline'])
+        w.writeheader()
+
+    # get response
+    response = get_response(url)
+
+    soup = BeautifulSoup(response.content, 'html5lib')
+    url_table = soup.find(id="ullist")
+    url_list = url_table.find_all('a')
+    for link in url_list:
+        get_scholarshipscom_details(link.get('href'), appendable_url, filename)
+        # Wait 1 second between requests
+        sleep(1)
+
+    scrape(environ['MYSQL_USER'], environ['MYSQL_PASSWORD'], "db", environ['MYSQL_DB_NAME'])
+    print("done")
+
+
+if __name__ == "__main__":
+    main()
