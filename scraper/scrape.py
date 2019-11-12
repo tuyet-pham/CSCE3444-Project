@@ -16,27 +16,28 @@ import os
 import csv
 from datetime import date
 import datetime
-import re                               #re : regular expression
+import re                               # re : regular expression
 import MySQLdb as sql
+
 
 def scrape(usern, password, hostl, databasen):
     try:
-        conx = sql.connect(user=usern, passwd=password , host=hostl, db=databasen)
+        conx = sql.connect(user=usern, passwd=password, host=hostl, db=databasen)
         cursor = conx.cursor()
         conx.set_character_set('utf8')
         cursor.execute('SET NAMES utf8;')
         cursor.execute('SET CHARACTER SET utf8;')
         cursor.execute('SET character_set_connection=utf8;')
 
-        time=date.today()
-        filename='scan_'+str(time)+'.csv'
+        time = date.today()
+        filename = 'scan_' + str(time) + '.csv'
         reader = csv.reader(open(filename))
 
         i = 0
         # for each row in the csv file the cursor will make a relation in the table `Scholarship` with name, URL, amount and deadline.
         for row in reader:
-            if i==0:
-                i=i+1
+            if i == 0:
+                i = i + 1
                 continue
             else:
                 cursor.execute("INSERT INTO Scholarship (name, url, amount, deadline ) VALUES (%s,%s,%s,%s)", (row[0], row[1], int(row[2]), row[3]))
@@ -45,8 +46,7 @@ def scrape(usern, password, hostl, databasen):
         cursor.execute("UPDATE Scholarship set deadline = NULL where deadline = '1000-01-01';")
         cursor.execute("UPDATE Scholarship set amount = NULL where amount = 0;")
 
-
-        print("Successful Scrape! Scraped filename : %s" %filename)
+        print("Successful Scrape! Scraped filename : %s" % filename)
         # Close
         conx.commit()
         cursor.close()
@@ -71,7 +71,6 @@ def toDate(date_str):
         format_str = '%m/%d/%Y'                                             # The old format
         datetime_obj = datetime.datetime.strptime(date_str, format_str)     # This will give use the formatted object which is then turned into a date string.
         return datetime_obj.date()
-
 
 
 # This function formats the amount where if equals to 'varies' then return 0. It also takes out any spaces or ','
