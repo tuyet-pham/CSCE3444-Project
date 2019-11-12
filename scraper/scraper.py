@@ -1,11 +1,9 @@
 #!/usr/bin/python
 """This is an HTML scraper that does the following.
-
 1. Go to https://www.scholarships.com/financial-aid/college-scholarships/scholarship-directory/academic-major/computer-science
 2. Scrape the first page of listings (<td> elements inside <tr>)
 3. Output data as importable CSB (Outdated step: Turn the collected data into JSON)
 4. Store the JSON to file, where it can be accessed by the Py-SQL script
-
 """
 # scholscrape_new.py -- optimized for Python v3.7.3.
 
@@ -35,14 +33,11 @@ from scrape import scrape, toAmount, toDate
 
 def get_scholarshipscom_description(url, appendable_url):
     """Get the description for a scholarship.
-
     Args:
         url (str): URL to scholarship page
         appendable_url (str): base site url
-
     Returns:
         str: The scholarship description
-
     """
     response = get_response(appendable_url + url)
     soup = BeautifulSoup(response.content, 'html5lib')
@@ -61,12 +56,10 @@ def get_scholarshipscom_description(url, appendable_url):
 
 def get_scholarshipscom_details(url, appendable_url, filename):
     """Get the details from the academic major page and save them to a .csv file.
-
     Args:
             url (str): Url to scholarship page
             appendable_url (str): Base site url
             filename (str): .csv to save scholarships to
-
     """
     response = get_response(appendable_url + url)
     soup = BeautifulSoup(response.content, 'html5lib')
@@ -101,13 +94,10 @@ def get_scholarshipscom_details(url, appendable_url, filename):
 
 def get_response(url):
     """Connect to website, stopping the program if response code not OK.
-
     Args:
             url (str): String url to get request
-
     Returns:
             response: Response object
-
     """
     try:
         response = requests.get(url)
