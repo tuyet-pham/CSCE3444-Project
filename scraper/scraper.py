@@ -33,6 +33,31 @@ from os import environ
 from scrape import scrape, toAmount, toDate
 
 
+def get_scholarshipscom_description(url, appendable_url):
+    """Get the description for a scholarship.
+
+    Args:
+        url (str): URL to scholarship page
+        appendable_url (str): base site url
+
+    Returns:
+        str: The scholarship description
+
+    """
+    response = get_response(appendable_url + url)
+    soup = BeautifulSoup(response.content, 'html5lib')
+
+    # Get description text
+    raw_desc = soup.find('li', attrs={'class': 'scholdescrip'}).get_text()
+
+    # Remove google ad code
+    raw_desc = raw_desc.replace('(adsbygoogle = window.adsbygoogle || []).push({});', '')
+
+    # Remove extra white spaece from front and back of string
+    raw_desc = raw_desc.strip()
+
+    return raw_desc
+
 
 def get_scholarshipscom_details(url, appendable_url, filename):
     """Get the details from the academic major page and save them to a .csv file.
@@ -45,6 +70,8 @@ def get_scholarshipscom_details(url, appendable_url, filename):
     """
     response = get_response(appendable_url + url)
     soup = BeautifulSoup(response.content, 'html5lib')
+
+    print("Finding scholarships for: %s" % url, flush=True)
 
     # Get scholarship table
     scholarshipList = []
@@ -60,13 +87,14 @@ def get_scholarshipscom_details(url, appendable_url, filename):
             'td', attrs={'class': 'scholamt'}).text)
         scholarship['deadline'] = toDate(row.find(
             'td', attrs={'class': 'scholdd'}).text)
+        scholarship['description'] = get_scholarshipscom_description(row.find('td', attrs={'class': 'scholtitle'}).a['href'], appendable_url)
         scholarshipList.append(scholarship)
 
     # print(scholarshipList)
 
     # Write scholarships to file
     with open(filename, 'a', encoding='utf-8-sig') as f:
-        w = csv.DictWriter(f, ['name', 'url', 'amount', 'deadline'])
+        w = csv.DictWriter(f, ['name', 'url', 'amount', 'deadline', 'description'])
         for scholarship in scholarshipList:
             w.writerow(scholarship)
 
@@ -99,8 +127,8 @@ def main():
     # Setup output file
     scan_time = date.today()
     filename = 'scan_' + str(scan_time) + '.csv'
-    with open(filename, 'w',encoding='utf-8-sig') as f:
-        w = csv.DictWriter(f, ['name', 'url', 'amount', 'deadline'])
+    with open(filename, 'w', encoding='utf-8-sig') as f:
+        w = csv.DictWriter(f, ['name', 'url', 'amount', 'deadline', 'description'])
         w.writeheader()
 
     # get response
@@ -111,9 +139,11 @@ def main():
     url_list = url_table.find_all('a')
     for link in url_list:
         get_scholarshipscom_details(link.get('href'), appendable_url, filename)
+
         # Wait 1 second between requests
         sleep(1)
 
+    print("Pushing file into the database.", flush=True)
     scrape(environ['MYSQL_USER'], environ['MYSQL_PASSWORD'], "db", environ['MYSQL_DB_NAME'])
 
     print("done")
