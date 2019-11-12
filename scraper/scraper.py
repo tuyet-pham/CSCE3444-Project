@@ -40,6 +40,7 @@ def get_scholarshipscom_description(url, appendable_url):
         str: The scholarship description
     """
     sleep(1)
+
     response = get_response(appendable_url + url)
     soup = BeautifulSoup(response.content, 'html5lib')
 
