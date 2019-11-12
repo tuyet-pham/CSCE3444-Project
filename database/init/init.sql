@@ -1,7 +1,9 @@
+
 -- -----------------------------------------------------
 -- Schema ScholarScrape
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `scholarscrape` ;
+
 USE `scholarscrape` ;
 
 -- -----------------------------------------------------
@@ -37,22 +39,10 @@ CREATE TABLE IF NOT EXISTS `scholarscrape`.`Scholarship`
     `name`          VARCHAR(300) NOT NULL,  #
     `amount`        INT,
     `deadline`      DATE,
-     #`idScholarshipSource` INT REFERENCES Scholarship_source(idScholarship_source), # URL
-    `url`                  VARCHAR(300) NULL,   #
+    `idreqtag`      INT REFERENCES Reqtag(idreqtag), # URL
+    `url`           VARCHAR(300) NULL,
     `accp_status`   INT DEFAULT 0,
     PRIMARY KEY (`idScholarship`)
-);
-
-
--- -----------------------------------------------------
--- Table `ScholarScrape`.`Scholarship_source`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `scholarscrape`.`Scholarship_source`
-(
-    `idScholarship_source` INT          NOT NULL auto_increment,
-    `url`                  VARCHAR(200) NULL,   #
-    `idScholarship`        INT REFERENCES Scholarship (idScholarship),  #from Scholarship table
-    PRIMARY KEY (`idScholarship_source`, `idScholarship`)
 );
 
 
@@ -63,11 +53,11 @@ CREATE TABLE IF NOT EXISTS `scholarscrape`.`Reqtag`
 (
     `idreqtag`      INT         NOT NULL auto_increment,
     `sex`           INT         NULL,
-    `education_lvl` INT         NULL,
-    `citizenship`   TINYINT     NOT NULL DEFAULT 0,
-    `essay`         TINYINT     NULL,
+    `major`         VARCHAR(200) NULL,
+    `citizenship`   TINYINT     DEFAULT 0,
+    `essay`         TINYINT     DEFAULT 0,
     `GPA`           VARCHAR(5)  NULL,
     `ethnicity`     VARCHAR(20) NULL,
-    `idScholarship` INT         NOT NULL REFERENCES Scholarship (idScholarship),    #from Scholarship table
+    `idScholarship` INT         NOT NULL REFERENCES Scholarship (idScholarship),
     PRIMARY KEY (`idreqtag`, `idScholarship`)
 );

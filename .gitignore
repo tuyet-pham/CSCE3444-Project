@@ -1,5 +1,7 @@
 .vscode
 *.csv
+run.py
+run1.py
 .env
 env
 *.pyc

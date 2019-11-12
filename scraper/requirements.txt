@@ -1,4 +1,4 @@
 beautifulsoup4
 requests
 html5lib
-mysqlclient
+mysql-connector-python

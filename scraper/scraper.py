@@ -39,6 +39,8 @@ def get_scholarshipscom_description(url, appendable_url):
     Returns:
         str: The scholarship description
     """
+    sleep(1)
+
     response = get_response(appendable_url + url)
     soup = BeautifulSoup(response.content, 'html5lib')
 
@@ -71,17 +73,20 @@ def get_scholarshipscom_details(url, appendable_url, filename):
     table = soup.find('tbody')
 
     # Get elements from table
-    for row in table.findAll('tr'):
+    rows = table.findAll('tr')
+    for i in range(len(rows)):
         scholarship = {}
-        scholarship['name'] = row.find(
+        scholarship['name'] = rows[i].find(
             'td', attrs={'class': 'scholtitle'}).text
-        scholarship['url'] = appendable_url + str(row.a['href'])
-        scholarship['amount'] = toAmount(row.find(
+        scholarship['url'] = appendable_url + str(rows[i].a['href'])
+        scholarship['amount'] = toAmount(rows[i].find(
             'td', attrs={'class': 'scholamt'}).text)
-        scholarship['deadline'] = toDate(row.find(
+        scholarship['deadline'] = toDate(rows[i].find(
             'td', attrs={'class': 'scholdd'}).text)
-        scholarship['description'] = get_scholarshipscom_description(row.find('td', attrs={'class': 'scholtitle'}).a['href'], appendable_url)
+        scholarship['description'] = get_scholarshipscom_description(rows[i].find('td', attrs={'class': 'scholtitle'}).a['href'], appendable_url)
         scholarshipList.append(scholarship)
+        if i >= 19:
+            break
 
     # print(scholarshipList)
 
