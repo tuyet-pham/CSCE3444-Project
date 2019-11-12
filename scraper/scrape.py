@@ -17,7 +17,6 @@ from mysql.connector import errorcode
 import csv
 from datetime import date
 import datetime
-<<<<<<< HEAD
 
 #re : regular expression
 import re
