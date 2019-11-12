@@ -86,9 +86,12 @@ def scrape(usern, passwd, hostl, databasen):
         cursor.execute("UPDATE Scholarship set deadline = NULL where deadline = '1000-01-01'")
         cursor.execute("UPDATE Scholarship set amount = NULL where amount = 0")
 
-        # queries to NULL where GPA = '-1' and where ethnicity = '-1'
+        # queries to NULL where GPA = '-1' and where ethnicity = '-1' and where sex = '-1'
         cursor.execute("UPDATE Reqtag set GPA = NULL where GPA = '-1'")
         cursor.execute("UPDATE Reqtag set ethnicity = NULL where ethnicity = '-1'")
+        cursor.execute("UPDATE Reqtag set sex = NULL where sex = '-1'")
+
+
 
 
         print("Successful insertion of scraped scholarship - Scraped filename : %s" %filename)
