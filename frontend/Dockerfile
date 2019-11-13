@@ -5,5 +5,6 @@ ENV PATH /code/node_modules/.bin:$PATH
 
 RUN npm install
 RUN npm install react-scripts -g
+RUN npm install react-icons -g
 EXPOSE 3000
 CMD ["npm","start"]

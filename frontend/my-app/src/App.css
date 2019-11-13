@@ -1,22 +1,109 @@
+:root {
+    --ss-light-green: #ccffcc;
+    --ss-medium-green: #00ff00;
+    --ss-dark-green: #008000;
+    --ss-teal: #00aaaa;
+    --ss-orange: #cc6600;
+    --ss-gray: #999999;
+    --ss-light-gray: #dddddd;
+}
+
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
+    height: 2em;
+    vertical-align: middle;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: var(--ss-light-green);
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: black;
+}
+
+.App-footer {
+    background-color: black;
+    color: white;
+    min-height: 5%;
+    max-height: 10%;
+    width: 100%;
+    bottom: 0;
+    
+    text-align: left;
+}
+
+.App-header-contents {
+    bottom: 10;
 }
 
 .App-link {
-  color: #09d3ac;
+    color: #09d3ac;
+}
+
+/* Style for search bar */
+.Search-bar{
+    float: none;
+}
+
+.Search-bar input[type=text]{
+    color: var(--ss-gray);
+    background-color: white;
+    padding: 6px 10px;
+    margin-top: 8px;
+    font-size: 17px;
+    border: 1px solid var(--ss-gray);
+    border-radius: 10px 0px 0px 10px;
+}
+
+.Search-bar button{
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    color: white;
+    background: var(--ss-teal);
+    font-size: 17px;
+    border: 1px solid var(--ss-gray);
+    border-radius: 0px 10px 10px 0px;
+    cursor: pointer;
+}
+
+/* Columns and rows from w3schools.com */
+.column {
+    float: left;
+    width: 20%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Floating boxes on home screen */
+.floatingBox {
+    display: inline-block;
+    width: 30%;
+    height: 100%;
+    margin: 1%;
+    padding: 10px;
+    vertical-align: text-top;
+    background-color:var(--ss-light-gray);
+}
+
+.floatingBox2 {
+    display: inline-block;
+    width: 30%;
+    height: 100%;
+    margin: 1%;
+    padding: 10px;
+    vertical-align: text-top;
+    background-color: white;
 }
