@@ -52,7 +52,7 @@ class Home extends React.Component {
                 </div>
         
                 
-                <div id="meetTheTeam" style={{background: "#eee", paddingTop: "10px", paddingBottom: "10px", marginTop: "10px"}}>
+                <div id="meetTheTeam" style={{background: "var(--ss-light-green)", paddingTop: "10px", paddingBottom: "10px", marginTop: "10px"}}>
                     <h2> Meet the Team </h2>
                     {/*put team info here*/}
                     <div class="floatingBox2">

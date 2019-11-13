@@ -1,8 +1,9 @@
 :root {
     --ss-light-green: #ccffcc;
-    --ss-medium-green: #00ff00;
+    --ss-medium-green: #40bf40;
     --ss-dark-green: #008000;
     --ss-teal: #00aaaa;
+    --ss-light-teal: #00cccc;
     --ss-orange: #cc6600;
     --ss-gray: #999999;
     --ss-light-gray: #dddddd;
@@ -18,7 +19,7 @@
 }
 
 .App-header {
-    background-color: var(--ss-light-green);
+    background-color: var(--ss-medium-green);
     min-height: 300px;
     display: flex;
     flex-direction: column;
@@ -58,7 +59,7 @@
     padding: 6px 10px;
     margin-top: 8px;
     font-size: 17px;
-    border: 1px solid var(--ss-gray);
+    border: 1px solid black;
     border-radius: 10px 0px 0px 10px;
 }
 
@@ -68,9 +69,9 @@
     margin-top: 8px;
     margin-right: 16px;
     color: white;
-    background: var(--ss-teal);
+    background: var(--ss-light-teal);
     font-size: 17px;
-    border: 1px solid var(--ss-gray);
+    border: 1px solid black;
     border-radius: 0px 10px 10px 0px;
     cursor: pointer;
 }
@@ -96,6 +97,7 @@
     padding: 10px;
     vertical-align: text-top;
     background-color:var(--ss-light-gray);
+    border-radius: 10px;
 }
 
 .floatingBox2 {
@@ -106,4 +108,5 @@
     padding: 10px;
     vertical-align: text-top;
     background-color: white;
+    border-radius: 10px;
 }
