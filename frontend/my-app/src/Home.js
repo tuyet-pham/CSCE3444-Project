@@ -5,6 +5,16 @@ class Home extends React.Component {
     render () {
         return (
             <div className="App">
+                <div class="App-header">
+                    <h1 class="App-header-contents">
+                        <img class="App-logo" src={process.env.PUBLIC_URL + "scraper_logo.png"} alt="ScholarScraper logo"/> 
+                        ScholarScraper 
+                    </h1>
+                    <div class="Search-bar">
+                        <input type="text" placeholder="Search scholarships..." name="search" />
+                        <button type="submit">Go</button>
+                    </div>
+                </div>
                 <div id="scholarScrapeDescription" style={{paddingTop:"10px", paddingBottom:"10px"}}>
                     <h2> How to use ScholarScrape </h2>
                     {/*put scraper tips here*/}

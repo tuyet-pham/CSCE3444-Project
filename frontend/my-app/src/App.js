@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-class MainHeader extends React.Component {
+class App extends React.Component {
     render () {
         return (
             <div className="App" class="App-header">
@@ -18,4 +18,4 @@ class MainHeader extends React.Component {
     }
 }
 
-export default MainHeader;
+export default App;

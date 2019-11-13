@@ -1,13 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import MainHeader from './App';
 import Home from './Home';
+//import Results from './Results';
+//import AdminLogin from './AdminLogin';
+//import AdminHome from './AdminHome';
 import Footer from './Footer';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<MainHeader />, document.getElementById('mainheader'));
+//Home page
 ReactDOM.render(<Home />, document.getElementById('home'));
+
+//Search result page
+
+
+//Admin login
+
+//Admin home
+
+//Footer (appears on all pages)
 ReactDOM.render(<Footer />, document.getElementById('footer'));
 
 // If you want your app to work offline and load faster, you can change
