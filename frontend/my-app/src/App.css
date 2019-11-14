@@ -48,9 +48,11 @@
     color: #09d3ac;
 }
 
-/* Style for search bar */
+/* Style for search bar, source: https://www.w3schools.com/howto/howto_css_searchbar.asp */
 .Search-bar{
     float: none;
+    white-space: nowrap;
+    min-width: 300px;
 }
 
 .Search-bar input[type=text]{
@@ -59,12 +61,13 @@
     padding: 6px 10px;
     margin-top: 8px;
     font-size: 17px;
+    /*float: left;*/
     border: 1px solid black;
     border-radius: 10px 0px 0px 10px;
 }
 
 .Search-bar button{
-    float: right;
+    /*float: right;*/
     padding: 6px 10px;
     margin-top: 8px;
     margin-right: 16px;

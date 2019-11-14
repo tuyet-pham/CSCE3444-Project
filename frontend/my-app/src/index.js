@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './Home';
 //import Results from './Results';
-//import AdminLogin from './AdminLogin';
+import AdminLogin from './AdminLogin';
 //import AdminHome from './AdminHome';
 import Footer from './Footer';
 import * as serviceWorker from './serviceWorker';
@@ -15,6 +15,7 @@ ReactDOM.render(<Home />, document.getElementById('home'));
 
 
 //Admin login
+ReactDOM.render(<AdminLogin />, document.getElementById('adminlogin'));
 
 //Admin home
 
