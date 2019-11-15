@@ -85,18 +85,23 @@
     width: 20%;
 }
 
-.row:after {
+.row {
     content: "";
     display: table;
     clear: both;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    border-collapse: separate;
+    border-spacing: 10px;
 }
 
 /* Floating boxes on home screen */
 .floatingBox {
-    display: inline-block;
+    display: table-cell;
     width: 30%;
-    height: 100%;
-    margin: 1%;
+    max-height: inherit;
+    margin: 10px;
     padding: 10px;
     vertical-align: text-top;
     background-color:var(--ss-light-gray);
