@@ -36,7 +36,6 @@
     max-height: 10%;
     width: 100%;
     bottom: 0;
-    
     text-align: left;
 }
 
@@ -112,4 +111,155 @@
     vertical-align: text-top;
     background-color: white;
     border-radius: 10px;
+}
+
+/***************************** Admin Home Page  ****************************/
+.AppAdmin{
+    height: 110vh;
+    max-height: 100%;
+    min-height: 10%;
+    min-width: 20%;
+    background-color: #e0e0e0;
+    overflow: hidden;
+}
+
+.App-logo2 {
+    height: 3em;
+    vertical-align: middle;
+}
+
+.AddminHomeHeader {
+    background-color : #1a6631;
+    color: rgb(231, 231, 231);
+    text-align: right;
+    font-size: 20px;
+    padding : 10px;
+}
+
+
+/* NAVBAR - references : https://www.w3schools.com/css/css_navbar.asp */
+.nav {
+    list-style-type: none;
+    margin : 0px;
+    padding: 0px;
+    background-color: #232323;
+    height: 100%;
+    width: 260px;
+    float: left;
+    font-size: 17px;
+    text-align: center;
+    overflow: auto;
+}
+
+.nav a {
+    display: inline-block;
+    color: whitesmoke;
+    padding: 20px 0px 20px 0px;
+    text-decoration: none;
+    width: 100%;
+}
+
+.nav a:hover:not(.active) {
+    background-color: var(--ss-dark-green);
+}
+
+.active {
+    background-color: var(--ss-dark-green);
+}
+
+/************ END NAVBAR ************/
+
+
+
+/*******Buttons******/
+.button {
+    border-style: none;
+    border-radius: 20px;
+    margin-top: 30px;
+    height: 30px;
+    padding: 0px 10px 0px 10px;
+    margin-right: 15px 0 10px 0px;
+    font-size: 16px; ;
+    /* -webkit-transition-duration: 0.2s; 
+    transition-duration: 0.2s;    */
+}
+
+.button-yellow {
+    background-color: #fdd835;
+    color: white;
+}
+
+.button-yellow:hover {
+    background-color: #b69504;
+    color:whitesmoke;
+    box-shadow: 3px 10px 20px -7px rgba(0,0,0,0.19), 0 10px 20px 0 rgba(0,0,0,0.14);
+}
+
+.button-yellow:active {
+    background-color: #997d00;
+    color:whitesmoke;
+}
+
+
+.button-red {
+    background-color: #e53935;
+    color: whitesmoke;
+}
+
+.button-red:hover {
+    background-color: #b81d1a;
+    color: whitesmoke;
+    box-shadow: 3px 10px 20px -7px rgba(0,0,0,0.19), 0 10px 20px 0 rgba(0,0,0,0.14);
+}
+
+.button-red:active {
+    background-color: #962321;
+    color:whitesmoke;
+}
+
+
+.button-green {
+    background-color: #1a6631;
+    color: whitesmoke;
+}
+
+.button-green:hover {
+    background-color: var(--ss-medium-green);
+    color: whitesmoke;
+    box-shadow: 3px 10px 20px -7px rgba(0,0,0,0.19), 0 10px 20px 0 rgba(0,0,0,0.14);
+}
+
+.button-green:active {
+    background-color: #4d964d;
+    color:whitesmoke;
+}
+
+/**** END BUTTONS ****/
+
+
+/* FLEX AREA references 
+- https://www.w3schools.com/css/css3_flexbox.asp               
+- https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container
+*/
+
+.flex-view {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.flex-view > div {
+    height: 250px;
+    width: 300px;
+    background-color: whitesmoke;
+    margin: 50px 20px 0px 10px;
+    padding: 5px;
+    font-size: 17px;
+    text-align: center;
+    box-shadow: 3px 10px 20px -7px rgba(0,0,0,0.19), 0 10px 20px 0 rgba(0,0,0,0.14);
+}
+
+.viewdisplay {
+    font-family: "Helvetica Neue", "Arial", sans-serif;; 
+    font-size: 50px;
 }
