@@ -66,7 +66,7 @@ def scrape(usern, passwd, hostl, databasen):
                 # tagBuilder(idScholarship, url, desc) : Gives us an array of all attributes of the Reqtag table per scholarship listing
                 # Reqtag table's attributes : sex, major, citizenship, essay, GPA, ethnicity, idScholarship
                 #
-                s = tagBuilder(lastScholarshipID[0], row[1], " ")
+                s = tagBuilder(lastScholarshipID[0], row[1], row[4])
                 tagQuery ="""
                         INSERT INTO Reqtag (sex, major, citizenship, essay, GPA, ethnicity, idScholarship) VALUES (%s, %s, %s, %s, %s, %s, %s)
                         """
@@ -151,5 +151,20 @@ def tagBuilder(idscholarship, url, desc):
         front, back = temp.split('/academic-major/')
         major, other = back.split('/')
         s[1] = major
+        result = ['women', 'woman']
+
+        #result = desc.find('women')
+        if any(c in desc for c in result):
+            s[0] = 1
+
+        #result = desc.find('men')
+        elif any(c in desc for c in result):
+            s[0] = 2
+
+        #if 'American' or 'american' in desc:
+        #    s[2] = 1
+
+        #decimals = re.findall('\d*\.?\d+',temp)
+
         return s
 
