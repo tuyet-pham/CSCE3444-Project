@@ -8,12 +8,12 @@ import AdminHome from './AdminHome';
 import Footer from './Footer';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter, Route } from 'react-router-dom'
 
-// //Home page
+//Home page
 ReactDOM.render(<App />, document.getElementById('root'));
 
-// //Search result page
-
+//Search result page
 
 // //Admin login
 ReactDOM.render(<AdminLogin />, document.getElementById('adminlogin'));
@@ -29,7 +29,6 @@ ReactDOM.render(<AdminLogin />, document.getElementById('adminlogin'));
 //     all: '503'
 // };
 ReactDOM.render(<AdminHome {...basicinfo}/>, document.getElementById('adminhome'));
-
 
 
 //Footer (appears on all pages)
