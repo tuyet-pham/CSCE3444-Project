@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `scholarscrape`.`Account`
 CREATE TABLE IF NOT EXISTS `scholarscrape`.`Scholarship`
 (
     `idScholarship` INT          NOT NULL auto_increment,
-    `desc`          VARCHAR(500) NULL,      # Do we need a description?
+    `description`   TEXT NULL,      # Do we need a description?
     `name`          VARCHAR(300) NOT NULL,  #
     `amount`        INT,
     `deadline`      DATE,
