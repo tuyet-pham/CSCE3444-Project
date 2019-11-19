@@ -28,7 +28,7 @@ ReactDOM.render(<AdminLogin />, document.getElementById('adminlogin'));
 //     reported: '10',
 //     all: '503'
 // };
-ReactDOM.render(<AdminHome {...basicinfo}/>, document.getElementById('adminhome'));
+ReactDOM.render(<AdminHome />, document.getElementById('adminhome'));
 
 
 //Footer (appears on all pages)
