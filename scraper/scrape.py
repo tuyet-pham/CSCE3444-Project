@@ -151,18 +151,19 @@ def tagBuilder(idscholarship, url, desc):
         front, back = temp.split('/academic-major/')
         major, other = back.split('/')
         s[1] = major
-        result = ['women', 'woman']
+        result = ['women', 'woman', 'Women', 'Woman', 'Female', 'female']
+        results = ['men', 'man', 'Men', 'Man', 'male', 'Male']
 
         #result = desc.find('women')
         if any(c in desc for c in result):
             s[0] = 1
-
-        #result = desc.find('men')
-        elif any(c in desc for c in result):
+                
+        elif any(c in desc for c in results):
             s[0] = 2
 
-        #if 'American' or 'american' in desc:
-        #    s[2] = 1
+        result = ['Citizen', 'citizen']
+        if any(c in desc for c in result):
+            s[2] = 1
 
         #decimals = re.findall('\d*\.?\d+',temp)
 
