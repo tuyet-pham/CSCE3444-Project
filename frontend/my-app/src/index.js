@@ -11,12 +11,12 @@ import * as serviceWorker from './serviceWorker';
 // import { BrowserRouter, Route } from 'react-router-dom'
 
 //Home page
-ReactDOM.render(<App />, document.getElementById('root'));
+//ReactDOM.render(<App />, document.getElementById('root'));
 
 //Search result page
 
 // //Admin login
-ReactDOM.render(<AdminLogin />, document.getElementById('adminlogin'));
+//ReactDOM.render(<AdminLogin />, document.getElementById('adminlogin'));
 
 //Admin home
 //This is for testing purposes. You can pass in elements via the 'constructor'. 
