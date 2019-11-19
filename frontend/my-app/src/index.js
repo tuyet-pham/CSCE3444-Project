@@ -7,6 +7,7 @@ import AdminLogin from './AdminLogin';
 import AdminHome from './AdminHome';
 import Footer from './Footer';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter, Route } from 'react-router-dom'
 
 // //Home page
 // ReactDOM.render(<Home />, document.getElementById('home'));
