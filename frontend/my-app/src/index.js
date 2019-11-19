@@ -10,11 +10,13 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 // import { BrowserRouter, Route } from 'react-router-dom'
 
-// //Home page
-// ReactDOM.render(<App />, document.getElementById('root'));
+//Home page
+ReactDOM.render(<App />, document.getElementById('root'));
 
-// //Search result page
+//Search result page
 
+// //Admin login
+ReactDOM.render(<AdminLogin />, document.getElementById('adminlogin'));
 
 //Admin home
 //This is for testing purposes. You can pass in elements via the 'constructor'. 
@@ -26,9 +28,7 @@ import * as serviceWorker from './serviceWorker';
 //     reported: '10',
 //     all: '503'
 // };
-ReactDOM.render(<AdminHome />, document.getElementById('adminhome'));
-
-ReactDOM.render(<AdminLogin />, document.getElementById('adminlogin'));
+ReactDOM.render(<AdminHome {...basicinfo}/>, document.getElementById('adminhome'));
 
 
 //Footer (appears on all pages)
