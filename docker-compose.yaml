@@ -19,7 +19,8 @@ services:
   frontend:
     build: ./frontend
     volumes:
-      - ./frontend/my-app:/code
+      - ./frontend/my-app:/app
+      - /app/node_modules
     ports:
       - 3000:3000
 
