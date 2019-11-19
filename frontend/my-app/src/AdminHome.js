@@ -1,8 +1,7 @@
 import React from 'react';
 import './App.css';
 import './Table';
-import Footer from './Footer';
-import Table from './Table';
+
 
 
 // reference : https://www.w3schools.com/react/showreact.asp?filename=demo2_react_lifecycle_componentwillunmount
