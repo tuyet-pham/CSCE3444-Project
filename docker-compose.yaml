@@ -4,22 +4,25 @@ services:
     image: mysql:5.7
     volumes:
       - db-data:/var/lib/mysql
-      - ./init:/docker-entrypoint-initdb.d
+      - ./database/init/init.sql:/data/application/init.sql
+      - ./database/init/new_config.cnf:/etc/mysql/conf.d/custom.cnf
     restart: always
     expose:
       - '3306'
     ports:
       - 3306:3306
+    command: --init-file /data/application/init.sql
     environment:
-       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT}
-       MYSQL_DATABASE: 'scholarscrape'
-       MYSQL_USER: 'user'
-       MYSQL_PASSWORD: 'pass'
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_P}
+      MYSQL_DATABASE: ${MYSQL_DB_NAME}
+      MYSQL_USER: ${MYSQL_USER_1}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD_1}
 
   frontend:
     build: ./frontend
     volumes:
-      - ./frontend/my-app:/code
+      - ./frontend/my-app:/app
+      - /app/node_modules
     ports:
       - 3000:3000
 
@@ -27,7 +30,12 @@ services:
     build: ./scraper
     volumes:
       -  ./scraper:/code
-
+    depends_on:
+      - db
+    environment:
+      MYSQL_USER: ${MYSQL_USER_1}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD_1}
+      MYSQL_DB_NAME: ${MYSQL_DB_NAME}
 
 volumes:
   db-data:
