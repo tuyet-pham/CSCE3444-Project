@@ -1,13 +1,4 @@
-.vscode
-*.csv
-run.py
-run1.py
-.env
-env
-venv
-.mypy_cache
-__pycache__
-
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
@@ -29,5 +20,4 @@ __pycache__
 
 npm-debug.log*
 yarn-debug.log*
-<<<<<<< HEAD
 yarn-error.log*
