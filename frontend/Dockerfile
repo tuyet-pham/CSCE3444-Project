@@ -11,5 +11,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY my-app/package.json /app/package.json
 RUN npm install --silent
 RUN npm install react-scripts@3.0.1 -g --silent
+RUN npm install react-router-dom
+RUN npm install react-icons
 
 CMD ["npm", "start"]
