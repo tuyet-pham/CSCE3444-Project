@@ -4,21 +4,23 @@ import './index.css';
 import Home from './Home';
 //import Results from './Results';
 import AdminLogin from './AdminLogin';
-//import AdminHome from './AdminHome';
+import AdminHome from './AdminHome';
 import Footer from './Footer';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter, Route } from 'react-router-dom'
 
-//Home page
-ReactDOM.render(<Home />, document.getElementById('home'));
+// //Home page
+// ReactDOM.render(<Home />, document.getElementById('home'));
 
-//Search result page
+// //Search result page
 
 
-//Admin login
-ReactDOM.render(<AdminLogin />, document.getElementById('adminlogin'));
+// //Admin login
+// ReactDOM.render(<AdminLogin />, document.getElementById('adminlogin'));
 
 //Admin home
+ReactDOM.render(<AdminHome />, document.getElementById('adminhome'));
+
 
 //Footer (appears on all pages)
 ReactDOM.render(<Footer />, document.getElementById('footer'));
