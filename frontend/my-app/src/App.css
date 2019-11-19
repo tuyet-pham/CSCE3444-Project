@@ -79,9 +79,13 @@
 }
 
 /* Columns and rows from w3schools.com */
-.column {
+.column-20 {
     float: left;
     width: 20%;
+}
+.column-5 {
+    float: left;
+    width: 5%;
 }
 
 .row {

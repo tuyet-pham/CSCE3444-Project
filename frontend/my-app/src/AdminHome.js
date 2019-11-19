@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import { FaBeer } from 'react-icons/fa';
 import './Table';
 
 
@@ -61,7 +60,7 @@ class AdminHome extends React.Component {
 
                     <div title="Listing awaiting approval">
                         <h1 style={{color:'#fdd835'}} class="viewdisplay">{this.state.requests}</h1>
-                                Search for Scholarships <FaBeer />
+                                Search for Scholarships
                                 Requested listing 
                         <div>
                             <button class="button button-green">Show me</button>
