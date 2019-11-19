@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
+import './Table';
 import Footer from './Footer';
+import Table from './Table';
 
 
 // reference : https://www.w3schools.com/react/showreact.asp?filename=demo2_react_lifecycle_componentwillunmount
@@ -10,9 +12,9 @@ class AdminHome extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            requests : 0,
-            reported: 13,
-            all: 566,
+            requests : this.props.requested,
+            reported: this.props.reported,
+            all: this.props.all,
         };
     }
 
@@ -22,8 +24,11 @@ class AdminHome extends React.Component {
 
     requestscrape() {
         var x = document.getElementById("myDate").value;
-        alert('Scraper is scheduled to scrape on ' + x );
+        alert('Scraper is scheduled to scrape on ' + x);
+        // Realistically the Admin should ask the db to scrape when needed. This 
+        // Function will be an after thought if we have time.
     }
+
 
     componentDidMount(){
         setInterval(() => {
@@ -78,7 +83,9 @@ class AdminHome extends React.Component {
                         </div>
                     </div>
 
-                    <div>
+
+                    {/* This is disabled until we can somehow schedule the scraper */}
+                    <div style={{display:"none"}} >
                         <br />
                         Last known scrape
                         <br/>{this.props.lastscraped}
@@ -88,7 +95,7 @@ class AdminHome extends React.Component {
                             <input type="date" id="myDate"></input><br/>
                             <button class="button button-red" onClick="requestscrape()">Submit Request</button>
                         </form>
-                    </div>       
+                    </div>      
                 </div>
             </div>
         );

@@ -1,10 +1,17 @@
-FROM node:11.5
-WORKDIR /code
 
-ENV PATH /code/node_modules/.bin:$PATH
+# base image
+FROM node:12.2.0-alpine
 
-RUN npm install
-RUN npm install react-scripts -g
-RUN npm install react-icons -g
-EXPOSE 3000
-CMD ["npm","start"]
+# set working directory
+WORKDIR /app
+
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /app/node_modules/.bin:$PATH
+
+# install and cache app dependencies
+COPY my-app/package.json /app/package.json
+RUN npm install --silent
+RUN npm install react-scripts@3.0.1 -g --silent
+
+# start app
+CMD ["npm", "start"]
