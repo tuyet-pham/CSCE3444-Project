@@ -21,6 +21,7 @@ class Home extends React.Component {
                     <div class="row">
                         <div class="floatingBox">
                             <h3>
+                                Search for Scholarships
                             </h3>
                             <span> {/* I want to add some padding between the text and the edge of the box here, but inline styling isn't working.*/}
                                 In the search box above, type in
