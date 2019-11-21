@@ -14,7 +14,7 @@ import Submit from './Submit';
 import {FaHome} from "react-icons/fa";
 import {FaSearch} from "react-icons/fa";
 import {MdAddCircle} from "react-icons/md"
-import {IoMdLogIn} from "react-icons/iomd"
+//import {IoMdLogIn} from "react-icons/iomd"
   
 
 class App extends React.Component {
@@ -26,7 +26,7 @@ class App extends React.Component {
                         <Link title="Home" to ="/root"><FaHome/></Link>
                         <Link title="Search for scholarships" to ="/search"><FaSearch/></Link>
                         <Link title="Add a listing" to ="/submit"><MdAddCircle/></Link>
-                        <Link title="Admin Login" to ="/login"><IoMdLogIn/></Link>
+                        <Link title="Admin Login" to ="/login">Login</Link>
                     </div>
                    
                     <Switch>
