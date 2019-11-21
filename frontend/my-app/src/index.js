@@ -1,16 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-// import Home from './Home';
-//import Results from './Results';
-//import AdminLogin from './AdminLogin';
-//import AdminHome from './AdminHome';
 import Footer from './Footer';
 import App from './App';
-import Results from './Results';
 import * as serviceWorker from './serviceWorker';
-import { BrowserRouter, Route } from 'react-router-dom'
-import Submit from './Submit';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

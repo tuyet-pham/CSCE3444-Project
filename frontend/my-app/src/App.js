@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
 import './App.css';
 import {
     BrowserRouter as Router,
@@ -12,10 +10,11 @@ import AdminLogin from './AdminLogin';
 import './index.css';
 import Home from './Home';
 import Results from './Results';
-import AdminHome from './AdminHome';
-import Footer from './Footer';
 import Submit from './Submit';
-
+import {FaHome} from "react-icons/fa";
+import {FaSearch} from "react-icons/fa";
+import {MdAddCircle} from "react-icons/md"
+import {IoMdLogIn} from "react-icons/iomd"
   
 
 class App extends React.Component {
@@ -24,10 +23,10 @@ class App extends React.Component {
             <div className="App">
                 <Router>
                     <div class="nav2">
-                        <Link to ="/root">Home</Link>
-                        <Link to ="/search">Search</Link>
-                        <Link to ="/submit">Submit</Link>
-                        <Link to ="/login">Login</Link>
+                        <Link title="Home" to ="/root"><FaHome/></Link>
+                        <Link title="Search for scholarships" to ="/search"><FaSearch/></Link>
+                        <Link title="Add a listing" to ="/submit"><MdAddCircle/></Link>
+                        <Link title="Admin Login" to ="/login"><IoMdLogIn/></Link>
                     </div>
                    
                     <Switch>
