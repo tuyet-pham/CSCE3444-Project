@@ -133,6 +133,24 @@ def toAmount(amount):
             line = 0
         return int(line)
 
+def GPA(desc):
+
+    decimals = re.findall('\s\.?\d*\.?\d+',desc)
+    for i in range(0, len(decimals)):
+        decimals[i] = float(decimals[i])
+
+    temp = decimals[:]
+
+    for item in decimals:
+        if (item >= 4.0 or item < 2.1):
+            temp.remove(item)
+
+    if (len(temp) == 0):
+        return -1
+    else:
+        return temp[0]
+
+
 
 
 # This function builds a string to
@@ -164,19 +182,8 @@ def tagBuilder(idscholarship, url, desc):
         result = ['Citizen', 'citizen']
         if any(c in desc for c in result):
             s[2] = 1
-
-        decimals = re.findall('\d*\.?\d+',desc)
-        for i in range(0, len(decimals)):
-            decimals[i] = float(decimals[i])
-
-        temp = decimals[:]
-
-        for item in decimals:
-            if (item >= 4.0 or item < 2.0):
-                temp.remove(item)
-
-        print(temp)
-        print('\n')
+        
+        s[4] = GPA(desc)
 
         return s
 
