@@ -431,23 +431,23 @@ button:focus {
 /* NAVBAR - references : https://www.w3schools.com/css/css_navbar.asp */
 
 .nav2 {
-    /* list-style-type: none; */
+    list-style-type: none;
     margin : 0px;
     padding: 0px;
     background-color: var(--ss-medium-green);
     height: 100%;
     width: 100%;
-    font-size: 17px;
+    font-size: 20px;
     text-align: right;
 }
 
 .nav2 a {
     display: inline-block;
     color: whitesmoke;
-    padding: 20px 0px 20px 0px;
+    padding: 15px 5px 15px 5px;
     text-decoration: none;
     text-align: center;
-    width: 7%;
+    width: 5%;
 }
 
 .nav2 a:hover:not(.active) {
