@@ -14,11 +14,11 @@ class Results extends React.Component {
                     <button type="submit">Go</button>
                 </div>
 
-                <div class="column-30" style={{backgroundColor:"var(--ss-light-gray)"}}>
+                <div class="column-30" style={{backgroundColor:"var(--ss-light-gray)", textAlign:"left"}}>
                     <h2 style={{color:"var(--ss-gray)"}}>
                         Filters
                     </h2>
-                    <form id="filters">
+                    <form class="form-inline" id="filters">
                         <label>
                             Major*
                             <input type="text" name="major" placeholder="Computer Science"/>

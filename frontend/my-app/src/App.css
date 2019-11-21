@@ -92,7 +92,7 @@
     padding: 6px 10px;
     margin-top: 8px;
     margin-bottom: 8px;
-    margin-left: auto;
+    margin-right: 0px;
     font-size: 17px;
     float: left;
     border: 1px solid black;
@@ -105,7 +105,7 @@
     padding: 6px 10px;
     margin-top: 8px;
     margin-bottom: 8px;
-    margin-right: auto;
+    margin-left: 0px;
     color: white;
     background: var(--ss-light-teal);
     font-size: 17px;
@@ -158,6 +158,28 @@
     height: 100%;
     border-collapse: separate;
     border-spacing: 10px;
+}
+
+/* Form styles for Search page */
+.form-inline {
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.form-inline label {
+    margin: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-inline input, select { /*TO DO: make numbers look less horrible*/
+    vertical-align: middle;
+    margin: 5px;
+    float: right;
+    width: 50%;
+    box-sizing: border-box;
 }
 
 /* Floating boxes on home screen */
