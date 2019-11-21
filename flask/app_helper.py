@@ -1,7 +1,12 @@
 #!usr/bin/env python3
 
 import mysql.connector as sql
+import datetime
 from os import environ
+
+def json_converter(o):
+    if isinstance(o, datetime.datetime):
+        return o._str_()
 
 def db_connect():
     try:
