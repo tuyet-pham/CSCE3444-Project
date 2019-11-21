@@ -154,7 +154,7 @@ def tagBuilder(idscholarship, url, desc):
         result = ['women', 'woman', 'Women', 'Woman', 'Female', 'female']
         results = ['men', 'man', 'Men', 'Man', 'male', 'Male']
 
-        #result = desc.find('women')
+
         if any(c in desc for c in result):
             s[0] = 1
                 
@@ -165,7 +165,18 @@ def tagBuilder(idscholarship, url, desc):
         if any(c in desc for c in result):
             s[2] = 1
 
-        #decimals = re.findall('\d*\.?\d+',temp)
+        decimals = re.findall('\d*\.?\d+',desc)
+        for i in range(0, len(decimals)):
+            decimals[i] = float(decimals[i])
+
+        temp = decimals[:]
+
+        for item in decimals:
+            if (item >= 4.0 or item < 2.0):
+                temp.remove(item)
+
+        print(temp)
+        print('\n')
 
         return s
 
