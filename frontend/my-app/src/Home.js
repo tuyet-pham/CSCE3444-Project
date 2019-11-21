@@ -4,7 +4,7 @@ import './App.css';
 class Home extends React.Component {
     render () {
         return (
-            <div className="App">
+            <div className="App-home">
                 <div class="App-header">
                     <h1 class="App-header-contents">
                         <img class="App-logo" src={process.env.PUBLIC_URL + "scraper_logo.png"} alt="ScholarScraper logo"/> 

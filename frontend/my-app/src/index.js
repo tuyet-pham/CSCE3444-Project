@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 // import Home from './Home';
 //import Results from './Results';
-import AdminLogin from './AdminLogin';
-import AdminHome from './AdminHome';
+//import AdminLogin from './AdminLogin';
+//import AdminHome from './AdminHome';
 import Footer from './Footer';
-import App from './App';
+//import App from './App';
+import Results from './Results';
 import * as serviceWorker from './serviceWorker';
 // import { BrowserRouter, Route } from 'react-router-dom'
 
@@ -28,8 +29,8 @@ import * as serviceWorker from './serviceWorker';
 //     reported: '10',
 //     all: '503'
 // };
-ReactDOM.render(<AdminHome />, document.getElementById('adminhome'));
-
+//ReactDOM.render(<AdminHome />, document.getElementById('adminhome'));
+ReactDOM.render(<Results />, document.getElementById('results'));
 
 //Footer (appears on all pages)
 ReactDOM.render(<Footer />, document.getElementById('footer'));

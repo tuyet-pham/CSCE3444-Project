@@ -21,6 +21,7 @@
 .App-header {
     background-color: var(--ss-medium-green);
     min-height: 300px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -78,14 +79,74 @@
     cursor: pointer;
 }
 
+.Search-bar-wide{
+    float: none;
+    white-space: nowrap;
+    margin: auto;
+    width: 96%;
+}
+
+.Search-bar-wide input[type=text]{
+    color: var(--ss-gray);
+    background-color: white;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: auto;
+    font-size: 17px;
+    float: left;
+    border: 1px solid black;
+    border-radius: 10px 0px 0px 10px;
+    min-width: 90%;
+}
+
+.Search-bar-wide button{
+    /*float: right;*/
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: auto;
+    color: white;
+    background: var(--ss-light-teal);
+    font-size: 17px;
+    border: 1px solid black;
+    border-radius: 0px 10px 10px 0px;
+    cursor: pointer;
+    min-width: 6%;
+}
+
 /* Columns and rows from w3schools.com */
 .column-20 {
     float: left;
     width: 20%;
+    box-sizing: border-box;
 }
+
 .column-5 {
     float: left;
     width: 5%;
+    box-sizing: border-box;
+}
+
+.column-30 {
+    float: left;
+    width: 30%;
+    box-sizing: border-box;
+    padding: 30px;
+}
+
+.column-70 {
+    float: left;
+    width: 70%;
+    box-sizing: border-box;
+    padding: 30px;
+}
+
+.column-50 {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+    padding: 30px;
 }
 
 .row {
