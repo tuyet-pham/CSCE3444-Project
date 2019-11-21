@@ -6,11 +6,11 @@ class Submit extends React.Component {
         return (
             <div className="App" class="App-header">
                 <h1 class="App-header-contents">
-                    ADMIN HOME
+                    SUBMIT
                 </h1>
             </div>
         );
     }
 }
 
-export default AdminHome;
+export default Submit;
