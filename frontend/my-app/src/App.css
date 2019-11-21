@@ -173,8 +173,9 @@
 }
 
 .floatingBox2 {
+    min-width: 400px;
     display: inline-block;
-    width: 30%;
+    max-width: 30%;
     height: 100%;
     margin: 1%;
     padding: 10px;
@@ -208,7 +209,12 @@
 }
 
 
-/* NAVBAR - references : https://www.w3schools.com/css/css_navbar.asp */
+/********************* Navigation bar AdminHome ********************/
+
+/* 
+- references : https://www.w3schools.com/css/css_navbar.asp 
+*/
+
 .nav {
     list-style-type: none;
     margin : 0px;
@@ -228,6 +234,7 @@
     padding: 20px 0px 20px 0px;
     text-decoration: none;
     width: 100%;
+    outline: none;
 }
 
 .nav a:hover:not(.active) {
@@ -238,9 +245,7 @@
     background-color: var(--ss-dark-green);
 }
 
-/************ END NAVBAR ************/
-/***************Buttons**************/
-
+/********************** Buttons AdminHome *********************/
 
 button::-moz-focus-inner {
     border: 0;
@@ -258,7 +263,7 @@ button:focus {
     height: 30px;
     padding: 0px 10px 0px 10px;
     margin-right: 15px 0 10px 0px;
-    font-size: 16px; ;
+    font-size: 17px; ;
     /* -webkit-transition-duration: 0.2s; 
     transition-duration: 0.2s;    */
 }
@@ -314,8 +319,10 @@ button:focus {
 }
 
 
-/**** END BUTTONS ****/
-/* FLEX AREA references 
+/************** Flex area for AdminHome ************************/
+
+/*
+- References: 
 - https://www.w3schools.com/css/css3_flexbox.asp               
 - https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container
 */
@@ -363,7 +370,7 @@ button:focus {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: calc(20px + 2vmin);
+    font-size: calc(16px + 2vmin);
     margin-bottom: -20px;
     padding-top: 3%;
     color: black;
@@ -380,7 +387,7 @@ button:focus {
     margin-top: 30px;
     margin-right: 15px;
     margin-bottom: 10px;
-    font-size: 18px; 
+    font-size: 17px; 
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;   
 }
@@ -404,7 +411,7 @@ button:focus {
     min-width: 20%;
     width: 400px;
     color: var(--ss-gray);
-    padding: 10px;
+    padding: 5px;
     margin-top: 10px;
     font-size: 17px;
     border-bottom: 2px solid #ebebeb;
@@ -427,33 +434,76 @@ button:focus {
 }
 
 
-/*****************APP**************************/
+/******************** App Page Navigation **************************/
 /* NAVBAR - references : https://www.w3schools.com/css/css_navbar.asp */
 
 .nav2 {
     list-style-type: none;
-    margin : 0px;
-    padding: 0px;
-    background-color: var(--ss-medium-green);
+    padding: 0px 0px 0px 42%;
     height: 100%;
     width: 100%;
-    font-size: 20px;
-    text-align: right;
+    font-size: 25px;
+    text-align: center;
 }
 
 .nav2 a {
     display: inline-block;
-    color: whitesmoke;
-    padding: 15px 5px 15px 5px;
+    color: var(--ss-dark-green);
+    padding: 15px 7px 15px 7px;
     text-decoration: none;
     text-align: center;
-    width: 5%;
+    width: 35px;
+    outline: none;
 }
 
-.nav2 a:hover:not(.active) {
-    background-color: var(--ss-dark-green);
+.nav2 a:hover {
+    color: white;
 }
 
-.active {
-    background-color: var(--ss-dark-green);
+.nav2 a:active {
+    color: #e0e0e0;
 }
+
+
+/*****************SUBMISSION PAGE********************/
+
+.SubmissionBackground {
+    background-image: linear-gradient( rgb(133, 255, 164, .5), rgb(202,220,240, .8));    
+    height: 95vh;
+    max-height: 100%;
+    min-height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.flex-viewSub {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    height: 95vh;
+}
+
+.flex-viewSub > div {
+    height: 70%;
+    width: 70%;
+    padding: 30px 40px 30px 40px;
+    background-color: whitesmoke;
+    margin: 10px 10px 10px 10px;
+    border-radius: 20px;
+    box-shadow: 10px 30px 70px -7px rgba(0,0,0,0.20), 7px 5px 10px 0 rgba(0,0,0,0.14);
+}
+
+.title {
+    text-align: left;
+    padding: 30px 0px 0px 16%;;
+    font-size: calc(13px + 2vmin);
+    color: rgb(32, 32, 32);
+}
+
+.labelSub {
+    text-align: lef;
+    font-size: 17px;
+    padding: 10px;
+}
+
+
