@@ -48,7 +48,7 @@ class Scholarships(Resource):
         parameters = []
         if args['keywords']:
             for word in args['keywords'].split(','):
-                filters.append('''description LIKE CONCAT("%", %s, "%")''')
+                filters.append('''description LIKE CONCAT("%%", %s, "%%")''')
                 parameters.append(word)
 
         # Combine query
