@@ -87,9 +87,12 @@ def scrape(usern, passwd, hostl, databasen):
         cursor.execute("UPDATE Scholarship set amount = NULL where amount = 0")
 
         # queries to NULL where GPA = '-1' and where ethnicity = '-1' and where sex = '-1'
+        # and where essay = '0' and where citizenship = '0'
         cursor.execute("UPDATE Reqtag set GPA = NULL where GPA = '-1'")
         cursor.execute("UPDATE Reqtag set ethnicity = NULL where ethnicity = '-1'")
         cursor.execute("UPDATE Reqtag set sex = NULL where sex = '-1'")
+        cursor.execute("UPDATE Reqtag set essay = NULL where essay = '0'")
+        cursor.execute("UPDATE Reqtag set citizenship = NULL where citizenship = '0'")
 
 
 
@@ -133,6 +136,25 @@ def toAmount(amount):
             line = 0
         return int(line)
 
+# doesn't work atm
+def ethnicity(desc):
+    temp = ['Hispanic', 'Black', 'Native North American', 'Pacific Islander']
+    count = 0
+    for item in desc:
+        if (item == 'Hispanic')
+            temporary.insert(count, 'Hispanic')
+            count += 1
+        elif (item == 'Black'):
+            temporary.insert(count, 'Black')
+            count += 1
+
+    if (len(temporary) >= 1):
+        return -1
+    else:
+        return temp[0]
+
+# this function finds any decimal values in the description and parses them
+# it returns the actual value or a -1 to later set to NULL
 def GPA(desc):
 
     decimals = re.findall('\s\.?\d*\.?\d+',desc)
@@ -169,21 +191,28 @@ def tagBuilder(idscholarship, url, desc):
         front, back = temp.split('/academic-major/')
         major, other = back.split('/')
         s[1] = major
-        result = ['women', 'woman', 'Women', 'Woman', 'Female', 'female']
-        results = ['men', 'man', 'Men', 'Man', 'male', 'Male']
-
+        # Finding sex from description
+        result = [' women ', ' woman ', ' Women ', ' Woman ', ' Female ', ' female ']
+        results = [' men ', ' man ', ' Men ', ' Man ', ' male ', ' Male ']
 
         if any(c in desc for c in result):
             s[0] = 1
                 
         elif any(c in desc for c in results):
             s[0] = 2
-
+        # Finding whether citizenship is required from description
         result = ['Citizen', 'citizen']
         if any(c in desc for c in result):
             s[2] = 1
-        
+        # Getting GPA requirements from description 
         s[4] = GPA(desc)
+        #Find whether an essay is required
+        result = ['essay', 'Essay']
+
+        if any(c in desc for c in result):
+            s[3] = 1
+        #Getting ethnicity from description
+        #s[5] = ethnicity(desc)
 
         return s
 
