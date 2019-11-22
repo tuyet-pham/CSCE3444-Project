@@ -12,7 +12,5 @@ COPY my-app/package.json /app/package.json
 COPY my-app/package-lock.json /app/package-lock.json
 RUN npm install
 RUN npm install react-scripts@3.0.1 -g
-# RUN npm install react-router-dom -g
-# RUN npm install react-icons -g
 
 CMD ["npm", "start"]
