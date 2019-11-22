@@ -22,7 +22,7 @@ services:
     build: ./frontend
     volumes:
       - ./frontend/my-app:/app
-      - /app/node_modules
+      - node-modules:/app/node_modules
     ports:
       - 3000:3000
 
@@ -39,3 +39,4 @@ services:
 
 volumes:
   db-data:
+  node-modules:
