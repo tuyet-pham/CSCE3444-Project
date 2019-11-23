@@ -478,10 +478,12 @@ button:focus {
 
 .nav2 {
     list-style-type: none;
-    padding: 0px 0px 0px 42%;
+    padding: 0px 5% 0px 0px;
     height: 100%;
+    width: 100vw;
     font-size: 25px;
-    text-align: center;
+    box-sizing: border-box;
+    text-align: right;
 }
 
 .nav2 a {
@@ -514,34 +516,66 @@ button:focus {
     overflow: hidden;
 }
 
-.flex-viewSub {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    height: 95vh;
-}
-
-.flex-viewSub > div {
-    height: 70%;
-    width: 70%;
-    padding: 30px 40px 30px 40px;
-    background-color: whitesmoke;
-    margin: 10px 10px 10px 10px;
-    border-radius: 20px;
-    box-shadow: 10px 30px 70px -7px rgba(0,0,0,0.20), 7px 5px 10px 0 rgba(0,0,0,0.14);
-}
-
 .title {
     text-align: left;
-    padding: 30px 0px 0px 16%;;
+    padding: 20px 0px 0px 0px;
     font-size: calc(13px + 2vmin);
     color: rgb(32, 32, 32);
 }
 
-.labelSub {
-    text-align: lef;
-    font-size: 17px;
-    padding: 10px;
+.submissionDiv {
+    text-align: left;
+    height: 75%;
+    width: 70%;
+    padding: 30px 40px 30px 40px;
+    background-color: whitesmoke;
+    margin: 10px 10px 10px 15%;
+    border-radius: 20px;
+    box-shadow: 10px 30px 70px -7px rgba(0,0,0,0.20), 7px 5px 10px 0 rgba(0,0,0,0.14);
 }
+
+
+.row {
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+    width: 50%;
+    padding: 10px;
+    height: 250px;
+    border-radius: 14px;
+    background-color: whitesmoke;
+}
+
+.columnBottom {
+    flex: 50%;
+    width: 50%;
+    padding: 10px;
+    height: 100px;
+    border-radius: 14px;
+    background-color: whitesmoke;
+}
+
+
+
+.admininput2 {
+    text-align: center;
+    border-style: none;
+    border-radius:6px;
+    width: 100%;
+    background-color: white;
+    height: 30px;
+    color: var(--ss-gray);
+    margin-top: 10px;
+    font-size: 17px;
+    border-bottom: 2px solid #ebebeb;
+    transition-duration: 0.2s;   
+}
+
+.admininput2:hover {
+    color: black;
+}
+
 
 

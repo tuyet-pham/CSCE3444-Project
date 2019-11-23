@@ -1,24 +1,42 @@
 import React from 'react';
 import './App.css';
 
+
 class Submit extends React.Component {
+    constructor(props){
+        super(props);
+
+        var x = new Date();
+        this.state = {
+            date: x
+        };
+    }
     render () {
         return (
             <div class="SubmissionBackground">
-                <div class="title">
-                       Submit Scholarship Listing
-                </div>
-                <div class="flex-viewSub">
+                <div class="submissionDiv">
                     <div>
-                        <form>
-                            <label class="labelSub" for="fname">Name of Scholarship</label>
-                            <input class="admininput" type="text" id="fname" name="firstname" placeholder="Your name.."/>
-                            <br/>        
-                            <label class="labelSub" for="lname">Last Name</label>
-                            <input class="admininput" type="text" id="lname" name="lastname" placeholder="Your last name.."/>
-                            <br/>        
-                            <input class="flatButton" type="submit" value="Submit Scholarship"/>
-                        </form>
+                        <div class="row">
+                            <div class="column">
+                                <input type="text" class="admininput2" placeholder="scholarship name"/>
+                                <input type="text" class="admininput2" placeholder="scholarship url"/>
+                            </div>
+                            <div class="column">
+                                <input type="text" class="admininput2" placeholder="amount"/>
+                                <input type="date" class="admininput2" placeholder="deadline"/>
+                            </div>
+                            <div class="column"></div>
+                        </div> 
+                        <div class="row">
+                            <div class="column"></div>
+                            <div class="column"></div>
+                        </div> 
+                        <div class="row">
+                            <div class="columnBottom">
+                                <div class="title">Submit Scholarship Listing</div>
+                            </div>
+                            <div class="columnBottom"></div>
+                        </div> 
                     </div>
                 </div>
             </div>
