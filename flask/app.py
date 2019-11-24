@@ -39,22 +39,25 @@ class Scholarships(Resource):
     def post(self):
         # Parse request parameters
         parser = reqparse.RequestParser()
-        parser.add_argument('keywords', help="keywords separated by commas")
+        parser.add_argument('keywords', help="Keywords separated by commas.")
+        parser.add_argument('major', required=True, help="Academic major")
         args = parser.parse_args()
 
         # Build query parts
-        query=  '''SELECT * FROM Scholarship INNER JOIN Reqtag R ON Scholarship.idreqtag = R.idreqtag'''
+        query = '''SELECT * FROM Scholarship INNER JOIN Reqtag R ON Scholarship.idreqtag = R.idreqtag'''
         filters = []
         parameters = []
+
+        if args['major']:
+            filters.append(''' WHERE major=%s ''')
+            parameters.append(args['major'])
+
         if args['keywords']:
-            for word in args['keywords'].split(','):
-                filters.append('''description LIKE CONCAT("%%", %s, "%%")''')
+            for i, word in enumerate(args['keywords'].split(',')):
+                filters.append(''' AND (CONCAT(description, name)) LIKE CONCAT("%%", %s, "%%") ''')
                 parameters.append(word)
 
         # Combine query
-        if filters:
-            query += ''' WHERE '''
-
         for filt in filters:
             query += filt
 
@@ -64,9 +67,9 @@ class Scholarships(Resource):
         db, cursor = db_connect()
         print(query % parameters, flush=True)
         cursor.execute(query, parameters)
-        row_headers=[x[0] for x in cursor.description]
+        row_headers = [x[0] for x in cursor.description]
         rv = cursor.fetchall()
-        json_data=[]
+        json_data = []
 
         for result in rv:
             json_data.append(dict(zip(row_headers,result)))
