@@ -89,10 +89,12 @@ class Scholarship(Resource):
     def post(self): #placeholder arguments used for now
         #just filler for the post and delete functions at the moment. Will add more 
         db, cursor = db_connect()
+        json_data = []
         return json.dumps(json_data, default=json_converter)
 
     def delete(self):
         db, cursor =db_connect()
+        json_data = []
         return json.dumps(json_data, default=json_converter)
 
 api.add_resource(Scholarship, '/scholarship')
