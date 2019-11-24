@@ -4,9 +4,11 @@ import mysql.connector as sql
 import datetime
 from os import environ
 
+
 def json_converter(o):
     if isinstance(o, datetime.datetime):
         return o._str_()
+
 
 def db_connect():
     try:
@@ -15,9 +17,9 @@ def db_connect():
 
         return db, cursor
     except sql.Error as er:
-        if er.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+        if er.errno == sql.errorcode.ER_ACCESS_DENIED_ERROR:
             print("Something is wrong with username or password")
-        elif er.errno == errorcode.ER_BAD_DB_ERROR:
+        elif er.errno == sql.errorcode.ER_BAD_DB_ERROR:
             print("Database does not exit")
         else:
             print(er)

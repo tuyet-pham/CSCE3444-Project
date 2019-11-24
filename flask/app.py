@@ -10,6 +10,7 @@ from app_helper import db_connect, json_converter
 app = Flask(__name__)
 api = Api(app)
 
+
 class Scholarships(Resource):
     """Class for /scholarships route.
 
@@ -17,6 +18,7 @@ class Scholarships(Resource):
         Resource (obj): Resource from the request
 
     """
+
     def get(self):
         """Get from scholarships.
 
@@ -32,11 +34,21 @@ class Scholarships(Resource):
         json_data=[]
 
         for result in rv:
-            json_data.append(dict(zip(row_headers,result)))
+            json_data.append(dict(zip(row_headers, result)))
 
         return json.dumps(json_data, default=json_converter)
 
     def post(self):
+        """Post to scholarships.
+
+        Arguments:
+            keywords: Keywords separated by commas.
+            major (required): academic major as listed in database (example: actuarial-science)
+
+        Returns:
+            json: Data for filtered scholarships
+
+        """
         # Parse request parameters
         parser = reqparse.RequestParser()
         parser.add_argument('keywords', help="Keywords separated by commas.")
