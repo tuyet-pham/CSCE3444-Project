@@ -55,7 +55,7 @@ class Scholarships(Resource):
 api.add_resource(Scholarships, '/scholarships')
 
 class Scholarship(Resource):
-    def post(name, url, amount, deadline, description): #placeholder arguments used for now
+    def post(self): #placeholder arguments used for now
         #just filler for the post and delete functions at the moment. Will add more 
         db, cursor = db_connect()
         return json.dumps(json_data, default=json_converter)
@@ -63,6 +63,8 @@ class Scholarship(Resource):
     def delete(self):
         db, cursor =db_connect()
         return json.dumps(json_data, default=json_converter)
+
+api.add_resource(Scholarship, '/scholarship')
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True)
