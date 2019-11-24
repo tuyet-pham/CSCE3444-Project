@@ -35,12 +35,12 @@ CREATE TABLE IF NOT EXISTS `scholarscrape`.`Account`
 CREATE TABLE IF NOT EXISTS `scholarscrape`.`Scholarship`
 (
     `idScholarship` INT          NOT NULL auto_increment,
-    `desc`          VARCHAR(500) NULL,      # Do we need a description?
+    `description`   TEXT NULL,      # Do we need a description?
     `name`          VARCHAR(300) NOT NULL,  #
     `amount`        INT,
     `deadline`      DATE,
     `idreqtag`      INT REFERENCES Reqtag(idreqtag), # URL
-    `url`           VARCHAR(300) NULL,   
+    `url`           VARCHAR(300) NULL,
     `accp_status`   INT DEFAULT 0,
     PRIMARY KEY (`idScholarship`)
 );
@@ -58,6 +58,6 @@ CREATE TABLE IF NOT EXISTS `scholarscrape`.`Reqtag`
     `essay`         TINYINT     DEFAULT 0,
     `GPA`           VARCHAR(5)  NULL,
     `ethnicity`     VARCHAR(20) NULL,
-    `idScholarship` INT         NOT NULL REFERENCES Scholarship (idScholarship),  
+    `idScholarship` INT         NOT NULL REFERENCES Scholarship (idScholarship),
     PRIMARY KEY (`idreqtag`, `idScholarship`)
 );

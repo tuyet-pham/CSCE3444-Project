@@ -114,29 +114,33 @@ def get_response(url):
 
 
 def main():
-    """Code for scraper."""
-    url = "https://www.scholarships.com/financial-aid/college-scholarships/scholarship-directory/academic-major"
-    # Use to make URL attribute of scholarship object usable
-    appendable_url = "https://www.scholarships.com"
+    """Code for scraper.
 
-    # Setup output file
-    scan_time = date.today()
-    filename = 'scan_' + str(scan_time) + '.csv'
-    with open(filename, 'w', encoding='utf-8-sig') as f:
-        w = csv.DictWriter(f, ['name', 'url', 'amount', 'deadline', 'description'])
-        w.writeheader()
+    Actual scraping is turned off because server doesn't like being pinged.
 
-    # get response
-    response = get_response(url)
+    """
+    # url = "https://www.scholarships.com/financial-aid/college-scholarships/scholarship-directory/academic-major"
+    # # Use to make URL attribute of scholarship object usable
+    # appendable_url = "https://www.scholarships.com"
 
-    soup = BeautifulSoup(response.content, 'html5lib')
-    url_table = soup.find(id="ullist")
-    url_list = url_table.find_all('a')
-    for link in url_list:
-        get_scholarshipscom_details(link.get('href'), appendable_url, filename)
+    # # Setup output file
+    # scan_time = date.today()
+    # filename = 'scan_' + str(scan_time) + '.csv'
+    # with open(filename, 'w', encoding='utf-8-sig') as f:
+    #     w = csv.DictWriter(f, ['name', 'url', 'amount', 'deadline', 'description'])
+    #     w.writeheader()
 
-        # Wait 1 second between requests
-        sleep(1)
+    # # get response
+    # response = get_response(url)
+
+    # soup = BeautifulSoup(response.content, 'html5lib')
+    # url_table = soup.find(id="ullist")
+    # url_list = url_table.find_all('a')
+    # for link in url_list:
+    #     get_scholarshipscom_details(link.get('href'), appendable_url, filename)
+
+    #     # Wait 1 second between requests
+    #     sleep(1)
 
     print("Pushing file into the database.", flush=True)
     scrape(environ['MYSQL_USER'], environ['MYSQL_PASSWORD'], "db", environ['MYSQL_DB_NAME'])
