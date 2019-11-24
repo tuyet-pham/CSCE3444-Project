@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 
 
+
 {/* Forms reference: https://reactjs.org/docs/forms.html */}
 class Results extends React.Component {
     render () {
@@ -46,7 +47,7 @@ class Results extends React.Component {
                             </label>
                             <br />
                             <label>
-                                Amount
+                                Min. Amount
                                 <input type="number" name="amount"/>
                             </label>
                         </form>
@@ -56,10 +57,10 @@ class Results extends React.Component {
                     <div class="column-70">
                         {/* FOR result IN results */}
                         <div class="floatingBox3">
-                            <h2>
+                            <h2 class="scholarship-title">
                                 %Result_Title%
                             </h2>
-                            <span>
+                            <span class="scholarship-description-collapsed" id="scholDesc">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce. Elit ut aliquam purus sit. Urna duis convallis convallis tellus id interdum velit laoreet id. Risus nullam eget felis eget nunc lobortis mattis. Sed augue lacus viverra vitae congue eu consequat ac. Massa vitae tortor condimentum lacinia quis vel eros donec. At tempor commodo ullamcorper a lacus vestibulum sed arcu. Vel facilisis volutpat est velit egestas dui. A pellentesque sit amet porttitor. Quam adipiscing vitae proin sagittis nisl rhoncus mattis. Mi tempus imperdiet nulla malesuada pellentesque. Mi bibendum neque egestas congue quisque egestas.        
 
                                 Consequat semper viverra nam libero. Vivamus at augue eget arcu dictum varius. Nec dui nunc mattis enim ut. Parturient montes nascetur ridiculus mus mauris vitae ultricies leo integer. Proin libero nunc consequat interdum varius sit amet mattis vulputate. Molestie at elementum eu facilisis sed odio morbi. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo vel. Praesent elementum facilisis leo vel fringilla est ullamcorper eget nulla. Fermentum posuere urna nec tincidunt praesent semper feugiat nibh sed. Placerat orci nulla pellentesque dignissim enim sit. Eu facilisis sed odio morbi. Vel facilisis volutpat est velit. Feugiat in fermentum posuere urna. In ante metus dictum at tempor commodo ullamcorper a lacus. Turpis egestas sed tempus urna et pharetra pharetra massa. Tortor aliquam nulla facilisi cras fermentum odio eu feugiat. Nunc vel risus commodo viverra maecenas accumsan lacus.
