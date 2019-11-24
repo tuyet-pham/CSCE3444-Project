@@ -12,6 +12,7 @@ import './index.css';
 import Home from './Home';
 import Results from './Results';
 import Submit from './Submit';
+import Footer from './Footer';
 import {AiFillHome} from "react-icons/ai";
 import {FaSearch} from "react-icons/fa";
 import {MdAddCircle} from "react-icons/md"
@@ -72,7 +73,8 @@ class App extends React.Component {
                             <Home />
                         </Route>
                     </Switch>
-                </Router>       
+                </Router>
+                <Footer/>       
             </div>
         );
     }

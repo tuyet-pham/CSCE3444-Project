@@ -37,7 +37,6 @@
     bottom: 0px !important;
     height: 75px !important;
     text-align: left;
-    position: absolute;
 }
 
 .App-header-contents {
@@ -518,7 +517,7 @@ button:focus {
 
 .title {
     text-align: left;
-    padding: 20px 0px 0px 0px;
+    padding: 20px 0px 0px 16%;
     font-size: calc(13px + 2vmin);
     color: rgb(32, 32, 32);
 }
@@ -535,24 +534,25 @@ button:focus {
 }
 
 
-.row {
+.row2{
     display: flex;
 }
 
 .column {
     flex: 50%;
-    width: 50%;
+    width: 100%;
     padding: 10px;
-    height: 250px;
+    height: 100%;
     border-radius: 14px;
     background-color: whitesmoke;
 }
 
 .columnBottom {
+    text-align: right;
     flex: 50%;
     width: 50%;
     padding: 10px;
-    height: 100px;
+    height: 10%;
     border-radius: 14px;
     background-color: whitesmoke;
 }
@@ -560,17 +560,25 @@ button:focus {
 
 
 .admininput2 {
-    text-align: center;
     border-style: none;
     border-radius:6px;
-    width: 100%;
+    width: 90%;
     background-color: white;
     height: 30px;
     color: var(--ss-gray);
-    margin-top: 10px;
     font-size: 17px;
     border-bottom: 2px solid #ebebeb;
-    transition-duration: 0.2s;   
+    transition-duration: 0.2s;  
+    padding: 0px 0px 0px 5px;
+    margin: 1%;
+}
+
+textarea {
+    line-height: 15px;
+    resize:none;
+    overflow:none;
+    max-height: 190px; 
+    min-width: 48%;
 }
 
 .admininput2:hover {
