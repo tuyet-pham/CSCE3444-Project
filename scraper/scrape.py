@@ -136,22 +136,51 @@ def toAmount(amount):
             line = 0
         return int(line)
 
-# doesn't work atm
-def ethnicity(desc):
-    temp = ['Hispanic', 'Black', 'Native North American', 'Pacific Islander']
-    count = 0
-    for item in desc:
-        if (item == 'Hispanic')
-            temporary.insert(count, 'Hispanic')
+# filters through description to see if ethnicity is found
+def compare(desc, count, temp):
+    if any(c in desc for c in temp):
             count += 1
-        elif (item == 'Black'):
-            temporary.insert(count, 'Black')
-            count += 1
+    return count
 
-    if (len(temporary) >= 1):
+# searches for specific ethnicities in description
+# returns -1 if various or no ethnicities found
+# returns the ethnicity found if just 1
+def ethnicity(desc):
+    count = 0
+    store = []
+    temp = ['Hispanic']
+    count = compare(desc, count, temp)
+    if (count == 1 and len(store) == 0):
+        store = temp[:]
+    temp = ['Black']
+    count = compare(desc, count, temp)
+    if (count == 1 and len(store) == 0):
+        store = temp[:]
+    temp = ['Native North American']
+    count = compare(desc, count, temp)
+    if (count == 1 and len(store) == 0):
+        store = temp[:]
+    temp = ['Pacific Islander']
+    count = compare(desc, count, temp)
+    if (count == 1 and len(store) == 0):
+        store = temp[:]
+    temp = ['American Indian']
+    count = compare(desc, count, temp)
+    if (count == 1 and len(store) == 0):
+        store = temp[:]
+    temp = ['Italian']
+    count = compare(desc, count, temp)
+    if (count == 1 and len(store) == 0):
+        store = temp[:]
+    temp = ['Vietnamese']
+    count = compare(desc, count, temp)
+    if (count == 1 and len(store) == 0):
+        store = temp[:]
+
+    if (count == 0):
         return -1
     else:
-        return temp[0]
+        return store[0]
 
 # this function finds any decimal values in the description and parses them
 # it returns the actual value or a -1 to later set to NULL
@@ -212,7 +241,7 @@ def tagBuilder(idscholarship, url, desc):
         if any(c in desc for c in result):
             s[3] = 1
         #Getting ethnicity from description
-        #s[5] = ethnicity(desc)
+        s[5] = ethnicity(desc)
 
         return s
 
