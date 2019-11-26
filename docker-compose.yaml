@@ -35,6 +35,14 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD_1}
       MYSQL_DB_NAME: ${MYSQL_DB_NAME}
 
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend/my-app:/app
+      - node-modules:/app/node_modules
+    ports:
+      - 3000:3000
+
   scraper:
     build: ./scraper
     volumes:
@@ -48,3 +56,4 @@ services:
 
 volumes:
   db-data:
+  node-modules:
