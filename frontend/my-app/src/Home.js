@@ -29,13 +29,13 @@ class Home extends React.Component {
                 {/*put scraper tips here*/}
                 <div id="scholarScrapeDescription" style={{padding:"20px"}}>
                     <hr class="new1"/>
-                    <p  style={{padding:"20px 0px 20px 10%"}} class="howto"> 
+                    <p  style={{padding:"20px 0px 20px 0px"}} class="howto"> 
                         <h2>How to use ScholarScrape </h2>
                         Using Scholarscrap is easy! Here's some quick tips.
                     </p>
 
                     {/* slide show here */}
-                    <div style={{padding:"120px 0px 120px 0px"}} class="row">
+                    <div style={{padding:"120px 0px 120px 10px"}} class="row">
                         <img class="App-tip" src={process.env.PUBLIC_URL + "slide1.png"} alt="slide 1"/> 
                         <img class="App-tip" src={process.env.PUBLIC_URL + "slide2.png"} alt="slide 2"/> 
                         <img class="App-tip" src={process.env.PUBLIC_URL + "slide3.png"} alt="slide 3"/>

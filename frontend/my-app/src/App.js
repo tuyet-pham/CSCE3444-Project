@@ -28,17 +28,17 @@ class App extends React.Component {
     }
 
     navClick (e) {
-        if(e == 0){
+        if(e === 0){
             this.setState({
             bgColor: "rgb(133, 255, 164, .5)"
             })
         }
-        else if (e == 1){
+        else if (e === 1){
             this.setState({
                 bgColor: "#07bd65"
             })
         }
-        else if (e == 2){
+        else if (e === 2){
             this.setState({
                 bgColor: "whitesmoke"
             })
