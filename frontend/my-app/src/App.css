@@ -1,7 +1,7 @@
 :root {
-    --ss-light-green: #ccffcc;
-    --ss-medium-green: #40bf40;
-    --ss-dark-green: #008000;
+    --ss-light-green: #77ffa0;
+    --ss-medium-green: #07bd65;
+    --ss-dark-green: #06904d;
     --ss-teal: #00aaaa;
     --ss-light-teal: #00cccc;
     --ss-orange: #cc6600;
@@ -17,6 +17,25 @@
     height: 2em;
     vertical-align: middle;
 }
+
+.App-tip {
+    height: 25em;
+    padding: 10px;
+}
+
+hr.new1 {
+    color: var(--ss-gray);
+    border-top: 1px solid;
+    margin: 0px 40px 0px 40px;
+    opacity: 50%;
+
+}
+
+p.howto {
+    opacity: 80%;
+    font-size: 25px;
+}
+
 
 .App-header {
     background-color: var(--ss-medium-green);
@@ -37,6 +56,7 @@
     bottom: 0px !important;
     height: 75px !important;
     text-align: left;
+    position: fixed;
 }
 
 .App-header-contents {
@@ -198,30 +218,87 @@
     border-radius: 10px;
 }
 
-.floatingBox2 {
-    min-width: 400px;
-    display: inline-block;
-    max-width: 30%;
-    height: 100%;
-    margin: 1%;
-    padding: 10px;
-    vertical-align: text-top;
-    background-color: white;
-    border-radius: 10px;
+/**************** Meet the team section ****************/
+
+.meetTheTeam {
+    padding: 20px 0px 300px 0px;
+    background-image: linear-gradient( #b6ebdb, rgb(7, 189, 101, .2));
+    /* background-color: rgb(7, 189, 101, .2); */
 }
 
-.floatingBox3 {
-    width: 100%;
-    min-height: 50px;
-    display: inline-block;
-    overflow: auto;;
-    margin: 0px;
-    padding: 10px;
-    vertical-align: text-top;
-    background-color: var(--ss-gray);
-    border-radius: 10px;
-    box-sizing: border-box;
+
+.usericon {
+    color: black;
+    margin: 30px;
+    font-size: 4em;
 }
+
+.userdesc {
+    height: 450px;
+    min-height: 10%;
+    width: 350px;
+    background-color: white;
+    /* display:none; */
+    position: absolute;
+    display: inline-block;
+    left : 65%;
+    overflow: hidden;
+}
+
+.userdescText {
+    font-size: 16px;
+    min-width: 350px;
+    position: absolute;
+    display: none;
+    text-align: left;
+}
+
+
+.userdescCon {
+    height: 450px;
+    min-height: 10%;
+    width: 350px;
+    background-color: none;
+    border-radius: 5px;
+    position: absolute;
+    border-style: solid;
+    border-width: 3px;
+    left : 64%;
+    margin: 5px;
+    transition: .5s;
+}
+
+
+.dot {
+    height: 200px;
+    min-height: 10%;
+    width: 200px;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 8px 45px 8px 45px;
+    transition: .5s;
+}
+
+
+.dot:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.19), 0 17px 50px 0 rgba(0,0,0,0.14);
+    transform: scale(1.15);
+}
+
+
+.container:hover .userdescText {
+    display: block;
+}
+
+.cap {
+    position: absolute;
+    height: 10em;
+    padding: 5px;
+    opacity: 20%;
+}
+
+
 
 /***************************** Admin Home Page  ****************************/
 .AppAdmin{
@@ -417,9 +494,10 @@ button:focus {
 
 .flatButton {
     border-style: none;
+    border: none;
     border-radius: 20px;
-    background-color:#cadcfa ;
-    min-width: 200px;
+    background-color: var(--ss-light-green) ;
+    min-width: 180px;
     max-width: 100%;
     height: 40px;
     margin-top: 30px;
@@ -431,7 +509,7 @@ button:focus {
 }
 
 
-/* https://www.w3schools.com/css/css3_buttons.asp */
+/* https://www.w3schools.com/css/css3_buttons.sp */
 .flatButton:hover {
     background-color:#b6ebdb;
     color: var(--ss-dark-green);
@@ -479,7 +557,7 @@ button:focus {
     list-style-type: none;
     padding: 0px 5% 0px 0px;
     height: 100%;
-    width: 100vw;
+    width: 100%;
     font-size: 25px;
     box-sizing: border-box;
     text-align: right;
@@ -508,7 +586,7 @@ button:focus {
 
 .SubmissionBackground {
     background-image: linear-gradient( rgb(133, 255, 164, .5), rgb(202,220,240, .8));    
-    height: 95vh;
+    height: 100vh;
     max-height: 100%;
     min-height: 100%;
     width: 100%;
@@ -517,18 +595,18 @@ button:focus {
 
 .title {
     text-align: left;
-    padding: 20px 0px 0px 16%;
+    padding: 0px 0px 0px 16%;
     font-size: calc(13px + 2vmin);
     color: rgb(32, 32, 32);
 }
 
 .submissionDiv {
     text-align: left;
-    height: 75%;
-    width: 70%;
+    height: 70%;
+    width: 65%;
     padding: 30px 40px 30px 40px;
     background-color: whitesmoke;
-    margin: 10px 10px 10px 15%;
+    margin: 5px 10px 10px 15%;
     border-radius: 20px;
     box-shadow: 10px 30px 70px -7px rgba(0,0,0,0.20), 7px 5px 10px 0 rgba(0,0,0,0.14);
 }
@@ -549,8 +627,8 @@ button:focus {
 
 .columnBottom {
     text-align: right;
-    flex: 50%;
-    width: 50%;
+    flex: 50%; 
+    /* width: 0%;*/
     padding: 10px;
     height: 10%;
     border-radius: 14px;
@@ -578,12 +656,9 @@ textarea {
     resize:none;
     overflow:none;
     max-height: 190px; 
-    min-width: 48%;
+    min-width: 100%;
 }
 
 .admininput2:hover {
     color: black;
 }
-
-
-

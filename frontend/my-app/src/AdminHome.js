@@ -29,7 +29,6 @@ class AdminHome extends React.Component {
         // Function will be an after thought if we have time.
     }
 
-
     componentDidMount(){
         setInterval(() => {
             this.setState({requests:this.state.requests + 1})

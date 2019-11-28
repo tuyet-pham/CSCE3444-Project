@@ -23,7 +23,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          bgColor: "#40bf40"
+          bgColor: "#07bd65"
         }
     }
 
@@ -35,7 +35,7 @@ class App extends React.Component {
         }
         else if (e == 1){
             this.setState({
-                bgColor: "#40bf40"
+                bgColor: "#07bd65"
             })
         }
         else if (e == 2){
