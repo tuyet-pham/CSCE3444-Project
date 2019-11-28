@@ -1,4 +1,4 @@
 .git
-node_modules
 build
 Dockerfile
+node_modules

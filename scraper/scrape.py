@@ -37,7 +37,7 @@ def scrape(usern, passwd, hostl, databasen):
         cursor = conx.cursor()
 
         time = date.today()
-        filename = 'scan_' + str(time) + '.csv'
+        filename = 'input.csv'
         reader = csv.reader(open(filename))
 
         i = 0
@@ -49,12 +49,12 @@ def scrape(usern, passwd, hostl, databasen):
                 # Creating and inserting the scholarships by row.
                 # The scholarships are missing the `desc` attribute. Otherwise all attributes are satisfied
                 #
-                # Scholarship table's attributes : idScholarship, desc, name, amount, deadline, idreqtag, url, accp_status
+                # Scholarship table's attributes : idScholarship, description, name, amount, deadline, idreqtag, url, accp_status
                 #
                 scholarshipQuery ="""
-                                INSERT INTO Scholarship (name, url, amount, deadline) VALUES (%s,%s,%s,%s)
+                                INSERT INTO Scholarship (name, url, amount, deadline, description) VALUES (%s,%s,%s,%s,%s)
                                 """
-                scholarshipData = (row[0], row[1], int(row[2]), row[3])
+                scholarshipData = (row[0], row[1], int(row[2]), row[3], row[4])
                 cursor.execute(scholarshipQuery, scholarshipData)
 
 

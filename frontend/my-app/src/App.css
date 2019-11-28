@@ -1,7 +1,7 @@
 :root {
-    --ss-light-green: #ccffcc;
-    --ss-medium-green: #40bf40;
-    --ss-dark-green: #008000;
+    --ss-light-green: #77ffa0;
+    --ss-medium-green: #07bd65;
+    --ss-dark-green: #06904d;
     --ss-teal: #00aaaa;
     --ss-light-teal: #00cccc;
     --ss-orange: #cc6600;
@@ -18,9 +18,29 @@
     vertical-align: middle;
 }
 
+.App-tip {
+    height: 25em;
+    padding: 10px;
+}
+
+hr.new1 {
+    color: var(--ss-gray);
+    border-top: 1px solid;
+    margin: 0px 40px 0px 40px;
+    opacity: 50%;
+
+}
+
+p.howto {
+    opacity: 80%;
+    font-size: 25px;
+}
+
+
 .App-header {
     background-color: var(--ss-medium-green);
     min-height: 300px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,11 +52,11 @@
 .App-footer {
     background-color: black;
     color: white;
-    min-height: 100px;
-    max-height: 100%;
     width: 100%;
-    bottom: 0;
+    bottom: 0px !important;
+    height: 75px !important;
     text-align: left;
+    position: fixed;
 }
 
 .App-header-contents {
@@ -78,10 +98,75 @@
     cursor: pointer;
 }
 
+.Search-bar-wide{
+    float: none;
+    white-space: nowrap;
+    margin: auto;
+    width: 96%;
+}
+
+.Search-bar-wide input[type=text]{
+    color: var(--ss-gray);
+    background-color: white;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-right: 0px;
+    font-size: 17px;
+    float: left;
+    border: 1px solid black;
+    border-radius: 10px 0px 0px 10px;
+    min-width: 90%;
+}
+
+.Search-bar-wide button{
+    /*float: right;*/
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 0px;
+    color: white;
+    background: var(--ss-light-teal);
+    font-size: 17px;
+    border: 1px solid black;
+    border-radius: 0px 10px 10px 0px;
+    cursor: pointer;
+    min-width: 6%;
+}
+
 /* Columns and rows from w3schools.com */
-.column {
+.column-20 {
     float: left;
     width: 20%;
+    box-sizing: border-box;
+}
+
+.column-5 {
+    float: left;
+    width: 5%;
+    box-sizing: border-box;
+}
+
+.column-30 {
+    float: left;
+    width: 30%;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 30px !important;
+}
+
+.column-70 {
+    float: left;
+    width: 70%;
+    box-sizing: border-box;
+    padding: 0px 30px 0px 30px;
+}
+
+.column-50 {
+    float: left;
+    width: 50%;
+    box-sizing: border-box;
+    padding: 30px;
 }
 
 .row {
@@ -93,6 +178,33 @@
     height: 100%;
     border-collapse: separate;
     border-spacing: 10px;
+}
+
+.row-flex {
+    display: flex;
+    height: 100%;
+}
+
+/* Form styles for Search page */
+.form-inline {
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+.form-inline label {
+    margin: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-inline input, select { /*TO DO: make numbers look less horrible*/
+    vertical-align: middle;
+    margin: 5px;
+    float: right;
+    width: 50%;
+    box-sizing: border-box;
 }
 
 /* Floating boxes on home screen */
@@ -107,16 +219,106 @@
     border-radius: 10px;
 }
 
-.floatingBox2 {
-    display: inline-block;
-    width: 30%;
-    height: 100%;
-    margin: 1%;
-    padding: 10px;
-    vertical-align: text-top;
-    background-color: white;
-    border-radius: 10px;
+/**************** Meet the team section ****************/
+
+.meetTheTeam {
+    padding: 20px 0px 300px 0px;
+    background-image: linear-gradient( #b6ebdb, rgb(7, 189, 101, .2));
+    /* background-color: rgb(7, 189, 101, .2); */
 }
+
+
+.usericon {
+    color: black;
+    margin: 30px;
+    font-size: 4em;
+}
+
+.userdesc {
+    height: 450px;
+    min-height: 10%;
+    width: 350px;
+    background-color: white;
+    /* display:none; */
+    position: absolute;
+    display: inline-block;
+    left : 65%;
+    overflow: hidden;
+}
+
+.userdescText {
+    font-size: 16px;
+    min-width: 350px;
+    position: absolute;
+    display: none;
+    text-align: left;
+}
+
+
+.userdescCon {
+    height: 450px;
+    min-height: 10%;
+    width: 350px;
+    background-color: none;
+    border-radius: 5px;
+    position: absolute;
+    border-style: solid;
+    border-width: 3px;
+    left : 64%;
+    margin: 5px;
+    transition: .5s;
+}
+
+
+.dot {
+    height: 200px;
+    min-height: 10%;
+    width: 200px;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 8px 45px 8px 45px;
+    transition: .5s;
+}
+
+
+.dot:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.19), 0 17px 50px 0 rgba(0,0,0,0.14);
+    transform: scale(1.15);
+}
+
+
+.container:hover .userdescText {
+    display: block;
+
+}
+
+.floatingBox3 {
+    float: left;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    min-height: 50px;
+    display: inline-block;
+    word-wrap: break-word;
+    margin: 0px;
+    padding: 10px 30px 30px 30px;
+    vertical-align: text-top;
+    color: white;
+    text-align: left;
+    background-color: var(--ss-gray);
+    box-shadow: 10px 10px 10px var(--ss-light-gray);
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.cap {
+    position: absolute;
+    height: 10em;
+    padding: 5px;
+    opacity: 20%;
+}
+
 
 
 /***************************** Admin Home Page  ****************************/
@@ -143,7 +345,12 @@
 }
 
 
-/* NAVBAR - references : https://www.w3schools.com/css/css_navbar.asp */
+/********************* Navigation bar AdminHome ********************/
+
+/* 
+- references : https://www.w3schools.com/css/css_navbar.asp 
+*/
+
 .nav {
     list-style-type: none;
     margin : 0px;
@@ -163,6 +370,7 @@
     padding: 20px 0px 20px 0px;
     text-decoration: none;
     width: 100%;
+    outline: none;
 }
 
 .nav a:hover:not(.active) {
@@ -173,9 +381,7 @@
     background-color: var(--ss-dark-green);
 }
 
-/************ END NAVBAR ************/
-/***************Buttons**************/
-
+/********************** Buttons AdminHome *********************/
 
 button::-moz-focus-inner {
     border: 0;
@@ -193,7 +399,7 @@ button:focus {
     height: 30px;
     padding: 0px 10px 0px 10px;
     margin-right: 15px 0 10px 0px;
-    font-size: 16px; ;
+    font-size: 17px; ;
     /* -webkit-transition-duration: 0.2s; 
     transition-duration: 0.2s;    */
 }
@@ -249,8 +455,10 @@ button:focus {
 }
 
 
-/**** END BUTTONS ****/
-/* FLEX AREA references 
+/************** Flex area for AdminHome ************************/
+
+/*
+- References: 
 - https://www.w3schools.com/css/css3_flexbox.asp               
 - https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Aligning_Items_in_a_Flex_Container
 */
@@ -283,8 +491,12 @@ button:focus {
 /* Hoping to add background color Somehow */
 .AdminBackground {
     text-align: center;
-    min-height: 90vh;
     background-color: whitesmoke;
+    height: 100vh;
+    max-height: 100%;
+    min-height: 100%;
+    width: 100%;
+    overflow: hidden;
 }
 
 
@@ -294,7 +506,7 @@ button:focus {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: calc(20px + 2vmin);
+    font-size: calc(16px + 2vmin);
     margin-bottom: -20px;
     padding-top: 3%;
     color: black;
@@ -303,21 +515,22 @@ button:focus {
 
 .flatButton {
     border-style: none;
+    border: none;
     border-radius: 20px;
-    background-color:#cadcfa ;
-    min-width: 200px;
+    background-color: var(--ss-light-green) ;
+    min-width: 180px;
     max-width: 100%;
     height: 40px;
     margin-top: 30px;
     margin-right: 15px;
     margin-bottom: 10px;
-    font-size: 18px; 
+    font-size: 17px; 
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;   
 }
 
 
-/* https://www.w3schools.com/css/css3_buttons.asp */
+/* https://www.w3schools.com/css/css3_buttons.sp */
 .flatButton:hover {
     background-color:#b6ebdb;
     color: var(--ss-dark-green);
@@ -335,7 +548,7 @@ button:focus {
     min-width: 20%;
     width: 400px;
     color: var(--ss-gray);
-    padding: 10px;
+    padding: 5px;
     margin-top: 10px;
     font-size: 17px;
     border-bottom: 2px solid #ebebeb;
@@ -355,4 +568,118 @@ button:focus {
 
 .forgotpassword:hover {
     color: rgb(124, 124, 124);
+}
+
+
+/******************** App Page Navigation **************************/
+/* NAVBAR - references : https://www.w3schools.com/css/css_navbar.asp */
+
+.nav2 {
+    list-style-type: none;
+    padding: 0px 5% 0px 0px;
+    height: 100%;
+    width: 100%;
+    font-size: 25px;
+    box-sizing: border-box;
+    text-align: right;
+}
+
+.nav2 a {
+    display: inline-block;
+    color: var(--ss-dark-green);
+    padding: 15px 7px 15px 7px;
+    text-decoration: none;
+    text-align: center;
+    width: 35px;
+    outline: none;
+}
+
+.nav2 a:hover {
+    color: white;
+}
+
+.nav2 a:active {
+    color: #e0e0e0;
+}
+
+
+/*****************SUBMISSION PAGE********************/
+
+.SubmissionBackground {
+    background-image: linear-gradient( rgb(133, 255, 164, .5), rgb(202,220,240, .8));    
+    height: 100vh;
+    max-height: 100%;
+    min-height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.title {
+    text-align: left;
+    padding: 0px 0px 0px 16%;
+    font-size: calc(13px + 2vmin);
+    color: rgb(32, 32, 32);
+}
+
+.submissionDiv {
+    text-align: left;
+    height: 70%;
+    width: 65%;
+    padding: 30px 40px 30px 40px;
+    background-color: whitesmoke;
+    margin: 5px 10px 10px 15%;
+    border-radius: 20px;
+    box-shadow: 10px 30px 70px -7px rgba(0,0,0,0.20), 7px 5px 10px 0 rgba(0,0,0,0.14);
+}
+
+
+.row2{
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+    width: 100%;
+    padding: 10px;
+    height: 100%;
+    border-radius: 14px;
+    background-color: whitesmoke;
+}
+
+.columnBottom {
+    text-align: right;
+    flex: 50%; 
+    /* width: 0%;*/
+    padding: 10px;
+    height: 10%;
+    border-radius: 14px;
+    background-color: whitesmoke;
+}
+
+
+
+.admininput2 {
+    border-style: none;
+    border-radius:6px;
+    width: 90%;
+    background-color: white;
+    height: 30px;
+    color: var(--ss-gray);
+    font-size: 17px;
+    border-bottom: 2px solid #ebebeb;
+    transition-duration: 0.2s;  
+    padding: 0px 0px 0px 5px;
+    margin: 1%;
+}
+
+textarea {
+    line-height: 15px;
+    resize:none;
+    overflow:none;
+    max-height: 190px; 
+    min-width: 100%;
+}
+
+.admininput2:hover {
+    color: black;
 }
