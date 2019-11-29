@@ -87,7 +87,7 @@ api.add_resource(Scholarships, '/scholarships')
 
 class Scholarship(Resource):
     
-    def post(self):#placeholder arguments used for now --description, name, amount, deadline, url, sex, major, citizenship, essay, gpa, ethnicity
+    def post(self):
         """Post to scholarship.
         Arguments:
             description
@@ -104,17 +104,22 @@ class Scholarship(Resource):
         Returns:
             json: new scholarship to be added to database
         """
-        #description = description
-        #name = name
-        #amount = amount
-        #deadline = deadline
-        #url = url
-        #sex = sex
-        #major = major
-        #citizenship = citizenship
-        #essay = eassy
-        #gpa = gpa
-        #ethnicity = ethnicity
+
+        # Parse request parameters
+        parser = reqparse.RequestParser()
+        parser.add_argument('description', help="description")
+        parser.add_argument('name', help="major")
+        parser.add_argument('amount', help="amount")
+        parser.add_argument('deadline', help="deadline")
+        parser.add_argument('url', help="url")
+        parser.add_argument('sex', help="sex")
+        parser.add_argument('major', help="major")
+        parser.add_argument('citizenship', help="citizenship")
+        parser.add_argument('gpa', help="gpa")
+        parser.add_argument('ethnicity', help="ethnicity")
+        args = parser.parse_args()
+        
+        
         
         db, cursor = db_connect()
         json_data = []
