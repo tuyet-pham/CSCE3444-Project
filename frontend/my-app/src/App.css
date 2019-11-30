@@ -212,7 +212,7 @@
     border-radius: 10px;
 }
 
-.floatingBox3 { /* Used in results page */
+.floatingBox3-inactive { /* Used in results page */
     /*sizing and placement*/
     float: left;
     width: 100%;
@@ -237,7 +237,7 @@
     -webkit-box-orient: vertical;
 }
 
-.floatingBox3-inactive { /* Used in results page */
+.floatingBox3-active { /* Used in results page */
     /*sizing and placement*/
     float: left;
     width: 100%;

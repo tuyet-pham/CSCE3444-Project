@@ -15,22 +15,52 @@ function ResultsList(props)
     );
 }
 
+class Result extends React.Component
+{
+    constructor(props)
+    {
+        super(props);
+        this.updateClass = this.updateClass.bind(this);
+        this.state = {active: false};
+    }
+
+    render()
+    {
+        const isActive = this.props.active;
+
+        return(
+            //<div className={this.state.activeClasses[0]? "floatingBox3-active":"floatingBox3-inactive"} onClick={() => this.addActiveClass(0)}>}
+            <div className={this.state.active ? "floatingBox3-active" : "floatingBox3-inactive"} onClick={this.updateClass}>
+                <h2>
+                    {this.props.title}
+                </h2>
+                <span>
+                    {this.props.description}
+                </span>
+            </div>
+        );
+    }
+
+    updateClass()
+    {
+        const currentState = this.state.active;
+        this.setState({active: !currentState});
+    }
+}
+
 {/* Forms reference: https://reactjs.org/docs/forms.html */}
 class Results extends React.Component {
     constructor(props){
         super(props);
+        this.hipsterIpsum = "Lorem ipsum dolor amet godard jianbing you probably haven't heard of them, bicycle rights ennui everyday carry portland yuccie fixie cronut organic poke. Pabst williamsburg YOLO, blog austin iceland dreamcatcher you probably haven't heard of them cold-pressed tousled prism art party semiotics asymmetrical. Jean shorts glossier PBR&B heirloom. Synth pinterest farm-to-table coloring book pug tofu. Meditation vexillologist offal, hell of microdosing pug aesthetic intelligentsia knausgaard hoodie tumblr. Flannel flexitarian ethical chia taiyaki, gochujang street art fam mlkshk. Migas biodiesel selvage wolf. Authentic cold-pressed gentrify roof party letterpress +1 polaroid humblebrag keffiyeh meggings shaman. Hammock iceland green juice, art party cliche pork belly pug you probably haven't heard of them fixie hell of. Crucifix blue bottle vegan, selfies put a bird on it trust fund normcore. Blog listicle celiac, farm-to-table fixie shoreditch deep v hell of mlkshk plaid. Fashion axe drinking vinegar green juice kickstarter. 8-bit cliche you probably haven't heard of them hammock, mixtape XOXO shoreditch biodiesel selvage seitan. Fanny pack roof party etsy echo park, woke kickstarter irony asymmetrical pabst actually leggings snackwave +1 messenger bag wolf. Chartreuse fashion axe echo park single-origin coffee shaman meggings banh mi. Pop-up gastropub literally iPhone, tilde woke vinyl hoodie live-edge YOLO godard. Hexagon fashion axe yr cold-pressed offal la croix kinfolk food truck. Food truck yuccie dreamcatcher mustache, tattooed wolf edison bulb gastropub.";
         this.state = {
-            results : this.props.requested,
             listItems: this.props.listItems,
             activeClasses: [false, false, false],
             all: this.props.all,
         };
     }
 
-    addActiveClass(index) {
-        const activeClasses = [...this.state.activeClasses.slice(0,index), !this.state.activeClasses[index], this.state.activeClasses.slice(index + 1)];
-        this.setState({activeClasses});
-    }
+    
 
     render () {
         return (
@@ -83,38 +113,8 @@ class Results extends React.Component {
                     {/* RESULTS */}
                     <div class="column-70">
                         {/* FOR result IN results */}
-                        <div className={this.state.activeClasses[0]? "floatingBox3-inactive":"floatingBox3"} onClick={() => this.addActiveClass(0)}>
-                            <h2>
-                                %Result_Title%
-                            </h2>
-                            <span>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce. Elit ut aliquam purus sit. Urna duis convallis convallis tellus id interdum velit laoreet id. Risus nullam eget felis eget nunc lobortis mattis. Sed augue lacus viverra vitae congue eu consequat ac. Massa vitae tortor condimentum lacinia quis vel eros donec. At tempor commodo ullamcorper a lacus vestibulum sed arcu. Vel facilisis volutpat est velit egestas dui. A pellentesque sit amet porttitor. Quam adipiscing vitae proin sagittis nisl rhoncus mattis. Mi tempus imperdiet nulla malesuada pellentesque. Mi bibendum neque egestas congue quisque egestas.        
-
-                                Consequat semper viverra nam libero. Vivamus at augue eget arcu dictum varius. Nec dui nunc mattis enim ut. Parturient montes nascetur ridiculus mus mauris vitae ultricies leo integer. Proin libero nunc consequat interdum varius sit amet mattis vulputate. Molestie at elementum eu facilisis sed odio morbi. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo vel. Praesent elementum facilisis leo vel fringilla est ullamcorper eget nulla. Fermentum posuere urna nec tincidunt praesent semper feugiat nibh sed. Placerat orci nulla pellentesque dignissim enim sit. Eu facilisis sed odio morbi. Vel facilisis volutpat est velit. Feugiat in fermentum posuere urna. In ante metus dictum at tempor commodo ullamcorper a lacus. Turpis egestas sed tempus urna et pharetra pharetra massa. Tortor aliquam nulla facilisi cras fermentum odio eu feugiat. Nunc vel risus commodo viverra maecenas accumsan lacus.
-
-                                Erat velit scelerisque in dictum non consectetur a erat. Ipsum a arcu cursus vitae congue mauris rhoncus aenean vel. Sit amet massa vitae tortor condimentum lacinia. Lectus magna fringilla urna porttitor rhoncus dolor purus non. Sit amet volutpat consequat mauris nunc. Amet purus gravida quis blandit turpis cursus. Faucibus nisl tincidunt eget nullam non nisi est sit amet. Ornare lectus sit amet est placerat in egestas erat imperdiet. Feugiat in fermentum posuere urna nec tincidunt praesent. Netus et malesuada fames ac. Facilisis sed odio morbi quis commodo odio aenean.
-
-                                Phasellus egestas tellus rutrum tellus pellentesque eu. Cras ornare arcu dui vivamus. Purus gravida quis blandit turpis cursus in. Sed vulputate mi sit amet mauris commodo quis. Quam pellentesque nec nam aliquam sem et tortor consequat. Sit amet facilisis magna etiam tempor orci eu. Odio eu feugiat pretium nibh ipsum consequat nisl. Commodo nulla facilisi nullam vehicula ipsum a arcu cursus vitae. Vitae auctor eu augue ut. Gravida arcu ac tortor dignissim convallis aenean et tortor at. Mauris vitae ultricies leo integer malesuada nunc vel risus. Pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Condimentum lacinia quis vel eros donec ac odio. Nulla pellentesque dignissim enim sit amet venenatis urna cursus. Sed id semper risus in. Aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer. Velit laoreet id donec ultrices tincidunt arcu non sodales. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.
-
-                                Aliquam etiam erat velit scelerisque. Maecenas volutpat blandit aliquam etiam erat. Amet porttitor eget dolor morbi non arcu. Molestie a iaculis at erat pellentesque adipiscing. Amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Praesent semper feugiat nibh sed pulvinar proin gravida hendrerit lectus. Sodales ut eu sem integer vitae justo eget magna fermentum. Eget arcu dictum varius duis at consectetur lorem donec massa. Facilisi etiam dignissim diam quis enim lobortis. Ultrices gravida dictum fusce ut. Ultrices in iaculis nunc sed augue lacus. Leo vel fringilla est ullamcorper eget nulla facilisi etiam.
-                            </span>
-                        </div>
-                        <div className={this.state.activeClasses[0]? "floatingBox3-inactive":"floatingBox3"} onClick={() => this.addActiveClass(0)}>
-                            <h2>
-                                %Result_Title%
-                            </h2>
-                            <span>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce. Elit ut aliquam purus sit. Urna duis convallis convallis tellus id interdum velit laoreet id. Risus nullam eget felis eget nunc lobortis mattis. Sed augue lacus viverra vitae congue eu consequat ac. Massa vitae tortor condimentum lacinia quis vel eros donec. At tempor commodo ullamcorper a lacus vestibulum sed arcu. Vel facilisis volutpat est velit egestas dui. A pellentesque sit amet porttitor. Quam adipiscing vitae proin sagittis nisl rhoncus mattis. Mi tempus imperdiet nulla malesuada pellentesque. Mi bibendum neque egestas congue quisque egestas.        
-
-                                Consequat semper viverra nam libero. Vivamus at augue eget arcu dictum varius. Nec dui nunc mattis enim ut. Parturient montes nascetur ridiculus mus mauris vitae ultricies leo integer. Proin libero nunc consequat interdum varius sit amet mattis vulputate. Molestie at elementum eu facilisis sed odio morbi. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo vel. Praesent elementum facilisis leo vel fringilla est ullamcorper eget nulla. Fermentum posuere urna nec tincidunt praesent semper feugiat nibh sed. Placerat orci nulla pellentesque dignissim enim sit. Eu facilisis sed odio morbi. Vel facilisis volutpat est velit. Feugiat in fermentum posuere urna. In ante metus dictum at tempor commodo ullamcorper a lacus. Turpis egestas sed tempus urna et pharetra pharetra massa. Tortor aliquam nulla facilisi cras fermentum odio eu feugiat. Nunc vel risus commodo viverra maecenas accumsan lacus.
-
-                                Erat velit scelerisque in dictum non consectetur a erat. Ipsum a arcu cursus vitae congue mauris rhoncus aenean vel. Sit amet massa vitae tortor condimentum lacinia. Lectus magna fringilla urna porttitor rhoncus dolor purus non. Sit amet volutpat consequat mauris nunc. Amet purus gravida quis blandit turpis cursus. Faucibus nisl tincidunt eget nullam non nisi est sit amet. Ornare lectus sit amet est placerat in egestas erat imperdiet. Feugiat in fermentum posuere urna nec tincidunt praesent. Netus et malesuada fames ac. Facilisis sed odio morbi quis commodo odio aenean.
-
-                                Phasellus egestas tellus rutrum tellus pellentesque eu. Cras ornare arcu dui vivamus. Purus gravida quis blandit turpis cursus in. Sed vulputate mi sit amet mauris commodo quis. Quam pellentesque nec nam aliquam sem et tortor consequat. Sit amet facilisis magna etiam tempor orci eu. Odio eu feugiat pretium nibh ipsum consequat nisl. Commodo nulla facilisi nullam vehicula ipsum a arcu cursus vitae. Vitae auctor eu augue ut. Gravida arcu ac tortor dignissim convallis aenean et tortor at. Mauris vitae ultricies leo integer malesuada nunc vel risus. Pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Condimentum lacinia quis vel eros donec ac odio. Nulla pellentesque dignissim enim sit amet venenatis urna cursus. Sed id semper risus in. Aliquet sagittis id consectetur purus ut faucibus pulvinar elementum integer. Velit laoreet id donec ultrices tincidunt arcu non sodales. Fringilla est ullamcorper eget nulla facilisi etiam dignissim.
-
-                                Aliquam etiam erat velit scelerisque. Maecenas volutpat blandit aliquam etiam erat. Amet porttitor eget dolor morbi non arcu. Molestie a iaculis at erat pellentesque adipiscing. Amet mattis vulputate enim nulla aliquet porttitor lacus luctus. Praesent semper feugiat nibh sed pulvinar proin gravida hendrerit lectus. Sodales ut eu sem integer vitae justo eget magna fermentum. Eget arcu dictum varius duis at consectetur lorem donec massa. Facilisi etiam dignissim diam quis enim lobortis. Ultrices gravida dictum fusce ut. Ultrices in iaculis nunc sed augue lacus. Leo vel fringilla est ullamcorper eget nulla facilisi etiam.
-                            </span>
-                        </div>
+                        <Result isActive={false}title="Result Title 1" description={this.hipsterIpsum} />
+                        <Result isActive={false}title="Result Title 2" description="This is a shorter description." />
                     </div>
                 </div>
             </div>
