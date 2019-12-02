@@ -228,10 +228,10 @@
     word-wrap: break-word;
     overflow: hidden;
     /* aesthetic */
-    color: white;
-    background-color: var(--ss-gray);
-    box-shadow: 10px 10px 10px var(--ss-light-gray);
+    color: black;
+    background-color: white;
     border-radius: 5px;
+    box-shadow: 0px 0px 0px 2px black;
     /*overflow properties*/
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
@@ -253,8 +253,8 @@
     overflow: hidden;
     /* aesthetic */
     color: black;
-    background-color: var(--ss-light-green);
-    box-shadow: 10px 10px 10px var(--ss-light-gray);
+    background-color: white;
+    box-shadow: 0px 0px 0px 2px var(--ss-medium-green);
     border-radius: 5px;
     /*overflow properties*/
     -webkit-box-orient: vertical;
