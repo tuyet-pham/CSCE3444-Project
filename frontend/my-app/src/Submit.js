@@ -30,8 +30,7 @@ class Submit extends React.Component {
         const errormsg = "Your input is invalid, try again";
         const goodmsg = "";
         
-        if(!this.validate(e))
-        {
+        if(!this.validate(e)){
             alert(errormsg);
         }
         else {
@@ -44,7 +43,7 @@ class Submit extends React.Component {
         //delete
     }
 
-    validate( ) {
+    validate() {
         //if value is good then return good alert, if not then alert bad. 
     }
 

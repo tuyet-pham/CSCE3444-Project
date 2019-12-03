@@ -249,14 +249,32 @@ p.howto {
 /**************** Meet the team section ****************/
 
 .meetTheTeam {
-    padding: 50px 50px 500px 70px;
-    background-image: linear-gradient( #b6ebdb , rgb(7, 189, 101, .5));
+    padding: 50px 50px 600px 60px;
+    background-image: linear-gradient( #b6ebdb , rgb(7, 189, 101, .2));
     /* background-color: rgb(7, 189, 101, .2); */
 }
 .usericon {
     color: black;
     margin: 30px;
     font-size: 4em;
+}
+
+.divteamSize {
+    padding: 0px 50px 0px 200px;
+    width: 50%;
+}
+
+
+@media only screen and (max-width: 1300px) {
+    .divteamSize {
+        padding: 0px 50px 0px 50px;
+        width: 80%;
+    }
+
+    .meetTheTeam {
+        padding: 50px 50px 800px 0px;
+        /* background-color: rgb(7, 189, 101, .2); */
+    }
 }
 
 
@@ -268,7 +286,7 @@ p.howto {
     text-align: left;
     overflow: hidden;
     z-index: 500;
-    left: 65%;
+    left: 60%;
     transition: .5s;
 }
 
@@ -327,6 +345,24 @@ p.howto {
     box-sizing: border-box;
 }
 
+.cap {
+    position: absolute;
+    width: 200px;
+    opacity: 30%;
+    animation: shimmy 5s infinite;
+    animation-direction: alternate;
+    float: right;
+}
+
+@keyframes shimmy {
+    0% {
+      transform: translate(20px, 60px);
+    }
+    100% {
+      transform: translate(20px, 300px) rotate(90deg, -90deg);
+    }
+}
+
 @media only screen and (max-width: 950px) {
     .dot {
         height: 150px;
@@ -343,7 +379,7 @@ p.howto {
     .userdescText {
         font-size: 12px;
         min-width: 150px;
-        left: 50%
+        left: 60%
     }
 
     .userdescContainer {
@@ -355,6 +391,8 @@ p.howto {
         width: 200px;
     }
 }
+
+
 
 
 /***************************** Admin Home Page  ****************************/

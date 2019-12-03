@@ -47,15 +47,15 @@ class Home extends React.Component {
                                 </div>
                         </Carousel>
                     </div>
-                    
-                    <hr class="new1"/>
-                </div>
-                
+                        <hr class="new1"/>
+                    </div>
                 <div class="meetTheTeam">
                     <p class="howto"><h2>Meet the Team</h2></p>
-                    <div style={{width:"80%"}}>
+
+                   
+
+                    <div class="divteamSize">
                     {/* user description area */}
-                    {/* user icons here */}
                     <div class="container">
                         <div class="userdescText userdesc">
                             <h2>Tii</h2>
@@ -68,6 +68,9 @@ class Home extends React.Component {
                             <span class="usericon "><FaUser/></span>
                         </div>    
                     </div>
+                    <br/>
+                    <br/>
+                    <br/>
                     <div class="container">
                         <div class="userdescText userdesc">
                             <h2>Pedro</h2>
@@ -80,7 +83,9 @@ class Home extends React.Component {
                             <h2>Pedro</h2>
                             <span class="usericon "><FaUser/></span>
                         </div>
-                    </div> 
+                    </div>
+                    <br/>
+                    <br/>
                     <br/>
                     <div class="container">
                         <div class="userdescText userdesc">
@@ -94,7 +99,6 @@ class Home extends React.Component {
                             <span class="usericon "><FaUser/></span>
                         </div>
                     </div>
-                    <br/>
                     <div class="container">
                         <div class="userdescText userdesc">
                             <h2>Avery</h2>
@@ -102,28 +106,35 @@ class Home extends React.Component {
                             <br />for Blizzard. Graduated from the
                             <br />University of North Texas.
                         </div>
+                        <br/>
+                        <br/>
                         <div class="dot">
                             <h2>Avery</h2>
                             <span class="usericon "><FaUser/></span>
                         </div>
                     </div>
-                    <br/>
                     <div class="container">
                         <div class="userdescText userdesc">
-                                <h2>Peyton</h2>
-                                Awesome developer with a lot of 
-                                <br />stickers. You know where to go. 
-                                <br />Graduated from the University 
-                                <br />of North Texas.
+                            <h2>Peyton</h2>
+                            Awesome developer with a lot of 
+                            <br />stickers. You know where to go. 
+                            <br />Graduated from the University 
+                            <br />of North Texas.
                         </div>
                         <div class="dot">
                             <h2>Peyton</h2>
                             <span class="usericon "><FaUser/></span>
                         </div>
                     </div>
+                    {/* <div style={{width:"40%"}}>
+                        <div><img style={{transform:"rotate(20deg)"}} class="cap" src={process.env.PUBLIC_URL + "cap.png"} /> </div>
+                        <div><img style={{transform:"rotate(-30deg)"}} class="cap" src={process.env.PUBLIC_URL + "cap.png"} /></div>
+                        <img style={{transform:"rotate(-40deg)"}} class="cap" src={process.env.PUBLIC_URL + "cap.png"} />
+                        <img style={{transform:"rotate(30deg)"}} class="cap" src={process.env.PUBLIC_URL + "cap.png"} />
+                    </div> */}
                 </div>
-                </div>    
-            </div>
+            </div>    
+        </div>
         );
     }
 }
