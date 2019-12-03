@@ -18,6 +18,23 @@ services:
       MYSQL_USER: ${MYSQL_USER_1}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD_1}
 
+  flask:
+    build: ./flask
+    volumes:
+      - ./flask:/code
+    depends_on:
+      - db
+    ports:
+      - 5000:5000
+    expose:
+      - '5000'
+    command: python app.py
+    restart: always
+    environment:
+      MYSQL_USER: ${MYSQL_USER_1}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD_1}
+      MYSQL_DB_NAME: ${MYSQL_DB_NAME}
+
   frontend:
     build: ./frontend
     volumes:
