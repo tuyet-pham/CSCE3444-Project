@@ -96,6 +96,7 @@ class Scholarships(Resource):
 
         # Add sex to query
         if args['sex']:
+            param = 0
             if args['sex'] == "Female":
                 param = 1
             elif args['sex'] == "Male":
