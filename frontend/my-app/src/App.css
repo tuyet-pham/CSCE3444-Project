@@ -13,14 +13,38 @@
     text-align: center;
 }
 
+
 .App-logo {
     height: 2em;
     vertical-align: middle;
 }
 
 .App-tip {
-    height: 25em;
-    padding: 10px;
+    background:white;
+    width: 60px;
+}
+
+
+.carouselContainer {
+    text-align: center;
+    opacity: 80%;
+    width: 60%;
+    max-width: 600px;
+    padding-bottom: 50px;
+    position: relative;
+    margin-left: 35%;
+    margin-right: 20%;
+    /* background-color: yellowgreen; */
+}
+
+.carouselContainer:hover{
+    opacity: 95%;
+}
+
+@media only screen and (max-width: 1200px) {
+    .carouselContainer {
+        margin-left: 20%;
+    }
 }
 
 hr.new1 {
@@ -29,6 +53,10 @@ hr.new1 {
     margin: 0px 40px 0px 40px;
     opacity: 50%;
 
+}
+
+#scholarScrapeDescription {
+    background-color: whitesmoke;
 }
 
 p.howto {
@@ -56,7 +84,6 @@ p.howto {
     bottom: 0px !important;
     height: 75px !important;
     text-align: left;
-    position: fixed;
 }
 
 .App-header-contents {
@@ -222,29 +249,16 @@ p.howto {
 /**************** Meet the team section ****************/
 
 .meetTheTeam {
-    padding: 20px 0px 300px 0px;
-    background-image: linear-gradient( #b6ebdb, rgb(7, 189, 101, .2));
+    padding: 50px 50px 100px 70px;
+    background-image: linear-gradient( #b6ebdb , rgb(7, 189, 101, .5));
     /* background-color: rgb(7, 189, 101, .2); */
 }
-
-
 .usericon {
     color: black;
     margin: 30px;
     font-size: 4em;
 }
 
-.userdesc {
-    height: 450px;
-    min-height: 10%;
-    width: 350px;
-    background-color: white;
-    /* display:none; */
-    position: absolute;
-    display: inline-block;
-    left : 65%;
-    overflow: hidden;
-}
 
 .userdescText {
     font-size: 16px;
@@ -252,23 +266,21 @@ p.howto {
     position: absolute;
     display: none;
     text-align: left;
-}
-
-
-.userdescCon {
-    height: 450px;
-    min-height: 10%;
-    width: 350px;
-    background-color: none;
-    border-radius: 5px;
-    position: absolute;
-    border-style: solid;
-    border-width: 3px;
-    left : 64%;
-    margin: 5px;
+    overflow: hidden;
+    z-index: 500;
+    left: 65%;
     transition: .5s;
 }
 
+.userdesc {
+    height : 200px;
+    border-radius: 5px;
+    background-color: white;
+    overflow: hidden;
+    padding: 10px;
+    display: none;
+    transition: .5s;
+}
 
 .dot {
     height: 200px;
@@ -277,20 +289,23 @@ p.howto {
     background-color: whitesmoke;
     border-radius: 50%;
     display: inline-block;
-    margin: 8px 45px 8px 45px;
-    transition: .5s;
+    margin: 10px 20px 10px 20px;
+    transition: .7s;
+}
+ 
+.container {
+    float: left;
+} 
+
+.container:hover .userdescText{
+    display: block;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.19), 0 17px 50px 0 rgba(0,0,0,0.14);
 }
 
 
 .dot:hover{
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.19), 0 17px 50px 0 rgba(0,0,0,0.14);
     transform: scale(1.15);
-}
-
-
-.container:hover .userdescText {
-    display: block;
-
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.19), 0 17px 50px 0 rgba(0,0,0,0.14);
 }
 
 .floatingBox3 {
@@ -312,13 +327,34 @@ p.howto {
     box-sizing: border-box;
 }
 
-.cap {
-    position: absolute;
-    height: 10em;
-    padding: 5px;
-    opacity: 20%;
-}
+@media only screen and (max-width: 950px) {
+    .dot {
+        height: 150px;
+        min-height: 10%;
+        width: 150px;
+        margin-left: 0px 0px 20px 10px;
+        /* display: inline-block; */
+    }
 
+    .usericon {
+        font-size: 3em;
+    }
+
+    .userdescText {
+        font-size: 12px;
+        min-width: 150px;
+        left: 50%
+    }
+
+    .userdescContainer {
+        width: 200px;
+    }
+
+
+    .userdesc {
+        width: 200px;
+    }
+}
 
 
 /***************************** Admin Home Page  ****************************/

@@ -1,16 +1,6 @@
 import React from 'react';
 import './App.css';
 
-/*
-    useEffect(() => {
-        fetch('/scholarship').then(response => 
-            response.json().then(data => {
-                console.log(data);
-            })
-        );
-    },[]);
-
-*/
 
 
 class Submit extends React.Component {
@@ -37,8 +27,21 @@ class Submit extends React.Component {
     }
 
     handleSubmit = (e) => {
-        const errormsg = "";
+        const errormsg = "Your input is invalid, try again";
         const goodmsg = "";
+        
+        if(!this.validate(e))
+        {
+            alert(errormsg);
+        }
+        else {
+            alert(goodmsg);
+        }
+
+        //post : search & submit
+        //get
+        //put
+        //delete
     }
 
     validate( ) {
@@ -60,7 +63,7 @@ class Submit extends React.Component {
                                 </div>
                                 <div class="column">
                                     <input type="text" style={{width:"50%"}} name="amount" class="admininput2" placeholder="amount"/>
-                                    <input type="url"  max="4.0" style={{width:"50%"}} name="GPA" class="admininput2" placeholder="Minimum GPA" required/><strong><abbr title="required">*</abbr></strong>
+                                    <input type="amount"  max="4.0" style={{width:"50%"}} name="GPA" class="admininput2" placeholder="Minimum GPA" required/><strong><abbr title="required">*</abbr></strong>
                                 </div>
                                 <div class="column">
                                     Ethnicity<br/>
