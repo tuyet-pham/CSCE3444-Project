@@ -5,7 +5,7 @@ from symbol import parameters
 from flask import Flask
 from flask_restful import Api, Resource, reqparse
 
-from app_helper import db_connect, json_converter
+from app_helper import db_connect, json_converter, date_today_s
 
 app = Flask(__name__)
 api = Api(app)
@@ -68,19 +68,23 @@ class Scholarships(Resource):
             filters.append(''' WHERE major = %s ''')
             parameters.append(args['major'])
 
+        # Add keyword search to query
         if args['keywords']:
             for i, word in enumerate(args['keywords'].split(',')):
                 filters.append(''' AND (CONCAT(description, name)) LIKE CONCAT("%%", %s, "%%") ''')
                 parameters.append(word)
 
+        # Add min amount to query
         if args['min_amount']:
             filters.append(''' AND amount >= %s  ''')
             parameters.append(args['min_amount'])
 
+        # Add max amount to query
         if args['max_amount']:
             filters.append(''' AND amount <= %s ''')
             parameters.append(args['max_amount'])
 
+        # Add sex to query
         if args['sex']:
             if args['sex'] == "Female":
                 param = 1
@@ -91,13 +95,17 @@ class Scholarships(Resource):
                 parameters.append(param)
                 filters.append(''' AND sex = %s ''')
 
+        # Add citizenship to query
         if args['citizenship']:
             if args['citizenship'] == 'True':
                 filters.append(''' AND citizenship =  1''')
             elif args['citizenship'] == 'False':
                 filters.append(''' AND (citizenship IS NULL OR citizenship != 1)''')
 
-
+        # Only get data where the due date has not passed
+        date_today = date_today_s()
+        filters.append('AND (deadline >= %s)')
+        parameters.append(date_today)
 
 
         # Combine query
