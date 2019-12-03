@@ -52,7 +52,11 @@ class Scholarships(Resource):
         # Parse request parameters
         parser = reqparse.RequestParser()
         parser.add_argument('keywords', help="Keywords separated by commas.")
-        parser.add_argument('major', required=True, help="Academic major")
+        parser.add_argument('major', required=True, help="Academic major. Must be direct match to the data in the database.")
+        parser.add_argument('min_amount', help="Minimum limit on scholarship amount.")
+        parser.add_argument('max_amount', help="Maximum limit on scholarship amount.")
+        parser.add_argument('sex', help="Male or Female. Other will just return all.")
+        parser.add_argument('citizenship', help="True - citizenship required. False - citizenship not required or unknown")
         args = parser.parse_args()
 
         # Build query parts
@@ -61,13 +65,40 @@ class Scholarships(Resource):
         parameters = []
 
         if args['major']:
-            filters.append(''' WHERE major=%s ''')
+            filters.append(''' WHERE major = %s ''')
             parameters.append(args['major'])
 
         if args['keywords']:
             for i, word in enumerate(args['keywords'].split(',')):
                 filters.append(''' AND (CONCAT(description, name)) LIKE CONCAT("%%", %s, "%%") ''')
                 parameters.append(word)
+
+        if args['min_amount']:
+            filters.append(''' AND amount >= %s  ''')
+            parameters.append(args['min_amount'])
+
+        if args['max_amount']:
+            filters.append(''' AND amount <= %s ''')
+            parameters.append(args['max_amount'])
+
+        if args['sex']:
+            if args['sex'] == "Female":
+                param = 1
+            elif args['sex'] == "Male":
+                param = 2
+
+            if param:
+                parameters.append(param)
+                filters.append(''' AND sex = %s ''')
+
+        if args['citizenship']:
+            if args['citizenship'] == 'True':
+                filters.append(''' AND citizenship =  1''')
+            elif args['citizenship'] == 'False':
+                filters.append(''' AND (citizenship IS NULL OR citizenship != 1)''')
+
+
+
 
         # Combine query
         for filt in filters:
