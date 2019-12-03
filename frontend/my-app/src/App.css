@@ -1,16 +1,25 @@
 :root {
+    --ss-pale-green: #b6ebdb;
     --ss-light-green: #77ffa0;
     --ss-medium-green: #07bd65;
     --ss-dark-green: #06904d;
+    --ss-light-teal: #09d3ac;
     --ss-teal: #00aaaa;
-    --ss-light-teal: #00cccc;
     --ss-orange: #cc6600;
-    --ss-gray: #999999;
     --ss-light-gray: #dddddd;
+    --ss-gray: #999999;
+    --ss-dark-gray: #232323;
+    --ss-light-red: #e53935;
+    --ss-red: #b81d1a;
+    --ss-dark-red: #962321;
+    --ss-light-gold: #fdd835;
+    --ss-gold: #b69504;
+    --ss-dark-gold: #997d00;
 }
 
 .App {
     text-align: center;
+    height: 100%;
 }
 
 
@@ -91,7 +100,7 @@ p.howto {
 }
 
 .App-link {
-    color: #09d3ac;
+    color: var(--ss-light-teal);
 }
 
 /* Style for search bar, source: https://www.w3schools.com/howto/howto_css_searchbar.asp */
@@ -209,7 +218,7 @@ p.howto {
 
 .row-flex {
     display: flex;
-    height: 100%;
+    min-height: calc(100vh - 464px); /*exact height to sit the footer at the bottom of the page*/
 }
 
 /* Form styles for Search page */
@@ -249,14 +258,32 @@ p.howto {
 /**************** Meet the team section ****************/
 
 .meetTheTeam {
-    padding: 50px 50px 100px 70px;
-    background-image: linear-gradient( #b6ebdb , rgb(7, 189, 101, .5));
+    /*padding: 50px 50px 600px 60px;*/
+    background-image: linear-gradient( var(--ss-pale-green) , rgb(7, 189, 101, .2));
     /* background-color: rgb(7, 189, 101, .2); */
 }
 .usericon {
     color: black;
     margin: 30px;
     font-size: 4em;
+}
+
+.divteamSize {
+    padding: 0px 50px 0px 200px;
+    width: 50%;
+}
+
+
+@media only screen and (max-width: 1300px) {
+    .divteamSize {
+        padding: 0px 50px 0px 50px;
+        width: 80%;
+    }
+
+    .meetTheTeam {
+        padding: 50px 50px 800px 0px;
+        /* background-color: rgb(7, 189, 101, .2); */
+    }
 }
 
 
@@ -268,7 +295,7 @@ p.howto {
     text-align: left;
     overflow: hidden;
     z-index: 500;
-    left: 65%;
+    left: 60%;
     transition: .5s;
 }
 
@@ -308,23 +335,72 @@ p.howto {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.19), 0 17px 50px 0 rgba(0,0,0,0.14);
 }
 
-.floatingBox3 {
+.floatingBox3-inactive { /* Used in results page */
+    /*sizing and placement*/
     float: left;
     width: 100%;
     height: 150px;
     overflow: hidden;
     min-height: 50px;
-    display: inline-block;
-    word-wrap: break-word;
-    margin: 0px;
+    max-height: 150px; 
+    display: -webkit-box;
+    margin: 10px;
     padding: 10px 30px 30px 30px;
-    vertical-align: text-top;
-    color: white;
-    text-align: left;
-    background-color: var(--ss-gray);
-    box-shadow: 10px 10px 10px var(--ss-light-gray);
-    border-radius: 10px;
     box-sizing: border-box;
+    /*text alignment*/
+    vertical-align: text-top;
+    text-align: left;
+    word-wrap: break-word;
+    overflow: hidden;
+    /* aesthetic */
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 0px 2px black;
+    /*overflow properties*/
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+.floatingBox3-active { /* Used in results page */
+    /*sizing and placement*/
+    float: left;
+    width: 100%;
+    min-height: 50px;
+    display: -webkit-box;
+    margin: 10px;
+    padding: 10px 30px 30px 30px;
+    box-sizing: border-box;
+    /*text alignment*/
+    vertical-align: text-top;
+    text-align: left;
+    word-wrap: break-word;
+    overflow: hidden;
+    /* aesthetic */
+    color: black;
+    background-color: white;
+    box-shadow: 0px 0px 0px 2px var(--ss-medium-green);
+    border-radius: 5px;
+    /*overflow properties*/
+    -webkit-box-orient: vertical;
+}
+
+.cap {
+    position: absolute;
+    width: 200px;
+    opacity: 30%;
+    animation: shimmy 5s infinite;
+    animation-direction: alternate;
+    float: right;
+}
+
+@keyframes shimmy {
+    0% {
+      transform: translate(20px, 60px);
+    }
+    100% {
+      transform: translate(20px, 300px) rotate(90deg, -90deg);
+    }
 }
 
 @media only screen and (max-width: 950px) {
@@ -343,7 +419,7 @@ p.howto {
     .userdescText {
         font-size: 12px;
         min-width: 150px;
-        left: 50%
+        left: 60%
     }
 
     .userdescContainer {
@@ -357,13 +433,15 @@ p.howto {
 }
 
 
+
+
 /***************************** Admin Home Page  ****************************/
 .AppAdmin{
     height: 100vh;
     max-height: 100%;
     min-height: 100%;
     min-width: 20%;
-    background-color: #e0e0e0;
+    background-color: var(--ss-light-gray);
     overflow: hidden;
 }
 
@@ -373,8 +451,8 @@ p.howto {
 }
 
 .AddminHomeHeader {
-    background-color : #1a6631;
-    color: rgb(231, 231, 231);
+    background-color : var(--ss-dark-green);
+    color: var(--ss-light-gray);
     text-align: right;
     font-size: 20px;
     padding : 20px;
@@ -391,7 +469,7 @@ p.howto {
     list-style-type: none;
     margin : 0px;
     padding: 0px;
-    background-color: #232323;
+    background-color: var(--ss-dark-gray);
     height: 100%;
     width: 260px;
     float: left;
@@ -441,41 +519,41 @@ button:focus {
 }
 
 .button-yellow {
-    background-color: #fdd835;
+    background-color: var(--ss-light-gold);
     color: white;
 }
 
 .button-yellow:hover {
-    background-color: #b69504;
+    background-color: var(--ss-gold);
     color:whitesmoke;
     box-shadow: 3px 10px 20px -7px rgba(0,0,0,0.19), 0 10px 20px 0 rgba(0,0,0,0.14);
 }
 
 .button-yellow:active {
-    background-color: #997d00;
+    background-color: var(--ss-dark-gold);
     color:whitesmoke;
 }
 
 
 .button-red {
-    background-color: #e53935;
+    background-color: var(--ss-light-red);
     color: whitesmoke;
 }
 
 .button-red:hover {
-    background-color: #b81d1a;
+    background-color: var(--ss-red);
     color: whitesmoke;
     box-shadow: 3px 10px 20px -7px rgba(0,0,0,0.19), 0 10px 20px 0 rgba(0,0,0,0.14);
 }
 
 .button-red:active {
-    background-color: #962321;
+    background-color: var(--ss-dark-red);
     color:whitesmoke;
 }
 
 
 .button-green {
-    background-color: #1a6631;
+    background-color: var(--ss-dark-green);
     color: whitesmoke;
 }
 
@@ -486,7 +564,7 @@ button:focus {
 }
 
 .button-green:active {
-    background-color: #4d964d;
+    background-color: var(--ss-dark-green);
     color:whitesmoke;
 }
 
@@ -603,7 +681,7 @@ button:focus {
 
 
 .forgotpassword:hover {
-    color: rgb(124, 124, 124);
+    color: var(--ss-gray);
 }
 
 

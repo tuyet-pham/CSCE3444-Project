@@ -6,7 +6,7 @@ import './App.css';
 class Footer extends React.Component {
     render () {
         return (
-            <div className="App">
+            <div className="App-footer">
                 <div class="App-footer row">
                     <div class="column-5">
                         <FaMapMarkerAlt />

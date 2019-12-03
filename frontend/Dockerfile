@@ -12,8 +12,6 @@ COPY my-app/package.json /app/package.json
 COPY my-app/package-lock.json /app/package-lock.json
 RUN npm install
 RUN npm install react-scripts@3.0.1 -g
-# RUN npm install react-router-dom
-# RUN npm install react-icons
-# RUN npm install react-recaptcha-google --save
+
 
 CMD ["npm", "start"]
