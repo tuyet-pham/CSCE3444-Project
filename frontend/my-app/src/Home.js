@@ -31,7 +31,7 @@ class Home extends React.Component {
                     <hr class="new1"/>
                     <p> 
                         <h1 class="howto">How to use ScholarScrape </h1>
-                        Using Scholarscrap is easy! Here's some quick tips.
+                        Using ScholarScraper is easy! Here's some quick tips.
                     </p>
                     {/* slide show here */}
                     <div class="carouselContainer">
@@ -52,10 +52,9 @@ class Home extends React.Component {
                 <div class="meetTheTeam">
                     <p class="howto"><h2>Meet the Team</h2></p>
 
-                   
-
                     <div class="divteamSize">
                     {/* user description area */}
+                    <div class="row" style={{margin:"auto"}}>
                     <div class="container">
                         <div class="userdescText userdesc">
                             <h2>Tii</h2>
@@ -68,9 +67,7 @@ class Home extends React.Component {
                             <span class="usericon "><FaUser/></span>
                         </div>    
                     </div>
-                    <br/>
-                    <br/>
-                    <br/>
+
                     <div class="container">
                         <div class="userdescText userdesc">
                             <h2>Pedro</h2>
@@ -84,9 +81,7 @@ class Home extends React.Component {
                             <span class="usericon "><FaUser/></span>
                         </div>
                     </div>
-                    <br/>
-                    <br/>
-                    <br/>
+
                     <div class="container">
                         <div class="userdescText userdesc">
                             <h2>Joe</h2>
@@ -99,6 +94,8 @@ class Home extends React.Component {
                             <span class="usericon "><FaUser/></span>
                         </div>
                     </div>
+                    </div>
+                    <div class="row" style={{margin:"auto"}}>
                     <div class="container">
                         <div class="userdescText userdesc">
                             <h2>Avery</h2>
@@ -106,8 +103,6 @@ class Home extends React.Component {
                             <br />for Blizzard. Graduated from the
                             <br />University of North Texas.
                         </div>
-                        <br/>
-                        <br/>
                         <div class="dot">
                             <h2>Avery</h2>
                             <span class="usericon "><FaUser/></span>
@@ -125,6 +120,7 @@ class Home extends React.Component {
                             <h2>Peyton</h2>
                             <span class="usericon "><FaUser/></span>
                         </div>
+                    </div>
                     </div>
                     {/* <div style={{width:"40%"}}>
                         <div><img style={{transform:"rotate(20deg)"}} class="cap" src={process.env.PUBLIC_URL + "cap.png"} /> </div>
