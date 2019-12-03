@@ -54,12 +54,12 @@ class Submit extends React.Component {
     }
 
     validate(e) {
-        if(this.state.amount === parseInt(this.state.amount, 10) || this.state.amount <= 0)
+        if(this.state.amount <= 0)
         {
             alert("Amount not valid.");
             return false;
         }
-        else if(this.state.GPA === parseInt(this.state.GPA, 10) || this.state.GPA <= 0.0 || this.state.GPA > 4.0)
+        else if(this.state.GPA <= 0.0 || this.state.GPA > 4.0)
         {
             alert("GPA not valid.");
             return false;
@@ -82,8 +82,8 @@ class Submit extends React.Component {
                                     <input type="url"  max="300" name="url" class="admininput2" placeholder="scholarship url" value={this.state.value} onChange={this.handleChange} required/><strong><abbr title="required">*</abbr></strong>
                                 </div>
                                 <div class="column">
-                                    <input type="text" style={{width:"50%"}} name="amount" class="admininput2" placeholder="amount" value={this.state.value} onChange={this.handleChange}/>
-                                    <input type="amount"  max="4.0" style={{width:"50%"}} name="GPA" class="admininput2" placeholder="Minimum GPA" value={this.state.value} onChange={this.handleChange} required/><strong><abbr title="required">*</abbr></strong>
+                                    <input type="text" style={{width:"50%"}} pattern="[0-9]*" name="amount" class="admininput2" placeholder="amount" value={this.state.value} onChange={this.handleChange}/>
+                                    <input type="amount"  max="4.0" style={{width:"50%"}} pattern="[0-9]*" name="GPA" class="admininput2" placeholder="Minimum GPA" value={this.state.value} onChange={this.handleChange} required/><strong><abbr title="required">*</abbr></strong>
                                 </div>
                                 <div class="column">
                                     Ethnicity<br/>
