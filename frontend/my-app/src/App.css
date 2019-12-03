@@ -11,6 +11,7 @@
 
 .App {
     text-align: center;
+    height: 100%;
 }
 
 .App-logo {
@@ -37,7 +38,6 @@
     bottom: 0px !important;
     height: 75px !important;
     text-align: left;
-    position: fixed;
 }
 
 .App-header-contents {
@@ -163,7 +163,7 @@
 
 .row-flex {
     display: flex;
-    height: 100%;
+    min-height: calc(100vh - 464px); /*exact height to sit the footer at the bottom of the page*/
 }
 
 /* Form styles for Search page */
@@ -212,23 +212,52 @@
     border-radius: 10px;
 }
 
-.floatingBox3 {
+.floatingBox3-inactive { /* Used in results page */
+    /*sizing and placement*/
     float: left;
     width: 100%;
-    height: 150px;
-    overflow: hidden;
     min-height: 50px;
-    display: inline-block;
-    word-wrap: break-word;
-    margin: 0px;
+    max-height: 150px; 
+    display: -webkit-box;
+    margin: 10px;
     padding: 10px 30px 30px 30px;
-    vertical-align: text-top;
-    color: white;
-    text-align: left;
-    background-color: var(--ss-gray);
-    box-shadow: 10px 10px 10px var(--ss-light-gray);
-    border-radius: 10px;
     box-sizing: border-box;
+    /*text alignment*/
+    vertical-align: text-top;
+    text-align: left;
+    word-wrap: break-word;
+    overflow: hidden;
+    /* aesthetic */
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 0px 2px black;
+    /*overflow properties*/
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+.floatingBox3-active { /* Used in results page */
+    /*sizing and placement*/
+    float: left;
+    width: 100%;
+    min-height: 50px;
+    display: -webkit-box;
+    margin: 10px;
+    padding: 10px 30px 30px 30px;
+    box-sizing: border-box;
+    /*text alignment*/
+    vertical-align: text-top;
+    text-align: left;
+    word-wrap: break-word;
+    overflow: hidden;
+    /* aesthetic */
+    color: black;
+    background-color: white;
+    box-shadow: 0px 0px 0px 2px var(--ss-medium-green);
+    border-radius: 5px;
+    /*overflow properties*/
+    -webkit-box-orient: vertical;
 }
 
 /***************************** Admin Home Page  ****************************/
