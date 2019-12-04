@@ -107,7 +107,7 @@ class Scholarship(Resource):
 
         # Parse request parameters
         parser = reqparse.RequestParser()
-        parser.add_argument('description', help="description")
+        parser.add_argument('desc', help="description")
         parser.add_argument('name', help="major")
         parser.add_argument('amount', help="amount")
         parser.add_argument('deadline', help="deadline")
@@ -115,15 +115,37 @@ class Scholarship(Resource):
         parser.add_argument('sex', help="sex")
         parser.add_argument('major', help="major")
         parser.add_argument('citizenship', help="citizenship")
-        parser.add_argument('gpa', help="gpa")
+        parser.add_argument('GPA', help="gpa")
         parser.add_argument('ethnicity', help="ethnicity")
         args = parser.parse_args()
-        
-        
-        
+        desc = args['desc']
+        name = args['name']
+        amount = args['amount']
+        deadline = args['deadline']
+        url = args['url']
+        accp_status = 1
+        sex = args['sex']
+        major = args['major']
+        citizenship = args['citizenship']
+        GPA = args['GPA']
+        ethnicity = args['ethnicity']
+
         db, cursor = db_connect()
-        json_data = []
-        return json.dumps(json_data, default=json_converter)
+        
+        scholarshipQuery = """
+                        INSERT INTO Scholarship(desc, name, amount, deadline, url, accp_status) VALUES(%s, %s, %s, %s, %s, %s)
+                        """
+        scholarshipData = []
+        scholarshipData.append(desc)
+        scholarshipData.append(name)
+        scholarshipData.append(amount)
+        scholarshipData.append(deadline)
+        scholarshipData.append(url)
+        scholarshipData.append(accp_status)
+        #cursor.execute(scholarshipQuery, scholarshipData) #<---- Broken line
+        
+        cursor.execute("SELECT idScholarship FROM Scholarship where idScholarship = (SELECT LAST_INSERT_ID())")
+        lastScholarshipID = cursor.fetchone()
 
     def delete(id):
         id = id
