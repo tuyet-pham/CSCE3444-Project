@@ -147,6 +147,16 @@ class Scholarship(Resource):
         cursor.execute("SELECT idScholarship FROM Scholarship where idScholarship = (SELECT LAST_INSERT_ID())")
         lastScholarshipID = cursor.fetchone()
 
+
+
+        # Geting the last inserted tag's ID.
+        cursor.execute("SELECT idreqtag FROM Reqtag where idreqtag = (SELECT LAST_INSERT_ID())")
+        lastReqtagID = cursor.fetchone()
+
+        # Linking the two relations together
+        cursor.execute("UPDATE Scholarship set idreqtag = %s where idScholarship = %s", (lastReqtagID[0], lastScholarshipID[0]))
+
+
         # queries to NULL where deadline = '1000-01-01' and where amount = 0
         cursor.execute("UPDATE Scholarship set deadline = NULL where deadline = '1000-01-01'")
         cursor.execute("UPDATE Scholarship set amount = NULL where amount = 0")
