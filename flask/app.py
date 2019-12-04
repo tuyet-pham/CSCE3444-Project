@@ -133,16 +133,10 @@ class Scholarship(Resource):
         db, cursor = db_connect()
         
         scholarshipQuery = """
-                        INSERT INTO Scholarship(desc, name, amount, deadline, url, accp_status) VALUES(%s, %s, %s, %s, %s, %s)
+                        INSERT INTO Scholarship(description, name, amount, deadline, url, accp_status) VALUES(%s, %s, %s, %s, %s, %s)
                         """
-        scholarshipData = []
-        scholarshipData.append(desc)
-        scholarshipData.append(name)
-        scholarshipData.append(amount)
-        scholarshipData.append(deadline)
-        scholarshipData.append(url)
-        scholarshipData.append(accp_status)
-        #cursor.execute(scholarshipQuery, scholarshipData) #<---- Broken line
+        scholarshipData = (desc, name, amount, deadline, url, accp_status)
+        cursor.execute(scholarshipQuery, scholarshipData) #<---- Broken line
         
         cursor.execute("SELECT idScholarship FROM Scholarship where idScholarship = (SELECT LAST_INSERT_ID())")
         lastScholarshipID = cursor.fetchone()
