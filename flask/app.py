@@ -6,14 +6,14 @@ from symbol import parameters
 
 from flask import Flask, jsonify
 from flask_restful import Api, Resource, reqparse
-from flask_cors import CORS
 
-from app_helper import db_connect, json_converter, date_today_s
+from app_helper import MyJSONEncoder, date_today_s, db_connect
+from flask_cors import CORS
 
 app = Flask(__name__)
 api = Api(app)
 CORS(app)
-
+app.json_encoder = MyJSONEncoder
 
 class Scholarships(Resource):
     """Class for scholarships route.

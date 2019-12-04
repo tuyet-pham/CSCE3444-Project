@@ -5,26 +5,33 @@
 from datetime import date, datetime
 from os import environ
 from os.path import abspath
+from flask.json import JSONEncoder
 
 import mysql.connector as sql
 
+class MyJSONEncoder(JSONEncoder):
+    def default(self, o):
+        """Convert datetime and date objects to string for JSON serialization.
 
-def json_converter(o):
-    """Convert datetime and date objects to string for JSON serialization.
+        Args:
+            o (object): Object to check
 
-    Args:
-        o (object): Object to check
+        Raises:
+            TypeError: Object can't be serialized
 
-    Raises:
-        TypeError: Object can't be serialized
+        Returns:
+            str: Properly formatted date
 
-    Returns:
-        str: Properly formatted date
-
-    """
-    if isinstance(o, (datetime, date)):
-        return o.isoformat()
-    raise TypeError("Type %s not serializable" % type(o))
+        """
+        try:
+            if isinstance(o, (datetime, date)):
+                return o.isoformat()
+            iterable = iter(o)
+        except TypeError:
+            pass
+        else:
+            return list(iterable)
+        return JSONEncoder.default(self, o)
 
 
 def db_connect():
