@@ -55,7 +55,7 @@ class Filters extends React.Component
     {
         super(props);
         this.state = {
-            major: 'Computer Science',
+            major: 'computer-science',
             gpa: 0.0,
             amount: 0
         };
@@ -64,10 +64,46 @@ class Filters extends React.Component
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+
+    /* When an entry updates, this function catches that change.*/
     handleChange(event)
     {
         const target = event.target;
-        const value = target.value;
+        //If the data type is the major, hyphenate the input so it can be passed to Flask.
+        //If it is the GPA, make sure it is a numerical value (e.g. null = 0)
+        //If it is the amount, make sure it is not null (e.g. null = 0, ' ' = 0, etc)
+        let value;
+        if(target.name === 'major')
+        {
+            value = this.hyphenate(target.value);
+        }
+        else if(target.name === 'gpa')
+        {
+            if(target.value === 'NA')
+            {
+                value = 0;
+            }
+            else
+            {
+                value = target.value;
+            }
+        }
+        else if(target.name ==='amount')
+        {
+            if(target.value.length === 0)
+            {
+                value = 0;
+            }
+            else
+            {
+                value = target.value;
+            }
+        }
+        else //this should never be called, but CYA protocol dictates it stays in.
+        {
+            value = target.value;
+        }
+
         const name = target.name;
 
         this.setState({
@@ -75,10 +111,43 @@ class Filters extends React.Component
         });
     }
 
+    /*Prevent page from reloading and handle submitted data. Called when user clicks 'Apply.'*/
     handleSubmit(event)
     {
         event.preventDefault(); //Don't allow page to reload
-        alert('Form submitted with values: ' + this.state.major + ', ' + this.state.gpa + ', ' + this.state.amount + '.');
+        if(this.validate(event))
+        {
+            alert('Form submitted with values: ' + this.state.major + ', ' + this.state.gpa + ', ' + this.state.amount + '.');
+
+        }
+    }
+
+    hyphenate(str)
+    {
+        const str2 = str.replace(/\s+/g, "-").toLowerCase();
+        return str2;
+    }
+
+
+    validate(event)
+    {
+        if(this.state.amount < 0)
+        {
+            alert("Amount not valid.");
+            return false;
+        }
+        else if(this.state.gpa < 0.0 || this.state.gpa > 4.0)
+        {
+            alert("GPA not valid.");
+            return false;
+        }
+        else if(typeof this.state.major !== 'string' && !(this.state.major instanceof String) || !this.state.major.length)
+        {
+            alert("Major must be a valid string.");
+            return false;
+        }
+       
+        return true;
     }
 
     render ()
@@ -91,7 +160,7 @@ class Filters extends React.Component
                 <form className="form-inline" id="filters">
                     <label>
                         Major*
-                        <input type="text" name="major" value={this.state.value} onChange={this.handleChange} placeholder="Computer Science"/>
+                        <input type="text" name="major" value={this.state.value} onChange={this.handleChange} placeholder="Computer Science" required/>
                     </label>
                     <br />
                     <label>
