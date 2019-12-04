@@ -6,14 +6,14 @@ import './App.css';
 class Submit extends React.Component {
     constructor(){
         super();
-        var x = new Date();
-        console.log(x);
+
+        //The state of the user's submission.
         this.state = {
+            post: "http://localhost:5000/scholarships?",
             name: "",
             url: "",
             amount: 0,
             GPA: 0.0,
-            date: x.get,
             deadline: "",
             ethnicity: "",
             sex: "",
@@ -23,12 +23,14 @@ class Submit extends React.Component {
             description: "",
             accp_status: -1
         };
+
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(e)
-    {
+    //Handles the state change of values when submit clicked.
+    handleChange(e) {
+
         const target = e.target;
         const value = target.value;
         const name = target.name;
@@ -38,34 +40,41 @@ class Submit extends React.Component {
         });
     }
 
+
+    //Handles the submission button when clicked. Validating the values. 
     handleSubmit = (e) => {
-        const goodmsg = "Thank you for your submission!";
-        
-        e.preventDefault(); //Don't allow page to reload
-        if(this.validate(e))
-        {
+
+        const goodmsg = "Thank you for contributing.\nWe will review your submission shortly!";
+        if(this.validate(e)) {
             alert(goodmsg);
         }
-
-        //post : search & submit
-        //get
-        //put
-        //delete
     }
 
+
+    //Validating the amount and GPA - NEED Deadline
     validate(e) {
-        if(this.state.amount <= 0)
-        {
+
+        if(this.state.amount <= 0) {
             alert("Amount not valid.");
             return false;
         }
-        else if(this.state.GPA <= 0.0 || this.state.GPA > 4.0)
-        {
-            alert("GPA not valid.");
+        else if(this.state.GPA <= 0.0 || this.state.GPA > 4.0) {
+            alert("GPA not valid.")
             return false;
         }
-       
         return true;
+    }
+    
+
+    //Posting to flask via string parsing.
+    async sendData(){
+        
+        const response = await fetch('OUR-API-GO-HERE', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ example: 'data' }),
+          })
+          console.log(await response.json())
     }
 
     render () {
@@ -83,7 +92,7 @@ class Submit extends React.Component {
                                 </div>
                                 <div class="column">
                                     <input type="text" style={{width:"50%"}} pattern="[0-9]*" name="amount" class="admininput2" placeholder="amount" value={this.state.value} onChange={this.handleChange}/>
-                                    <input type="amount"  max="4.0" style={{width:"50%"}} pattern="[0-9]*" name="GPA" class="admininput2" placeholder="Minimum GPA" value={this.state.value} onChange={this.handleChange} required/><strong><abbr title="required">*</abbr></strong>
+                                    <input type="amount"  max="4.0" style={{width:"50%"}} pattern="[0-4]\.[0-9]?[0-9]" name="GPA" class="admininput2" placeholder="Minimum GPA" value={this.state.value} onChange={this.handleChange} required/><strong><abbr title="required">*</abbr></strong>
                                 </div>
                                 <div class="column">
                                     Ethnicity<br/>
