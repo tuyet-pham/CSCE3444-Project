@@ -147,6 +147,15 @@ class Scholarship(Resource):
         cursor.execute("SELECT idScholarship FROM Scholarship where idScholarship = (SELECT LAST_INSERT_ID())")
         lastScholarshipID = cursor.fetchone()
 
+        # queries to NULL where deadline = '1000-01-01' and where amount = 0
+        cursor.execute("UPDATE Scholarship set deadline = NULL where deadline = '1000-01-01'")
+        cursor.execute("UPDATE Scholarship set amount = NULL where amount = 0")
+
+        # queries to NULL where GPA = '-1' and where ethnicity = '-1' and where sex = '-1'
+        cursor.execute("UPDATE Reqtag set GPA = NULL where GPA = '-1'")
+        cursor.execute("UPDATE Reqtag set ethnicity = NULL where ethnicity = '-1'")
+        cursor.execute("UPDATE Reqtag set sex = NULL where sex = '-1'")
+
     def delete(id):
         id = id
         db, cursor =db_connect()
