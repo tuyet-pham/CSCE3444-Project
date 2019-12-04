@@ -189,6 +189,7 @@ class Scholarship(Resource):
         parser.add_argument('sex', help="sex")
         parser.add_argument('major', help="major")
         parser.add_argument('citizenship', help="citizenship")
+        parser.add_argument('essay', help="essay")
         parser.add_argument('GPA', help="gpa")
         parser.add_argument('ethnicity', help="ethnicity")
         args = parser.parse_args()
@@ -201,6 +202,7 @@ class Scholarship(Resource):
         sex = args['sex']
         major = args['major']
         citizenship = args['citizenship']
+        essay = args['essay']
         GPA = args['GPA']
         ethnicity = args['ethnicity']
 
@@ -210,11 +212,17 @@ class Scholarship(Resource):
                         INSERT INTO Scholarship(description, name, amount, deadline, url, accp_status) VALUES(%s, %s, %s, %s, %s, %s)
                         """
         scholarshipData = (desc, name, amount, deadline, url, accp_status)
-        cursor.execute(scholarshipQuery, scholarshipData) #<---- Broken line
+        cursor.execute(scholarshipQuery, scholarshipData)
+
         cursor.execute("SELECT idScholarship FROM Scholarship where idScholarship = (SELECT LAST_INSERT_ID())")
         lastScholarshipID = cursor.fetchone()
+        LSID = lastScholarshipID[0]
 
-
+        tagQuery = """
+                INSERT INTO Reqtag(sex, major, citizenship, essay, GPA, ethnicity, idScholarship) VALUES(%s, %s, %s, %s, %s, %s, %s)
+                """
+        tagData = (sex, major, citizenship, essay, GPA, ethnicity, LSID)
+        cursor.execute(tagQuery, tagData)
 
         # Geting the last inserted tag's ID.
         cursor.execute("SELECT idreqtag FROM Reqtag where idreqtag = (SELECT LAST_INSERT_ID())")
