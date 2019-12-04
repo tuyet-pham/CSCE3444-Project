@@ -1,7 +1,17 @@
 import React from 'react';
 import './App.css';
+import {FaUser} from "react-icons/fa"
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
 
 class Home extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+          
+        }
+    }
+
     render () {
         return (
             <div className="App">
@@ -15,98 +25,112 @@ class Home extends React.Component {
                         <button type="submit">Go</button>
                     </div>
                 </div>
-                <div id="scholarScrapeDescription" style={{paddingTop:"10px", paddingBottom:"10px"}}>
-                    <h2> How to use ScholarScrape </h2>
-                    {/*put scraper tips here*/}
-                    <div class="row">
-                        <div class="floatingBox">
-                            <h3>
-                                Search for Scholarships
-                            </h3>
-                            <span> {/* I want to add some padding between the text and the edge of the box here, but inline styling isn't working.*/}
-                                In the search box above, type in
-                                the criteria you want to search by - 
-                                your major, your hobbies, or something
-                                else that makes you special - then click
-                                "Go" to see what scholarships we have
-                                in store for you.
-                            </span>
+
+                {/*put scraper tips here*/}
+                <div id="scholarScrapeDescription" style={{padding:"20px", backgroundColor:"white"}}>
+                    <hr class="new1"/>
+                    <p> 
+                        <h1 class="howto">How to use ScholarScrape </h1>
+                        Using ScholarScraper is easy! Here's some quick tips.
+                    </p>
+                    {/* slide show here */}
+                    <div class="carouselContainer">
+                        <Carousel showArrows={false} infiniteLoop={true} stopOnHover={true} showStatus={false} showThumbs={false} autoPlay>
+                                <div>
+                                    <img class="App-tip" src={process.env.PUBLIC_URL + "slide1.png"} alt="slide 1"/>
+                                </div>
+                                <div>
+                                    <img class="App-tip" src={process.env.PUBLIC_URL + "slide2.png"} alt="slide 1"/>
+                                </div>
+                                <div>
+                                    <img class="App-tip" src={process.env.PUBLIC_URL + "slide3.png"} alt="slide 1"/>
+                                </div>
+                        </Carousel>
+                    </div>
+                        <hr class="new1"/>
+                    </div>
+                <div class="meetTheTeam">
+                    <p class="howto"><h2>Meet the Team</h2></p>
+
+                    <div class="divteamSize">
+                    {/* user description area */}
+                    <div class="row" style={{margin:"auto"}}>
+                    <div class="container">
+                        <div class="userdescText userdesc">
+                            <h2>Tii</h2>
+                            Wanna be Full stack developer. 
+                            <br />Graduated from the University of North 
+                            <br />Texas.
                         </div>
-                        <div class="floatingBox">
-                            <h3>
-                                Apply for Greatness
-                            </h3>
-                            <span>
-                                Once you find a scholarship you like,
-                                you can click "View More" and visit its
-                                website to apply. There is no limit on the 
-                                amount of scholarships you can inspect here
-                                on ScholarScrape, so apply for as many
-                                scholarships as you like.
-                            </span>
+                        <div class="dot" >
+                            <h2>Tii</h2>
+                            <span class="usericon "><FaUser/></span>
+                        </div>    
+                    </div>
+
+                    <div class="container">
+                        <div class="userdescText userdesc">
+                            <h2>Pedro</h2>
+                            Game developer. Want to work for
+                            <br />an indie game company.
+                            <br />Graduated from the University of North 
+                            <br />Texas.
                         </div>
-                        <div class="floatingBox">
-                            <h3>
-                                Contribute to the Community
-                            </h3>
-                            <span>
-                                Know about a scholarship opportunity
-                                that you'd like to share with other students
-                                like you? You can submit scholarships by
-                                clicking "Contribute" on this page. If the
-                                site admins approve your submission, it
-                                will be added to our database.
-                            </span>
+                        <div class="dot">
+                            <h2>Pedro</h2>
+                            <span class="usericon "><FaUser/></span>
                         </div>
                     </div>
+
+                    <div class="container">
+                        <div class="userdescText userdesc">
+                            <h2>Joe</h2>
+                            About to be hired as a real developer.
+                            <br />Graduated from the University of North 
+                            <br />Texas. Getting paid the big bucks.
+                        </div>
+                        <div class="dot">
+                            <h2>Joe</h2>
+                            <span class="usericon "><FaUser/></span>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row" style={{margin:"auto"}}>
+                    <div class="container">
+                        <div class="userdescText userdesc">
+                            <h2>Avery</h2>
+                            Game developer. Want to work 
+                            <br />for Blizzard. Graduated from the
+                            <br />University of North Texas.
+                        </div>
+                        <div class="dot">
+                            <h2>Avery</h2>
+                            <span class="usericon "><FaUser/></span>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="userdescText userdesc">
+                            <h2>Peyton</h2>
+                            Awesome developer with a lot of 
+                            <br />stickers. You know where to go. 
+                            <br />Graduated from the University 
+                            <br />of North Texas.
+                        </div>
+                        <div class="dot">
+                            <h2>Peyton</h2>
+                            <span class="usericon "><FaUser/></span>
+                        </div>
+                    </div>
+                    </div>
+                    {/* <div style={{width:"40%"}}>
+                        <div><img style={{transform:"rotate(20deg)"}} class="cap" src={process.env.PUBLIC_URL + "cap.png"} /> </div>
+                        <div><img style={{transform:"rotate(-30deg)"}} class="cap" src={process.env.PUBLIC_URL + "cap.png"} /></div>
+                        <img style={{transform:"rotate(-40deg)"}} class="cap" src={process.env.PUBLIC_URL + "cap.png"} />
+                        <img style={{transform:"rotate(30deg)"}} class="cap" src={process.env.PUBLIC_URL + "cap.png"} />
+                    </div> */}
                 </div>
-        
-                
-                <div id="meetTheTeam" style={{background: "var(--ss-light-green)", paddingTop: "10px", paddingBottom: "10px", marginTop: "10px"}}>
-                    <h2> Meet the Team </h2>
-                    {/*put team info here*/}
-                    <div class="floatingBox2">
-                        <h3>
-                            Tii
-                        </h3>
-                        <span>
-                            A normal human living person
-                        </span>
-                    </div>
-                    <div class="floatingBox2">
-                        <h3>
-                            Pedro
-                        </h3>
-                        <span>
-                            A normal human with a hat
-                        </span>
-                    </div>
-                    <div class="floatingBox2">
-                        <h3>
-                            Joe
-                        </h3>
-                        <span>
-                            A normal human with a beard
-                        </span>
-                    </div>
-                    <div class="floatingBox2">
-                        <h3>
-                            Avery
-                        </h3>
-                        <span>
-                            Often seen doing human activities
-                        </span>
-                    </div>
-                    <div class="floatingBox2">
-                        <h3>
-                            Peyton
-                        </h3>
-                        <span>
-                            Eats normal human food, like crushed ice
-                        </span>
-                    </div>
-                </div>
-            </div>
+            </div>    
+        </div>
         );
     }
 }

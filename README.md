@@ -46,6 +46,6 @@ For some, the process of applying for Scholarships is on the level of intimidati
     - ```docker-compose build```
 * Run Docker:
     - Start and run full system: ```docker-compose up```
-    - Run one service: ```docker-compose run --rm <service Name>```
+    - Run one service: ```docker-compose up --rm <service Name>```
     - Start bash in one service: ```docker-compose run --rm <service Name> /bin/sh```
 
