@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 
+import { getDataFetch } from './utils/api_functions';
+
 function ResultsList(props)
 {
     const list = props.itemsList;
@@ -22,7 +24,6 @@ class Result extends React.Component
         super(props);
         this.updateClass = this.updateClass.bind(this);
         this.state = {active: false};
-        this.getDataFetch();
     }
 
     render()
@@ -46,14 +47,6 @@ class Result extends React.Component
     {
         const currentState = this.state.active;
         this.setState({active: !currentState});
-    }
-
-    async getDataFetch(){
-        const response =
-          await fetch("http://localhost:5000/scholarships",
-            { headers: {'Content-Type': 'application/json'}}
-          )
-        console.log(await response.json())
     }
 }
 
@@ -135,12 +128,34 @@ class Results extends React.Component
         this.state = {
             listItems: this.props.listItems,
             all: this.props.all,
+            response: [],
         };
+        this.response = null;
+        getDataFetch().then(response => {
+            console.log(response[0]);
+            this.response = response
+        });
+    }
+
+    componentWillMount() {
+        getDataFetch().then(api_response => {
+            console.log(api_response)
+                this.setState({
+                    response: api_response
+                });
+        })
     }
 
 
 
     render () {
+        let scholarships;
+        if(this.state.response.length == 0) {
+            scholarships = <Result isActive={false}title="Loading Data" description="This will take a few seconds..." />
+        } else {
+            scholarships = <Result isActive={false}title={this.state.response[0].name} description={this.state.response[0].description} />;
+        }
+
         return (
             <div className="App-search-results">
                 {/*HEADER GOES HERE */}
@@ -166,8 +181,7 @@ class Results extends React.Component
                     {/* RESULTS */}
                     <div className="column-70">
                         {/* FOR result IN results */}
-                        <Result isActive={false}title="Result Title 1" description={this.hipsterIpsum} />
-                        <Result isActive={false}title="Result Title 2" description="This is a shorter description." />
+                        {scholarships}
                     </div>
                 </div>
             </div>
