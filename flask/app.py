@@ -2,13 +2,15 @@
 import json
 from symbol import parameters
 
-from flask import Flask
+from flask import Flask, jsonify
 from flask_restful import Api, Resource, reqparse
+from flask_cors import CORS
 
 from app_helper import db_connect, json_converter
 
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
 
 
 class Scholarships(Resource):
@@ -36,7 +38,9 @@ class Scholarships(Resource):
         for result in rv:
             json_data.append(dict(zip(row_headers, result)))
 
-        return json.dumps(json_data, default=json_converter)
+        response = jsonify(json_data)
+
+        return response
 
     def post(self):
         """Post to scholarships.

@@ -22,6 +22,7 @@ class Result extends React.Component
         super(props);
         this.updateClass = this.updateClass.bind(this);
         this.state = {active: false};
+        this.getDataFetch();
     }
 
     render()
@@ -45,6 +46,14 @@ class Result extends React.Component
     {
         const currentState = this.state.active;
         this.setState({active: !currentState});
+    }
+
+    async getDataFetch(){
+        const response =
+          await fetch("http://localhost:5000/scholarships",
+            { headers: {'Content-Type': 'application/json'}}
+          )
+        console.log(await response.json())
     }
 }
 
@@ -78,7 +87,7 @@ class Filters extends React.Component
     handleSubmit(event)
     {
         event.preventDefault(); //Don't allow page to reload
-        alert('Form submitted with values: ' + this.state.major + ', ' + this.state.gpa + ', ' + this.state.amount + '.');
+        // alert('Form submitted with values: ' + this.state.major + ', ' + this.state.gpa + ', ' + this.state.amount + '.');
     }
 
     render ()
@@ -118,7 +127,7 @@ class Filters extends React.Component
 }
 
 {/* Forms reference: https://reactjs.org/docs/forms.html */}
-class Results extends React.Component 
+class Results extends React.Component
 {
     constructor(props){
         super(props);
@@ -129,7 +138,7 @@ class Results extends React.Component
         };
     }
 
-    
+
 
     render () {
         return (
@@ -137,8 +146,8 @@ class Results extends React.Component
                 {/*HEADER GOES HERE */}
                 <div className="App-header">
                     <h1 className="App-header-contents">
-                        <img className="App-logo" src={process.env.PUBLIC_URL + "scraper_logo.png"} alt="ScholarScraper logo"/> 
-                        ScholarScraper 
+                        <img className="App-logo" src={process.env.PUBLIC_URL + "scraper_logo.png"} alt="ScholarScraper logo"/>
+                        ScholarScraper
                     </h1>
                 </div>
 
