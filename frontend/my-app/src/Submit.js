@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
-
-
+import Recaptcha from "react-recaptcha"
 
 class Submit extends React.Component {
     constructor(){
@@ -9,6 +8,7 @@ class Submit extends React.Component {
 
         //The state of the user's submission.
         this.state = {
+            isVerifiied: false,
             post: "http://localhost:5000/scholarships?",
             name: "",
             url: "",
@@ -26,11 +26,27 @@ class Submit extends React.Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.recaptchaLoaded = this.recaptchaLoaded.bind(this);
+        this.verifyHuman = this.verifyHuman.bind(this);
+
+    }
+
+    //Make sue the Recaptcha loaded correctly
+    recaptchaLoaded() {
+        console.log("Recaptcha Sucessfully loaded!");
+    }
+
+    //Get the reponse of the Recaptcha and change the value
+    verifyHuman(response) {
+        if(response){
+            this.setState({
+                isVerifiied: true
+            })
+        }
     }
 
     //Handles the state change of values when submit clicked.
     handleChange(e) {
-
         const target = e.target;
         const value = target.value;
         const name = target.name;
@@ -38,15 +54,21 @@ class Submit extends React.Component {
         this.setState({
             [name] : value
         });
+        
     }
 
 
     //Handles the submission button when clicked. Validating the values. 
     handleSubmit = (e) => {
-
-        const goodmsg = "Thank you for contributing.\nWe will review your submission shortly!";
-        if(this.validate(e)) {
-            alert(goodmsg);
+        const errormsg = "Please verify that you are a hooman";
+        if(this.isVerifiied == false){
+            alert(errormsg);
+        }
+        else{
+            const goodmsg = "Thank you for contributing.\nWe will review your submission shortly!";
+            if(this.validate(e)) {
+                alert(goodmsg);
+            }
         }
     }
 
@@ -140,13 +162,20 @@ class Submit extends React.Component {
                                     <input type="radio" name="essay" value="0" onChange={this.handleChange}/> N
                                 </div>
                             </div> 
-                            <div class="row2">
+                            <div class="row2">                                
                                 <div style={{textAlign:"left"}} class="columnBottom">
                                     <textarea placeholder="Add a description of the scholarship..." max="2000" name="description" rows="100" cols="30"/>
                                 </div>
-                                <div  style={{width:"30%", padding:"160px 0px 0px 0px"}} class="columnBottom">
+                                <div  style={{width:"30%", padding:"10% 0px 0px 0px"}} class="columnBottom">
+                                    {/* The Recaptcha  */}
+                                    <Recaptcha
+                                        sitekey="6Lc99cUUAAAAAHuqgpFUsTsBUhAmZna0wIkZAd-r"
+                                        render="explicit"
+                                        verifyCallback={this.verifyHuman}
+                                        onloadCallback={this.recaptchaLoaded}
+                                    />
                                     <input type="submit" class="flatButton" value="Submit Listing"/>
-                                </div>
+                                </div>s
                             </div>
                         </form>
                     </div>
