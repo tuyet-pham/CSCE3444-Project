@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import { getDataFetch } from './utils/api_functions';
+import { fetchScholarships } from './utils/api_functions';
 
 function ResultsList(props)
 {
@@ -553,15 +553,11 @@ class Results extends React.Component
                 major: 'computer-science'
             },
         };
-        // getDataFetch(this.state.filters).then(response => {
-        //     console.log(response[0]);
-        //     this.response = response
-        // });
     }
 
     getNewQuery(filters) {
         console.log(filters);
-        getDataFetch(filters).then(api_response => {
+        fetchScholarships(filters).then(api_response => {
             console.log(api_response);
             this.setState({
                 response: api_response
@@ -570,7 +566,7 @@ class Results extends React.Component
     }
 
     componentWillMount() {
-        getDataFetch(this.state.filters).then(api_response => {
+        fetchScholarships(this.state.filters).then(api_response => {
             console.log(api_response);
             this.setState({
                 response: api_response

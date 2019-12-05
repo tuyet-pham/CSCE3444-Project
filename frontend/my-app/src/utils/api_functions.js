@@ -1,4 +1,4 @@
-export async function getDataFetch(filters){
+export async function fetchScholarships(filters){
   var url = 'http://localhost:5000/scholarships?major='
   url += filters.major
     const response =
