@@ -51,7 +51,6 @@ class AdminLogin extends React.Component {
         else{
             const incorrectmsg = "Incorrect Username or Password";
             if(this.validate(e)) {
-
             }
             else
             {

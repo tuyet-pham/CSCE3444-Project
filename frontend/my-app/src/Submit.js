@@ -114,7 +114,7 @@ class Submit extends React.Component {
                                 </div>
                                 <div class="column">
                                     <input type="text" style={{width:"50%"}} pattern="[0-9]*" name="amount" class="admininput2" placeholder="amount" value={this.state.value} onChange={this.handleChange}/>
-                                    <input type="amount"  max="4.0" style={{width:"50%"}} pattern="[0-4]\.[0-9]?[0-9]" name="GPA" class="admininput2" placeholder="Minimum GPA" value={this.state.value} onChange={this.handleChange} required/><strong><abbr title="required">*</abbr></strong>
+                                    <input type="amount"  max="4.0" style={{width:"50%"}} pattern="[0-4]\.[0-9]?[0-9]" name="GPA" class="admininput2" placeholder="Minimum GPA" value={this.state.value} onChange={this.handleChange}/>
                                 </div>
                                 <div class="column">
                                     Ethnicity<br/>
@@ -125,7 +125,8 @@ class Submit extends React.Component {
                                         <option value="Native American">Native American</option>
                                         <option value="Caucasian">Caucasian</option>
                                         <option value="Pacific Islander">Pacific Islander</option>
-                                        <option value="">Other</option>
+                                        <option value="Other">Other</option>
+                                        <option value="">NA</option>
                                     </select>
                                 </div>
                                 <div class="column">
@@ -153,8 +154,8 @@ class Submit extends React.Component {
                                     </select>
                                 </div>
                                 <div class="column">
-                                    Requires citizenship? <strong><abbr title="required">*</abbr></strong><br/> 
-                                    <input type="radio" name="citizenship" value="1" onChange={this.handleChange} required/> Y <br/>
+                                    Requires citizenship? 
+                                    <input type="radio" name="citizenship" value="1" onChange={this.handleChange}/> Y <br/>
                                     <input type="radio" name="citizenship" value="0" onChange={this.handleChange}/> N 
                                     <br/><br/>
                                     Is there an essay involved? <br/>
@@ -164,7 +165,8 @@ class Submit extends React.Component {
                             </div> 
                             <div class="row3">
                                 <div class="columnBottom">
-                                    <textarea placeholder="Add a description of the scholarship..." max="1000" name="description" rows="100" cols="30"/>
+                                    Add a description of the scholarship.. <strong><abbr title="required">*</abbr></strong>
+                                    <textarea placeholder="." max="1000" name="description" rows="100" cols="30" required/>
                                 </div>
                                 <div style={{textAlign:"right"}} class="columnBottom">
                                     <input type="submit" class="flatButton" value="Submit Listing"/>
