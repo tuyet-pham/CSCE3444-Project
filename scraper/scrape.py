@@ -66,7 +66,7 @@ def scrape(usern, passwd, hostl, databasen):
                 # tagBuilder(idScholarship, url, desc) : Gives us an array of all attributes of the Reqtag table per scholarship listing
                 # Reqtag table's attributes : sex, major, citizenship, essay, GPA, ethnicity, idScholarship
                 #
-                s = tagBuilder(lastScholarshipID[0], row[1], " ")
+                s = tagBuilder(lastScholarshipID[0], row[1], row[4])
                 tagQuery ="""
                         INSERT INTO Reqtag (sex, major, citizenship, essay, GPA, ethnicity, idScholarship) VALUES (%s, %s, %s, %s, %s, %s, %s)
                         """
@@ -87,9 +87,12 @@ def scrape(usern, passwd, hostl, databasen):
         cursor.execute("UPDATE Scholarship set amount = NULL where amount = 0")
 
         # queries to NULL where GPA = '-1' and where ethnicity = '-1' and where sex = '-1'
+        # and where essay = '0' and where citizenship = '0'
         cursor.execute("UPDATE Reqtag set GPA = NULL where GPA = '-1'")
         cursor.execute("UPDATE Reqtag set ethnicity = NULL where ethnicity = '-1'")
         cursor.execute("UPDATE Reqtag set sex = NULL where sex = '-1'")
+        cursor.execute("UPDATE Reqtag set essay = NULL where essay = '0'")
+        cursor.execute("UPDATE Reqtag set citizenship = NULL where citizenship = '0'")
 
 
 
@@ -133,6 +136,72 @@ def toAmount(amount):
             line = 0
         return int(line)
 
+# filters through description to see if ethnicity is found
+def compare(desc, count, temp):
+    if any(c in desc for c in temp):
+            count += 1
+    return count
+
+# searches for specific ethnicities in description
+# returns -1 if various or no ethnicities found
+# returns the ethnicity found if just 1
+def ethnicity(desc):
+    count = 0
+    store = []
+    temp = ['Hispanic']
+    count = compare(desc, count, temp)
+    if (count == 1 and len(store) == 0):
+        store = temp[:]
+    temp = ['Black']
+    count = compare(desc, count, temp)
+    if (count == 1 and len(store) == 0):
+        store = temp[:]
+    temp = ['Native North American']
+    count = compare(desc, count, temp)
+    if (count == 1 and len(store) == 0):
+        store = temp[:]
+    temp = ['Pacific Islander']
+    count = compare(desc, count, temp)
+    if (count == 1 and len(store) == 0):
+        store = temp[:]
+    temp = ['American Indian']
+    count = compare(desc, count, temp)
+    if (count == 1 and len(store) == 0):
+        store = temp[:]
+    temp = ['Italian']
+    count = compare(desc, count, temp)
+    if (count == 1 and len(store) == 0):
+        store = temp[:]
+    temp = ['Vietnamese']
+    count = compare(desc, count, temp)
+    if (count == 1 and len(store) == 0):
+        store = temp[:]
+
+    if (count == 0):
+        return -1
+    else:
+        return store[0]
+
+# this function finds any decimal values in the description and parses them
+# it returns the actual value or a -1 to later set to NULL
+def GPA(desc):
+
+    decimals = re.findall('\s\.?\d*\.?\d+',desc)
+    for i in range(0, len(decimals)):
+        decimals[i] = float(decimals[i])
+
+    temp = decimals[:]
+
+    for item in decimals:
+        if (item >= 4.0 or item < 2.1):
+            temp.remove(item)
+
+    if (len(temp) == 0):
+        return -1
+    else:
+        return temp[0]
+
+
 
 
 # This function builds a string to
@@ -151,5 +220,28 @@ def tagBuilder(idscholarship, url, desc):
         front, back = temp.split('/academic-major/')
         major, other = back.split('/')
         s[1] = major
+        # Finding sex from description
+        result = [' women ', ' woman ', ' Women ', ' Woman ', ' Female ', ' female ']
+        results = [' men ', ' man ', ' Men ', ' Man ', ' male ', ' Male ']
+
+        if any(c in desc for c in result):
+            s[0] = 1
+                
+        elif any(c in desc for c in results):
+            s[0] = 2
+        # Finding whether citizenship is required from description
+        result = ['Citizen', 'citizen']
+        if any(c in desc for c in result):
+            s[2] = 1
+        # Getting GPA requirements from description 
+        s[4] = GPA(desc)
+        #Find whether an essay is required
+        result = ['essay', 'Essay']
+
+        if any(c in desc for c in result):
+            s[3] = 1
+        #Getting ethnicity from description
+        s[5] = ethnicity(desc)
+
         return s
 

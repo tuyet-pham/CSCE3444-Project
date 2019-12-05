@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 
+import { getDataFetch } from './utils/api_functions';
+
 function ResultsList(props)
 {
     const list = props.itemsList;
@@ -117,7 +119,7 @@ class Filters extends React.Component
         event.preventDefault(); //Don't allow page to reload
         if(this.validate(event))
         {
-            alert('Form submitted with values: ' + this.state.major + ', ' + this.state.gpa + ', ' + this.state.amount + '.');
+            //alert('Form submitted with values: ' + this.state.major + ', ' + this.state.gpa + ', ' + this.state.amount + '.');
 
         }
     }
@@ -534,7 +536,7 @@ class Filters extends React.Component
 }
 
 {/* Forms reference: https://reactjs.org/docs/forms.html */}
-class Results extends React.Component 
+class Results extends React.Component
 {
     constructor(props){
         super(props);
@@ -542,19 +544,41 @@ class Results extends React.Component
         this.state = {
             listItems: this.props.listItems,
             all: this.props.all,
+            response: [],
         };
+        this.response = null;
+        getDataFetch().then(response => {
+            console.log(response[0]);
+            this.response = response
+        });
     }
 
-    
+    componentWillMount() {
+        getDataFetch().then(api_response => {
+            console.log(api_response)
+                this.setState({
+                    response: api_response
+                });
+        })
+    }
+
+
 
     render () {
+        let scholarships;
+        if(this.state.response.length == 0) {
+            scholarships = <Result isActive={false}title="Loading Data" description="This will take a few seconds..." />
+        } else {
+            scholarships = <Result isActive={false}title={this.state.response[0].name} description={this.state.response[0].description} />;
+        }
+
         return (
             <div className="App-search-results">
                 {/*HEADER GOES HERE */}
                 <div className="App-header">
                     <h1 className="App-header-contents">
-                        <img className="App-logo" src={process.env.PUBLIC_URL + "scraper_logo.png"} alt="ScholarScraper logo"/> 
-                        ScholarScraper 
+                        <img className="App-logo" src={process.env.PUBLIC_URL + "scraper_logo.png"} alt="ScholarScraper logo"/>
+                        ScholarScraper
                     </h1>
                 </div>
 
@@ -573,8 +597,7 @@ class Results extends React.Component
                     {/* RESULTS */}
                     <div className="column-70">
                         {/* FOR result IN results */}
-                        <Result isActive={false}title="Result Title 1" description={this.hipsterIpsum} />
-                        <Result isActive={false}title="Result Title 2" description="This is a shorter description." />
+                        {scholarships}
                     </div>
                 </div>
             </div>
