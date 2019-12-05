@@ -3,19 +3,6 @@ import './App.css';
 
 import { getDataFetch } from './utils/api_functions';
 
-function ResultsList(props)
-{
-    const list = props.itemsList;
-    const updatedList = list.map((listItems)=>{
-        return<li key={listItems.toString()}>
-            {listItems.title}
-            {listItems.description}
-        </li>
-    });
-    return(
-        <ul>{updatedList}</ul>
-    );
-}
 
 class Result extends React.Component
 {
@@ -28,8 +15,6 @@ class Result extends React.Component
 
     render()
     {
-        const isActive = this.props.active;
-
         return(
             //<div className={this.state.activeClasses[0]? "floatingBox3-active":"floatingBox3-inactive"} onClick={() => this.addActiveClass(0)}>}
             <div className={this.state.active ? "floatingBox3-active" : "floatingBox3-inactive"} onClick={this.updateClass}>
@@ -52,13 +37,13 @@ class Result extends React.Component
 
 class Filters extends React.Component
 {
-
+    /* Forms reference: https://reactjs.org/docs/forms.html */
     constructor(props)
     {
         super(props);
         this.state = {
             major: 'computer-science',
-            gpa: 0.0,
+            gpa: null,
             amount: 0
         };
 
@@ -83,7 +68,7 @@ class Filters extends React.Component
         {
             if(target.value === 'NA')
             {
-                value = 0;
+                value = null;
             }
             else
             {
@@ -143,7 +128,7 @@ class Filters extends React.Component
             alert("GPA not valid.");
             return false;
         }
-        else if(typeof this.state.major !== 'string' && !(this.state.major instanceof String) || !this.state.major.length)
+        else if((typeof this.state.major !== 'string' && !(this.state.major instanceof String)) || !this.state.major.length)
         {
             alert("Major must be a valid string.");
             return false;
@@ -535,12 +520,10 @@ class Filters extends React.Component
     }
 }
 
-{/* Forms reference: https://reactjs.org/docs/forms.html */}
 class Results extends React.Component
 {
     constructor(props){
         super(props);
-        this.hipsterIpsum = "Lorem ipsum dolor amet godard jianbing you probably haven't heard of them, bicycle rights ennui everyday carry portland yuccie fixie cronut organic poke. Pabst williamsburg YOLO, blog austin iceland dreamcatcher you probably haven't heard of them cold-pressed tousled prism art party semiotics asymmetrical. Jean shorts glossier PBR&B heirloom. Synth pinterest farm-to-table coloring book pug tofu. Meditation vexillologist offal, hell of microdosing pug aesthetic intelligentsia knausgaard hoodie tumblr. Flannel flexitarian ethical chia taiyaki, gochujang street art fam mlkshk. Migas biodiesel selvage wolf. Authentic cold-pressed gentrify roof party letterpress +1 polaroid humblebrag keffiyeh meggings shaman. Hammock iceland green juice, art party cliche pork belly pug you probably haven't heard of them fixie hell of. Crucifix blue bottle vegan, selfies put a bird on it trust fund normcore. Blog listicle celiac, farm-to-table fixie shoreditch deep v hell of mlkshk plaid. Fashion axe drinking vinegar green juice kickstarter. 8-bit cliche you probably haven't heard of them hammock, mixtape XOXO shoreditch biodiesel selvage seitan. Fanny pack roof party etsy echo park, woke kickstarter irony asymmetrical pabst actually leggings snackwave +1 messenger bag wolf. Chartreuse fashion axe echo park single-origin coffee shaman meggings banh mi. Pop-up gastropub literally iPhone, tilde woke vinyl hoodie live-edge YOLO godard. Hexagon fashion axe yr cold-pressed offal la croix kinfolk food truck. Food truck yuccie dreamcatcher mustache, tattooed wolf edison bulb gastropub.";
         this.state = {
             listItems: this.props.listItems,
             all: this.props.all,
@@ -563,10 +546,9 @@ class Results extends React.Component
     }
 
 
-
     render () {
         let scholarships;
-        if(this.state.response.length == 0) {
+        if(this.state.response.length === 0) {
             scholarships = <Result isActive={false}title="Loading Data" description="This will take a few seconds..." />
         } else {
             scholarships = <Result isActive={false}title={this.state.response[0].name} description={this.state.response[0].description} />;
