@@ -1,22 +1,78 @@
 :root {
-    --ss-light-green: #ccffcc;
-    --ss-medium-green: #40bf40;
-    --ss-dark-green: #008000;
+    --ss-pale-green: #b6ebdb;
+    --ss-light-green: #77ffa0;
+    --ss-medium-green: #07bd65;
+    --ss-dark-green: #06904d;
+    --ss-light-teal: #09d3ac;
     --ss-teal: #00aaaa;
-    --ss-light-teal: #00cccc;
     --ss-orange: #cc6600;
-    --ss-gray: #999999;
     --ss-light-gray: #dddddd;
+    --ss-gray: #999999;
+    --ss-dark-gray: #232323;
+    --ss-light-red: #e53935;
+    --ss-red: #b81d1a;
+    --ss-dark-red: #962321;
+    --ss-light-gold: #fdd835;
+    --ss-gold: #b69504;
+    --ss-dark-gold: #997d00;
 }
 
 .App {
     text-align: center;
+    height: 100%;
 }
+
 
 .App-logo {
     height: 2em;
     vertical-align: middle;
 }
+
+.App-tip {
+    background:white;
+    width: 60px;
+}
+
+
+.carouselContainer {
+    text-align: center;
+    opacity: 80%;
+    width: 60%;
+    max-width: 600px;
+    padding-bottom: 50px;
+    position: relative;
+    margin-left: 35%;
+    margin-right: 20%;
+    /* background-color: yellowgreen; */
+}
+
+.carouselContainer:hover{
+    opacity: 95%;
+}
+
+@media only screen and (max-width: 1200px) {
+    .carouselContainer {
+        margin-left: 20%;
+    }
+}
+
+hr.new1 {
+    color: var(--ss-gray);
+    border-top: 1px solid;
+    margin: 0px 40px 0px 40px;
+    opacity: 50%;
+
+}
+
+#scholarScrapeDescription {
+    background-color: whitesmoke;
+}
+
+p.howto {
+    opacity: 80%;
+    font-size: 25px;
+}
+
 
 .App-header {
     background-color: var(--ss-medium-green);
@@ -37,7 +93,6 @@
     bottom: 0px !important;
     height: 75px !important;
     text-align: left;
-    position: fixed;
 }
 
 .App-header-contents {
@@ -45,7 +100,7 @@
 }
 
 .App-link {
-    color: #09d3ac;
+    color: var(--ss-light-teal);
 }
 
 /* Style for search bar, source: https://www.w3schools.com/howto/howto_css_searchbar.asp */
@@ -163,7 +218,7 @@
 
 .row-flex {
     display: flex;
-    height: 100%;
+    min-height: calc(100vh - 464px); /*exact height to sit the footer at the bottom of the page*/
 }
 
 /* Form styles for Search page */
@@ -200,36 +255,185 @@
     border-radius: 10px;
 }
 
-.floatingBox2 {
-    min-width: 400px;
-    display: inline-block;
-    max-width: 30%;
-    height: 100%;
-    margin: 1%;
-    padding: 10px;
-    vertical-align: text-top;
-    background-color: white;
-    border-radius: 10px;
+/**************** Meet the team section ****************/
+
+.meetTheTeam {
+    /*padding: 50px 50px 600px 60px;*/
+    background-image: linear-gradient( var(--ss-pale-green) , rgb(7, 189, 101, .2));
+    /* background-color: rgb(7, 189, 101, .2); */
+}
+.usericon {
+    color: black;
+    margin: 30px;
+    font-size: 4em;
 }
 
-.floatingBox3 {
+.divteamSize {
+    padding: 0px 50px 0px 200px;
+    width: 50%;
+}
+
+
+@media only screen and (max-width: 1300px) {
+    .divteamSize {
+        padding: 0px 50px 0px 50px;
+        width: 80%;
+    }
+
+    .meetTheTeam {
+        padding: 50px 50px 800px 0px;
+        /* background-color: rgb(7, 189, 101, .2); */
+    }
+}
+
+
+.userdescText {
+    font-size: 16px;
+    min-width: 350px;
+    position: absolute;
+    display: none;
+    text-align: left;
+    overflow: hidden;
+    z-index: 500;
+    left: 60%;
+    transition: .5s;
+}
+
+.userdesc {
+    height : 200px;
+    border-radius: 5px;
+    background-color: white;
+    overflow: hidden;
+    padding: 10px;
+    display: none;
+    transition: .5s;
+}
+
+.dot {
+    height: 200px;
+    min-height: 10%;
+    width: 200px;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 10px 20px 10px 20px;
+    transition: .7s;
+}
+ 
+.container {
+    float: left;
+} 
+
+.container:hover .userdescText{
+    display: block;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.19), 0 17px 50px 0 rgba(0,0,0,0.14);
+}
+
+
+.dot:hover{
+    transform: scale(1.15);
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.19), 0 17px 50px 0 rgba(0,0,0,0.14);
+}
+
+.floatingBox3-inactive { /* Used in results page */
+    /*sizing and placement*/
     float: left;
     width: 100%;
     height: 150px;
     overflow: hidden;
     min-height: 50px;
-    display: inline-block;
-    word-wrap: break-word;
-    margin: 0px;
+    max-height: 150px; 
+    display: -webkit-box;
+    margin: 10px;
     padding: 10px 30px 30px 30px;
-    vertical-align: text-top;
-    color: white;
-    text-align: left;
-    background-color: var(--ss-gray);
-    box-shadow: 10px 10px 10px var(--ss-light-gray);
-    border-radius: 10px;
     box-sizing: border-box;
+    /*text alignment*/
+    vertical-align: text-top;
+    text-align: left;
+    word-wrap: break-word;
+    overflow: hidden;
+    /* aesthetic */
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 0px 2px black;
+    /*overflow properties*/
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
 }
+
+.floatingBox3-active { /* Used in results page */
+    /*sizing and placement*/
+    float: left;
+    width: 100%;
+    min-height: 50px;
+    display: -webkit-box;
+    margin: 10px;
+    padding: 10px 30px 30px 30px;
+    box-sizing: border-box;
+    /*text alignment*/
+    vertical-align: text-top;
+    text-align: left;
+    word-wrap: break-word;
+    overflow: hidden;
+    /* aesthetic */
+    color: black;
+    background-color: white;
+    box-shadow: 0px 0px 0px 2px var(--ss-medium-green);
+    border-radius: 5px;
+    /*overflow properties*/
+    -webkit-box-orient: vertical;
+}
+
+.cap {
+    position: absolute;
+    width: 200px;
+    opacity: 30%;
+    animation: shimmy 5s infinite;
+    animation-direction: alternate;
+    float: right;
+}
+
+@keyframes shimmy {
+    0% {
+      transform: translate(20px, 60px);
+    }
+    100% {
+      transform: translate(20px, 300px) rotate(90deg, -90deg);
+    }
+}
+
+@media only screen and (max-width: 950px) {
+    .dot {
+        height: 150px;
+        min-height: 10%;
+        width: 150px;
+        margin-left: 0px 0px 20px 10px;
+        /* display: inline-block; */
+    }
+
+    .usericon {
+        font-size: 3em;
+    }
+
+    .userdescText {
+        font-size: 12px;
+        min-width: 150px;
+        left: 60%
+    }
+
+    .userdescContainer {
+        width: 200px;
+    }
+
+
+    .userdesc {
+        width: 200px;
+    }
+}
+
+
+
 
 /***************************** Admin Home Page  ****************************/
 .AppAdmin{
@@ -237,7 +441,7 @@
     max-height: 100%;
     min-height: 100%;
     min-width: 20%;
-    background-color: #e0e0e0;
+    background-color: var(--ss-light-gray);
     overflow: hidden;
 }
 
@@ -247,8 +451,8 @@
 }
 
 .AddminHomeHeader {
-    background-color : #1a6631;
-    color: rgb(231, 231, 231);
+    background-color : var(--ss-dark-green);
+    color: var(--ss-light-gray);
     text-align: right;
     font-size: 20px;
     padding : 20px;
@@ -265,7 +469,7 @@
     list-style-type: none;
     margin : 0px;
     padding: 0px;
-    background-color: #232323;
+    background-color: var(--ss-dark-gray);
     height: 100%;
     width: 260px;
     float: left;
@@ -315,41 +519,41 @@ button:focus {
 }
 
 .button-yellow {
-    background-color: #fdd835;
+    background-color: var(--ss-light-gold);
     color: white;
 }
 
 .button-yellow:hover {
-    background-color: #b69504;
+    background-color: var(--ss-gold);
     color:whitesmoke;
     box-shadow: 3px 10px 20px -7px rgba(0,0,0,0.19), 0 10px 20px 0 rgba(0,0,0,0.14);
 }
 
 .button-yellow:active {
-    background-color: #997d00;
+    background-color: var(--ss-dark-gold);
     color:whitesmoke;
 }
 
 
 .button-red {
-    background-color: #e53935;
+    background-color: var(--ss-light-red);
     color: whitesmoke;
 }
 
 .button-red:hover {
-    background-color: #b81d1a;
+    background-color: var(--ss-red);
     color: whitesmoke;
     box-shadow: 3px 10px 20px -7px rgba(0,0,0,0.19), 0 10px 20px 0 rgba(0,0,0,0.14);
 }
 
 .button-red:active {
-    background-color: #962321;
+    background-color: var(--ss-dark-red);
     color:whitesmoke;
 }
 
 
 .button-green {
-    background-color: #1a6631;
+    background-color: var(--ss-dark-green);
     color: whitesmoke;
 }
 
@@ -360,7 +564,7 @@ button:focus {
 }
 
 .button-green:active {
-    background-color: #4d964d;
+    background-color: var(--ss-dark-green);
     color:whitesmoke;
 }
 
@@ -425,9 +629,10 @@ button:focus {
 
 .flatButton {
     border-style: none;
+    border: none;
     border-radius: 20px;
-    background-color:#cadcfa ;
-    min-width: 200px;
+    background-color: var(--ss-light-green) ;
+    min-width: 180px;
     max-width: 100%;
     height: 40px;
     margin-top: 30px;
@@ -439,7 +644,7 @@ button:focus {
 }
 
 
-/* https://www.w3schools.com/css/css3_buttons.asp */
+/* https://www.w3schools.com/css/css3_buttons.sp */
 .flatButton:hover {
     background-color:#b6ebdb;
     color: var(--ss-dark-green);
@@ -476,7 +681,7 @@ button:focus {
 
 
 .forgotpassword:hover {
-    color: rgb(124, 124, 124);
+    color: var(--ss-gray);
 }
 
 
@@ -485,10 +690,12 @@ button:focus {
 
 .nav2 {
     list-style-type: none;
-    padding: 0px 0px 0px 42%;
+    padding: 0px 5% 0px 0px;
     height: 100%;
+    width: 100%;
     font-size: 25px;
-    text-align: center;
+    box-sizing: border-box;
+    text-align: right;
 }
 
 .nav2 a {
@@ -514,41 +721,79 @@ button:focus {
 
 .SubmissionBackground {
     background-image: linear-gradient( rgb(133, 255, 164, .5), rgb(202,220,240, .8));    
-    height: 95vh;
+    height: 100vh;
     max-height: 100%;
     min-height: 100%;
     width: 100%;
     overflow: hidden;
 }
 
-.flex-viewSub {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    height: 95vh;
-}
-
-.flex-viewSub > div {
-    height: 70%;
-    width: 70%;
-    padding: 30px 40px 30px 40px;
-    background-color: whitesmoke;
-    margin: 10px 10px 10px 10px;
-    border-radius: 20px;
-    box-shadow: 10px 30px 70px -7px rgba(0,0,0,0.20), 7px 5px 10px 0 rgba(0,0,0,0.14);
-}
-
 .title {
     text-align: left;
-    padding: 30px 0px 0px 16%;;
+    padding: 0px 0px 0px 16%;
     font-size: calc(13px + 2vmin);
     color: rgb(32, 32, 32);
 }
 
-.labelSub {
-    text-align: lef;
-    font-size: 17px;
-    padding: 10px;
+.submissionDiv {
+    text-align: left;
+    height: 70%;
+    width: 65%;
+    padding: 30px 40px 30px 40px;
+    background-color: whitesmoke;
+    margin: 5px 10px 10px 15%;
+    border-radius: 20px;
+    box-shadow: 10px 30px 70px -7px rgba(0,0,0,0.20), 7px 5px 10px 0 rgba(0,0,0,0.14);
 }
 
 
+.row2{
+    display: flex;
+}
+
+.column {
+    flex: 50%;
+    width: 100%;
+    padding: 10px;
+    height: 100%;
+    border-radius: 14px;
+    background-color: whitesmoke;
+}
+
+.columnBottom {
+    text-align: right;
+    flex: 50%; 
+    /* width: 0%;*/
+    padding: 10px;
+    height: 10%;
+    border-radius: 14px;
+    background-color: whitesmoke;
+}
+
+
+
+.admininput2 {
+    border-style: none;
+    border-radius:6px;
+    width: 90%;
+    background-color: white;
+    height: 30px;
+    color: var(--ss-gray);
+    font-size: 17px;
+    border-bottom: 2px solid #ebebeb;
+    transition-duration: 0.2s;  
+    padding: 0px 0px 0px 5px;
+    margin: 1%;
+}
+
+textarea {
+    line-height: 15px;
+    resize:none;
+    overflow:none;
+    max-height: 190px; 
+    min-width: 100%;
+}
+
+.admininput2:hover {
+    color: black;
+}
