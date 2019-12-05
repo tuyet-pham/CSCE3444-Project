@@ -92,7 +92,8 @@ def scrape(usern, passwd, hostl, databasen):
         cursor.execute("UPDATE Reqtag set ethnicity = NULL where ethnicity = '-1'")
         cursor.execute("UPDATE Reqtag set sex = NULL where sex = '-1'")
 
-
+        
+        # adduser(usern, passwd, hostl, databasen,"nuser.csv")
 
 
         print("Successful insertion of scraped scholarship - Scraped filename : %s" %filename)
@@ -100,6 +101,7 @@ def scrape(usern, passwd, hostl, databasen):
         conx.commit()
         cursor.close()
         conx.close()
+
     except sql.Error as er:
         if er.errno == errorcode.ER_ACCESS_DENIED_ERROR:
             print("Something is wrong with username or password")
