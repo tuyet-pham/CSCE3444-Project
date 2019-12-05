@@ -1,4 +1,7 @@
 export async function fetchScholarships(filters){
+    /**
+     * Fetch scholarships based on filters
+     */
     var url = 'http://localhost:5000/scholarships?major='
     url += filters.major
     const response =
@@ -14,6 +17,11 @@ export async function fetchScholarships(filters){
 }
 
 export async function reportScholarship(idScholarship) {
+    /* Report a specific scholarship.
+
+    Returns:
+        json: response from api
+    */
     var url = 'http://localhost:5000/scholarship?idScholarship='
     url += idScholarship
 
