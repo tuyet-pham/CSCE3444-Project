@@ -17,6 +17,7 @@ from mysql.connector import errorcode
 import csv
 from datetime import date
 import datetime
+from adduser import adduser
 
 #re : regular expression
 import re
@@ -94,7 +95,8 @@ def scrape(usern, passwd, hostl, databasen):
         cursor.execute("UPDATE Reqtag set essay = NULL where essay = '0'")
         cursor.execute("UPDATE Reqtag set citizenship = NULL where citizenship = '0'")
 
-
+        
+        # adduser(usern, passwd, hostl, databasen,"nuser.csv")
 
 
         print("Successful insertion of scraped scholarship - Scraped filename : %s" %filename)
@@ -102,6 +104,7 @@ def scrape(usern, passwd, hostl, databasen):
         conx.commit()
         cursor.close()
         conx.close()
+
     except sql.Error as er:
         if er.errno == errorcode.ER_ACCESS_DENIED_ERROR:
             print("Something is wrong with username or password")

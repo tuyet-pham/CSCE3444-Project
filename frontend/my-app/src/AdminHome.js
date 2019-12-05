@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import './Table';
+import Table from './Table';
 import { FaBeer } from 'react-icons/fa'
 
 
@@ -96,6 +96,9 @@ class AdminHome extends React.Component {
                             <button class="button button-red" onClick="requestscrape()">Submit Request</button>
                         </form>
                     </div>
+
+                <Table/>
+
                 </div>
             </div>
         );
