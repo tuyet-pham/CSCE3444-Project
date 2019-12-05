@@ -561,7 +561,7 @@ class Results extends React.Component
 
     getNewQuery(filters) {
         console.log(filters);
-        getDataFetch(this.state.filters).then(api_response => {
+        getDataFetch(filters).then(api_response => {
             console.log(api_response);
             this.setState({
                 response: api_response
@@ -585,7 +585,9 @@ class Results extends React.Component
         if(this.state.response.length === 0) {
             scholarships = <Result isActive={false}title="Loading Data" description="This will take a few seconds..." />
         } else {
-            scholarships = <Result isActive={false}title={this.state.response[0].name} description={this.state.response[0].description} />;
+            scholarships = this.state.response.map((value, index) => {
+                    return (<Result key={index} isActive={false}title={value.name} description={value.description} />)
+                })
         }
 
         return (
@@ -607,7 +609,7 @@ class Results extends React.Component
                 <div className="row-flex">
                     {/* FILTERS */}
                     <div className="column-30" style={{backgroundColor:"var(--ss-light-gray)", margin:"10px", textAlign:"left", borderRadius:"5px"}}>
-                        <Filters updateQuery={this.getNewQuery} />
+                        <Filters updateQuery={this.getNewQuery.bind(this)} />
                     </div>
 
                     {/* RESULTS */}

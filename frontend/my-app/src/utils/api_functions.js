@@ -1,5 +1,6 @@
 export async function getDataFetch(filters){
-  let url = 'http://localhost:5000/scholarships?major=' + filters.major
+  var url = 'http://localhost:5000/scholarships?major='
+  url += filters.major
     const response =
       await fetch(url, {
         method: 'POST',
