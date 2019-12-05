@@ -42,6 +42,8 @@ services:
       - node-modules:/app/node_modules
     ports:
       - 3000:3000
+    depends_on:
+      - flask
 
   scraper:
     build: ./scraper

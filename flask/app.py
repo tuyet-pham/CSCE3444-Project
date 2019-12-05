@@ -4,14 +4,17 @@
 import json
 from symbol import parameters
 
-from flask import Flask
-from flask_restful import Api, Resource, reqparse, abort
+from flask import Flask, jsonify
+from flask_restful import Api, Resource, reqparse
 
-from app_helper import db_connect, json_converter, date_today_s
+from app_helper import MyJSONEncoder, date_today_s, db_connect
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config['BUNDLE_ERRORS'] = True
 api = Api(app)
+CORS(app)
+app.json_encoder = MyJSONEncoder
 
 
 class Scholarships(Resource):
@@ -40,12 +43,14 @@ class Scholarships(Resource):
         for result in rv:
             json_data.append(dict(zip(row_headers, result)))
 
+        response = jsonify(json_data)
+
         # Close DB
         db.commit()
         cursor.close()
         db.close()
 
-        return json.dumps(json_data, default=json_converter)
+        return response
 
     def post(self):
         """Post to scholarships.
@@ -158,7 +163,7 @@ class Scholarships(Resource):
         except Exception as e:
             abort(400, message="{0}".format(str(e)))
 
-        return json.dumps(json_data, default=json_converter)
+        return jsonify(json_data)
 
 
 class Scholarship(Resource):
