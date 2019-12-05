@@ -8,7 +8,7 @@ class Submit extends React.Component {
 
         //The state of the user's submission.
         this.state = {
-            isVerifiied: false,
+            isVerified: false,
             post: "http://localhost:5000/scholarships?",
             name: "",
             url: "",
@@ -40,7 +40,7 @@ class Submit extends React.Component {
     verifyHuman(response) {
         if(response){
             this.setState({
-                isVerifiied: true
+                isVerified: true
             })
         }
     }
@@ -61,7 +61,7 @@ class Submit extends React.Component {
     //Handles the submission button when clicked. Validating the values. 
     handleSubmit = (e) => {
         const errormsg = "Please verify that you are a hooman";
-        if(this.isVerifiied == false){
+        if(this.isVerified === false){
             alert(errormsg);
         }
         else{
@@ -162,22 +162,24 @@ class Submit extends React.Component {
                                     <input type="radio" name="essay" value="0" onChange={this.handleChange}/> N
                                 </div>
                             </div> 
-                            <div class="row2">                                
-                                <div style={{textAlign:"left"}} class="columnBottom">
-                                    <textarea placeholder="Add a description of the scholarship..." max="2000" name="description" rows="100" cols="30"/>
+                            <div class="row3">
+                                <div class="columnBottom">
+                                    <textarea placeholder="Add a description of the scholarship..." max="1000" name="description" rows="100" cols="30"/>
                                 </div>
-                                <div  style={{width:"30%", padding:"10% 0px 0px 0px"}} class="columnBottom">
-                                    {/* The Recaptcha  */}
-                                    <Recaptcha
-                                        sitekey="6Lc99cUUAAAAAHuqgpFUsTsBUhAmZna0wIkZAd-r"
-                                        render="explicit"
-                                        verifyCallback={this.verifyHuman}
-                                        onloadCallback={this.recaptchaLoaded}
-                                    />
+                                <div style={{textAlign:"right"}} class="columnBottom">
                                     <input type="submit" class="flatButton" value="Submit Listing"/>
-                                </div>s
+                                </div>
                             </div>
                         </form>
+                        <div class="recaptchaSubmit">
+                            {/* The Recaptcha  */}
+                            <Recaptcha
+                                sitekey="6Lc99cUUAAAAAHuqgpFUsTsBUhAmZna0wIkZAd-r"
+                                render="explicit"
+                                verifyCallback={this.verifyHuman}
+                                onloadCallback={this.recaptchaLoaded}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

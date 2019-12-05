@@ -640,7 +640,7 @@ button:focus {
     margin-bottom: 10px;
     font-size: 17px; 
     -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;   
+    transition-duration: 0.4s;
 }
 
 
@@ -682,6 +682,19 @@ button:focus {
 
 .forgotpassword:hover {
     color: var(--ss-gray);
+}
+
+.recaptchaDiv{
+    margin: auto;
+    width: 310px;
+    height: 100px;
+    text-align: center;
+}
+
+.recaptchaSubmit{
+    margin: auto;
+    width: 310 px;
+    float: right;
 }
 
 
@@ -746,9 +759,16 @@ button:focus {
     box-shadow: 10px 30px 70px -7px rgba(0,0,0,0.20), 7px 5px 10px 0 rgba(0,0,0,0.14);
 }
 
-
 .row2{
     display: flex;
+}
+
+.row3{
+    display: flex;
+    float: left;
+    /* height: 200px; */
+    width: 100%;
+    background-color: whitesmoke;
 }
 
 .column {
@@ -761,16 +781,13 @@ button:focus {
 }
 
 .columnBottom {
-    text-align: right;
-    flex: 50%; 
-    /* width: 0%;*/
-    padding: 10px;
-    height: 10%;
-    border-radius: 14px;
+    text-align: left;
+    /* padding: 10px; */
+    height: 100px;
+    border-radius: 14px; 
     background-color: whitesmoke;
+    width: 100%;
 }
-
-
 
 .admininput2 {
     border-style: none;
@@ -790,8 +807,8 @@ textarea {
     line-height: 15px;
     resize:none;
     overflow:none;
-    max-height: 190px; 
-    min-width: 100%;
+    height: 100%;
+    width: 95%;
 }
 
 .admininput2:hover {
