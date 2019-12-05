@@ -4,11 +4,11 @@
 import json
 from symbol import parameters
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, abort
 from flask_restful import Api, Resource, reqparse
-from flask_cors import CORS
 
 from app_helper import MyJSONEncoder, date_today_s, db_connect
+from flask_cors import CORS
 
 app = Flask(__name__)
 app.config['BUNDLE_ERRORS'] = True
@@ -161,7 +161,7 @@ class Scholarships(Resource):
             cursor.close()
             db.close()
         except Exception as e:
-            abort(400, message="{0}".format(str(e)))
+            abort(400, "{0}".format(str(e)))
 
         return jsonify(json_data)
 
@@ -171,6 +171,10 @@ class Scholarship(Resource):
 
     Args:
         Resource: /scholarship route
+
+    post: creates a new scholarship.
+    put: report a scholarship
+    delete: delete a scholarship
 
     """
 
@@ -251,8 +255,28 @@ class Scholarship(Resource):
             db.close()
 
         except Exception as e:
-            abort(400, message="{0}".format(str(e)))
+            abort(400, "{0}".format(str(e)))
         return {'success': 'Write success!'}
+
+    def put(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('idScholarship', type=int, required=True, help="{error_msg} - Scholarship ID")
+        args = parser.parse_args()
+
+        try:
+            db, cursor = db_connect()
+
+            # Check if ID exists
+            query = """ UPDATE Scholarship SET accp_status = accp_status + 1 WHERE idScholarship = %s """
+            print(args["idScholarship"], flush=True)
+            cursor.execute(query, (args["idScholarship"],))
+            if cursor.rowcount == 0:
+                abort(400, message="ID does not exist.")
+
+            return {'message': 'Successfully reported scholarship.'}
+        except Exception as e:
+            abort(400, "{0}".format(str(e)))
+
 
     # def delete(id):
     #     id = id
