@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
 import Table from './Table';
-import { FaBeer } from 'react-icons/fa'
+import NavBarAdmin from './NavBarAdmin';
+// import { fetchScholarships } from './utils/api_functions';
 
 
 
@@ -15,6 +16,8 @@ class AdminHome extends React.Component {
             requests : this.props.requested,
             reported: this.props.reported,
             all: this.props.all,
+            username: '',
+            email: '',
         };
     }
 
@@ -30,37 +33,36 @@ class AdminHome extends React.Component {
     }
 
     componentDidMount(){
+        const token = localStorage.usertoken
+
+        this.setState({
+            username: this.state.username,
+        })
+
         setInterval(() => {
             this.setState({requests:this.state.requests + 1})
             this.setState({reported:this.state.reported + 1})
             this.setState({all:this.state.all + 1})
+            
         }, 1000)
     }
 
     render () {
         return (
             <div className="AppAdmin">
-                <div class="AddminHomeHeader">
-                    <img class="App-logo2" src={process.env.PUBLIC_URL + "scraper_logo.png"} alt="ScholarScraper logo"/>
-                    ScholarScrape Admin Portal
-                </div>
                 <div class="nav">
-
-                    <h3 style={{color:"#e0e0e0"}}>
-                        Greetings {this.props.user} <br/>
-                        id : {this.props.id}
-                    </h3>
-
-                    <a href="Home.page" title="Go to home" target="_self">Home</a>
-                    <a href="viewall.page" title="View and edit listings" target="_self">Scholarship View</a>
-                    <a href="Logout" title="You leaving? :(" target="_self">Logout</a>
+                    <NavBarAdmin/>
                 </div>
                 {/* column on the right */}
                 <div class="flex-view">
+                    <span class="AdminHomeHeader">
+                        <img class="App-logo2" src={process.env.PUBLIC_URL + "scraper_logo.png"} alt="ScholarScraper logo"/>
+                        ScholarScrape Admin Portal
+                    </span >
 
                     <div title="Listing awaiting approval">
                         <h1 style={{color:'#fdd835'}} class="viewdisplay">{this.state.requests}</h1>
-                                Search for Scholarships <FaBeer />
+                                Search for Scholarships
                                 Requested listing
                         <div>
                             <button class="button button-green">Show me</button>
@@ -85,7 +87,7 @@ class AdminHome extends React.Component {
 
 
                     {/* This is disabled until we can somehow schedule the scraper */}
-                    <div style={{display:"none"}} >
+                    {/* <div style={{display:"none"}} >
                         <br />
                         Last known scrape
                         <br/>{this.props.lastscraped}
@@ -95,9 +97,9 @@ class AdminHome extends React.Component {
                             <input type="date" id="myDate"></input><br/>
                             <button class="button button-red" onClick="requestscrape()">Submit Request</button>
                         </form>
-                    </div>
+                    </div> */}
 
-                <Table/>
+                {/* <Table/> */}
 
                 </div>
             </div>
