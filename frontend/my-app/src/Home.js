@@ -15,16 +15,15 @@ class Home extends React.Component {
     render () {
         return (
             <div className="App">
-                <div class="aestheticDiv"/>
 
-                <div style={{height:"200px"}} class="App-header">
+                <div style={{minHeight:"50px"}} class="App-header">
                     <h1 class="App-header-contents">
                         <img class="App-logo" src={process.env.PUBLIC_URL + "scraper_logo.png"} alt="ScholarScraper logo"/> 
                         ScholarScrape 
                     </h1>
-                    <div style={{height:"50%"}}></div>
                 </div>
-                
+                <div style={{height:"100px"}} class="App-header"/>
+
                 {/*put scraper tips here*/}
                 <div id="scholarScrapeDescription">
                     <p class="howto"><h2>How to use ScholarScrape</h2></p>
@@ -48,8 +47,7 @@ class Home extends React.Component {
                 </div>                
                 <hr class="new1"/>
                 <div class="meetTheTeam">
-                    <p style={{color:"#8fb1f0", fontSize:"35px"}}><h2>Meet the Team</h2></p>
-
+                    <p style={{color:"whitesmoke", fontSize:"35px"}}><h2>Meet the Team</h2></p>
                     <div class="divteamSize">
                     {/* user description area */}
                     <div class="row" style={{margin:"auto"}}>
