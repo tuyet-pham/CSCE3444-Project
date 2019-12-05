@@ -244,4 +244,3 @@ def tagBuilder(idscholarship, url, desc):
         s[5] = ethnicity(desc)
 
         return s
-
