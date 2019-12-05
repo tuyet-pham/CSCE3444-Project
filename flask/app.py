@@ -6,9 +6,9 @@ from symbol import parameters
 
 from flask import Flask, jsonify
 from flask_restful import Api, Resource, reqparse
+from flask_cors import CORS
 
 from app_helper import MyJSONEncoder, date_today_s, db_connect
-from flask_cors import CORS
 
 app = Flask(__name__)
 api = Api(app)
@@ -160,6 +160,8 @@ class Scholarships(Resource):
         db.close()
 
         return jsonify(json_data)
+
+
 
 
 api.add_resource(Scholarships, '/scholarships')
