@@ -142,6 +142,7 @@ def main():
     #     # Wait 1 second between requests
     #     sleep(1)
 
+
     print("Pushing file into the database.", flush=True)
     scrape(environ['MYSQL_USER'], environ['MYSQL_PASSWORD'], "db", environ['MYSQL_DB_NAME'])
 

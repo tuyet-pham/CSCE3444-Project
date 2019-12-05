@@ -1,19 +1,19 @@
 import React from 'react';
 import './App.css';
-
-
+import Recaptcha from "react-recaptcha"
 
 class Submit extends React.Component {
     constructor(){
         super();
-        var x = new Date();
-        console.log(x);
+
+        //The state of the user's submission.
         this.state = {
+            isVerified: false,
+            post: "http://localhost:5000/scholarships?",
             name: "",
             url: "",
             amount: 0,
             GPA: 0.0,
-            date: x.get,
             deadline: "",
             ethnicity: "",
             sex: "",
@@ -23,12 +23,30 @@ class Submit extends React.Component {
             description: "",
             accp_status: -1
         };
+
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.recaptchaLoaded = this.recaptchaLoaded.bind(this);
+        this.verifyHuman = this.verifyHuman.bind(this);
+
     }
 
-    handleChange(e)
-    {
+    //Make sue the Recaptcha loaded correctly
+    recaptchaLoaded() {
+        console.log("Recaptcha Sucessfully loaded!");
+    }
+
+    //Get the reponse of the Recaptcha and change the value
+    verifyHuman(response) {
+        if(response){
+            this.setState({
+                isVerified: true
+            })
+        }
+    }
+
+    //Handles the state change of values when submit clicked.
+    handleChange(e) {
         const target = e.target;
         const value = target.value;
         const name = target.name;
@@ -36,36 +54,49 @@ class Submit extends React.Component {
         this.setState({
             [name] : value
         });
-    }
-
-    handleSubmit = (e) => {
-        const goodmsg = "Thank you for your submission!";
         
-        e.preventDefault(); //Don't allow page to reload
-        if(this.validate(e))
-        {
-            alert(goodmsg);
-        }
-
-        //post : search & submit
-        //get
-        //put
-        //delete
     }
 
+
+    //Handles the submission button when clicked. Validating the values. 
+    handleSubmit = (e) => {
+        const errormsg = "Please verify that you are a hooman";
+        if(this.isVerified === false){
+            alert(errormsg);
+        }
+        else{
+            const goodmsg = "Thank you for contributing.\nWe will review your submission shortly!";
+            
+            if(this.validate(e)) {
+                alert(goodmsg);
+            }
+        }
+    }
+
+
+    //Validating the amount and GPA - NEED Deadline
     validate(e) {
-        if(this.state.amount <= 0)
-        {
+
+        if(this.state.amount <= 0) {
             alert("Amount not valid.");
             return false;
         }
-        else if(this.state.GPA <= 0.0 || this.state.GPA > 4.0)
-        {
-            alert("GPA not valid.");
+        else if(this.state.GPA <= 0.0 || this.state.GPA > 4.0) {
+            alert("GPA not valid.")
             return false;
         }
-       
         return true;
+    }
+    
+    //Posting to flask via string parsing.
+    async sendData(e){
+        const response = await fetch(this.state.post, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ example: 'data' }),
+          })
+        console.log(await response.json())
+        // e.preventDefault();
     }
 
     render () {
@@ -83,7 +114,7 @@ class Submit extends React.Component {
                                 </div>
                                 <div class="column">
                                     <input type="text" style={{width:"50%"}} pattern="[0-9]*" name="amount" class="admininput2" placeholder="amount" value={this.state.value} onChange={this.handleChange}/>
-                                    <input type="amount"  max="4.0" style={{width:"50%"}} pattern="[0-9]*" name="GPA" class="admininput2" placeholder="Minimum GPA" value={this.state.value} onChange={this.handleChange} required/><strong><abbr title="required">*</abbr></strong>
+                                    <input type="amount"  max="4.0" style={{width:"50%"}} pattern="[0-4]\.[0-9]?[0-9]" name="GPA" class="admininput2" placeholder="Minimum GPA" value={this.state.value} onChange={this.handleChange}/>
                                 </div>
                                 <div class="column">
                                     Ethnicity<br/>
@@ -94,7 +125,8 @@ class Submit extends React.Component {
                                         <option value="Native American">Native American</option>
                                         <option value="Caucasian">Caucasian</option>
                                         <option value="Pacific Islander">Pacific Islander</option>
-                                        <option value="">Other</option>
+                                        <option value="Other">Other</option>
+                                        <option value="">NA</option>
                                     </select>
                                 </div>
                                 <div class="column">
@@ -122,8 +154,8 @@ class Submit extends React.Component {
                                     </select>
                                 </div>
                                 <div class="column">
-                                    Requires citizenship? <strong><abbr title="required">*</abbr></strong><br/> 
-                                    <input type="radio" name="citizenship" value="1" onChange={this.handleChange} required/> Y <br/>
+                                    Requires citizenship? 
+                                    <input type="radio" name="citizenship" value="1" onChange={this.handleChange}/> Y <br/>
                                     <input type="radio" name="citizenship" value="0" onChange={this.handleChange}/> N 
                                     <br/><br/>
                                     Is there an essay involved? <br/>
@@ -131,15 +163,25 @@ class Submit extends React.Component {
                                     <input type="radio" name="essay" value="0" onChange={this.handleChange}/> N
                                 </div>
                             </div> 
-                            <div class="row2">
-                                <div style={{textAlign:"left"}} class="columnBottom">
-                                    <textarea placeholder="Add a description of the scholarship..." max="2000" name="description" rows="100" cols="30"/>
+                            <div class="row3">
+                                <div class="columnBottom">
+                                    Add a description of the scholarship.. <strong><abbr title="required">*</abbr></strong>
+                                    <textarea placeholder="." max="1000" name="description" rows="100" cols="30" required/>
                                 </div>
-                                <div  style={{width:"30%", padding:"160px 0px 0px 0px"}} class="columnBottom">
+                                <div style={{textAlign:"right"}} class="columnBottom">
                                     <input type="submit" class="flatButton" value="Submit Listing"/>
                                 </div>
                             </div>
                         </form>
+                        <div class="recaptchaSubmit">
+                            {/* The Recaptcha  */}
+                            <Recaptcha
+                                sitekey="6Lc99cUUAAAAAHuqgpFUsTsBUhAmZna0wIkZAd-r"
+                                render="explicit"
+                                verifyCallback={this.verifyHuman}
+                                onloadCallback={this.recaptchaLoaded}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -536,6 +536,7 @@ class Filters extends React.Component
     }
 }
 
+
 {/* Forms reference: https://reactjs.org/docs/forms.html */}
 class Results extends React.Component
 {

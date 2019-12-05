@@ -5,8 +5,8 @@ import Footer from './Footer';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
 
+ReactDOM.render(<App />, document.getElementById('root'));
 
 //Footer (appears on all pages)
 // ReactDOM.render(<Footer />, document.getElementById('footer'));
