@@ -15,6 +15,7 @@ api = Api(app)
 CORS(app)
 app.json_encoder = MyJSONEncoder
 
+
 class Scholarships(Resource):
     """Class for scholarships route.
 
@@ -158,7 +159,7 @@ class Scholarships(Resource):
         cursor.close()
         db.close()
 
-        return json.dumps(json_data, default=json_converter)
+        return jsonify(json_data)
 
 
 api.add_resource(Scholarships, '/scholarships')

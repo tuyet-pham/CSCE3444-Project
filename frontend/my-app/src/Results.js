@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import { getDataFetch } from './utils/api_functions';
+import { fetchScholarships } from './utils/api_functions';
 
 
 class Result extends React.Component
@@ -105,6 +105,7 @@ class Filters extends React.Component
         if(this.validate(event))
         {
             //alert('Form submitted with values: ' + this.state.major + ', ' + this.state.gpa + ', ' + this.state.amount + '.');
+            this.props.updateQuery(this.state)
 
         }
     }
@@ -133,7 +134,7 @@ class Filters extends React.Component
             alert("Major must be a valid string.");
             return false;
         }
-       
+
         return true;
     }
 
@@ -528,20 +529,31 @@ class Results extends React.Component
             listItems: this.props.listItems,
             all: this.props.all,
             response: [],
+            filters: {
+                keywords: null,
+                gpa: null,
+                amount: null,
+                major: 'computer-science'
+            },
         };
-        this.response = null;
-        getDataFetch().then(response => {
-            console.log(response[0]);
-            this.response = response
-        });
+    }
+
+    getNewQuery(filters) {
+        console.log(filters);
+        fetchScholarships(filters).then(api_response => {
+            console.log(api_response);
+            this.setState({
+                response: api_response
+            });
+        })
     }
 
     componentWillMount() {
-        getDataFetch().then(api_response => {
-            console.log(api_response)
-                this.setState({
-                    response: api_response
-                });
+        fetchScholarships(this.state.filters).then(api_response => {
+            console.log(api_response);
+            this.setState({
+                response: api_response
+            });
         })
     }
 
@@ -551,7 +563,9 @@ class Results extends React.Component
         if(this.state.response.length === 0) {
             scholarships = <Result isActive={false}title="Loading Data" description="This will take a few seconds..." />
         } else {
-            scholarships = <Result isActive={false}title={this.state.response[0].name} description={this.state.response[0].description} />;
+            scholarships = this.state.response.map((value, index) => {
+                    return (<Result key={index} isActive={false}title={value.name} description={value.description} />)
+                })
         }
 
         return (
@@ -573,7 +587,7 @@ class Results extends React.Component
                 <div className="row-flex">
                     {/* FILTERS */}
                     <div className="column-30" style={{backgroundColor:"var(--ss-light-gray)", margin:"10px", textAlign:"left", borderRadius:"5px"}}>
-                        <Filters />
+                        <Filters updateQuery={this.getNewQuery.bind(this)} />
                     </div>
 
                     {/* RESULTS */}
