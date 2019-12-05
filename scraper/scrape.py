@@ -17,6 +17,7 @@ from mysql.connector import errorcode
 import csv
 from datetime import date
 import datetime
+from adduser import adduser
 
 #re : regular expression
 import re

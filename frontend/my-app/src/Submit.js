@@ -8,7 +8,7 @@ class Submit extends React.Component {
 
         //The state of the user's submission.
         this.state = {
-            isVerifiied: false,
+            isVerified: false,
             post: "http://localhost:5000/scholarships?",
             name: "",
             url: "",
@@ -40,7 +40,7 @@ class Submit extends React.Component {
     verifyHuman(response) {
         if(response){
             this.setState({
-                isVerifiied: true
+                isVerified: true
             })
         }
     }
@@ -60,12 +60,14 @@ class Submit extends React.Component {
 
     //Handles the submission button when clicked. Validating the values. 
     handleSubmit = (e) => {
-        const errormsg = "Please verify that you are a hooman";
-        if(this.isVerifiied == false){
+        const errormsg = "Please verify that you are a human";
+        
+        if(this.state.isVerified == false){
             alert(errormsg);
         }
         else{
             const goodmsg = "Thank you for contributing.\nWe will review your submission shortly!";
+            
             if(this.validate(e)) {
                 alert(goodmsg);
             }
@@ -87,16 +89,15 @@ class Submit extends React.Component {
         return true;
     }
     
-
     //Posting to flask via string parsing.
-    async sendData(){
-        
-        const response = await fetch('OUR-API-GO-HERE', {
+    async sendData(e){
+        const response = await fetch(this.state.post, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ example: 'data' }),
           })
-          console.log(await response.json())
+        console.log(await response.json())
+        // e.preventDefault();
     }
 
     render () {
@@ -175,7 +176,7 @@ class Submit extends React.Component {
                                         onloadCallback={this.recaptchaLoaded}
                                     />
                                     <input type="submit" class="flatButton" value="Submit Listing"/>
-                                </div>s
+                                </div>
                             </div>
                         </form>
                     </div>

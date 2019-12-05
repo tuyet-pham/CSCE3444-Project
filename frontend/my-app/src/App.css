@@ -763,10 +763,10 @@ button:focus {
 .columnBottom {
     text-align: right;
     flex: 50%; 
-    /* width: 0%;*/
+    width: 100%;
     padding: 10px;
     height: 10%;
-    border-radius: 14px;
+    border-radius: 14px; 
     background-color: whitesmoke;
 }
 
@@ -790,7 +790,7 @@ textarea {
     line-height: 15px;
     resize:none;
     overflow:none;
-    max-height: 190px; 
+    max-height: ; 
     min-width: 100%;
 }
 
