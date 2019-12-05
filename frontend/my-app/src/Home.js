@@ -15,27 +15,24 @@ class Home extends React.Component {
     render () {
         return (
             <div className="App">
-                <div class="App-header">
+                <div class="aestheticDiv"/>
+
+                <div style={{height:"200px"}} class="App-header">
                     <h1 class="App-header-contents">
                         <img class="App-logo" src={process.env.PUBLIC_URL + "scraper_logo.png"} alt="ScholarScraper logo"/> 
-                        ScholarScraper 
+                        ScholarScrape 
                     </h1>
-                    <div class="Search-bar">
-                        <input type="text" placeholder="Search scholarships..." name="search" />
-                        <button type="submit">Go</button>
-                    </div>
+                    <div style={{height:"50%"}}></div>
                 </div>
-
+                
                 {/*put scraper tips here*/}
-                <div id="scholarScrapeDescription" style={{padding:"20px", backgroundColor:"white"}}>
-                    <hr class="new1"/>
-                    <p> 
-                        <h1 class="howto">How to use ScholarScrape </h1>
-                        Using ScholarScraper is easy! Here's some quick tips.
-                    </p>
+                <div id="scholarScrapeDescription">
+                    <p class="howto"><h2>How to use ScholarScrape</h2></p>
+                    <p class="howto2">Using ScholarScraper is easy! Here's some quick tips.</p>
+
                     {/* slide show here */}
                     <div class="carouselContainer">
-                        <Carousel showArrows={false} infiniteLoop={true} stopOnHover={true} showStatus={false} showThumbs={false} autoPlay>
+                        <Carousel showArrows={true} infiniteLoop={true} stopOnHover={true} showStatus={false} showThumbs={false} autoPlay>
                                 <div>
                                     <img class="App-tip" src={process.env.PUBLIC_URL + "slide1.png"} alt="slide 1"/>
                                 </div>
@@ -47,10 +44,11 @@ class Home extends React.Component {
                                 </div>
                         </Carousel>
                     </div>
-                        <hr class="new1"/>
-                    </div>
+                    {/* <button class="flatButton flatButtonGradient">Search now!</button> */}
+                </div>                
+                <hr class="new1"/>
                 <div class="meetTheTeam">
-                    <p class="howto"><h2>Meet the Team</h2></p>
+                    <p style={{color:"#8fb1f0", fontSize:"35px"}}><h2>Meet the Team</h2></p>
 
                     <div class="divteamSize">
                     {/* user description area */}
@@ -122,12 +120,6 @@ class Home extends React.Component {
                         </div>
                     </div>
                     </div>
-                    {/* <div style={{width:"40%"}}>
-                        <div><img style={{transform:"rotate(20deg)"}} class="cap" src={process.env.PUBLIC_URL + "cap.png"} /> </div>
-                        <div><img style={{transform:"rotate(-30deg)"}} class="cap" src={process.env.PUBLIC_URL + "cap.png"} /></div>
-                        <img style={{transform:"rotate(-40deg)"}} class="cap" src={process.env.PUBLIC_URL + "cap.png"} />
-                        <img style={{transform:"rotate(30deg)"}} class="cap" src={process.env.PUBLIC_URL + "cap.png"} />
-                    </div> */}
                 </div>
             </div>    
         </div>
