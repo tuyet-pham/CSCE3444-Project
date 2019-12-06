@@ -96,9 +96,7 @@ class AdminHome extends React.Component {
                             <button class="button button-red" onClick="requestscrape()">Submit Request</button>
                         </form>
                     </div>
-
-                <Table/>
-
+                    <span class="tableMake"><Table/></span>
                 </div>
             </div>
         );

@@ -54,7 +54,7 @@ class App extends React.Component {
                         <Link onClick={this.navClick.bind(this,1)} title="Search for scholarships" to ="/search"><FaSearch/></Link>
                         <Link onClick={this.navClick.bind(this,0)} title="Add a listing" to ="/submit"><MdAddCircle/></Link>
                         <Link onClick={this.navClick.bind(this,2)} title="Admin Login" to ="/login"><FaUserCircle/></Link>
-                        {/* <Link title="Admin Home" to ="/adhome">AdminHome</Link> */}
+                         <Link title="Admin Home" to ="/adhome">AdminHome</Link>
                     </div>
                     <Switch>
                         <Route path="/adhome">
