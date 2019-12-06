@@ -11,6 +11,11 @@ export async function fetchScholarships(filters){
     url += "&min_amount="
     url += filters.amount
   }
+  if(filters.max_amount != null)
+  {
+    url += "&max_amount="
+    url += filters.max_amount
+  }
   if(filters.sex != null)
   {
     url += "&sex="
@@ -20,6 +25,11 @@ export async function fetchScholarships(filters){
   {
     url += "&citizenship="
     url += filters.citizenship
+  }
+  if(filters.essay != null)
+  {
+    url += "&essay="
+    url += filters.essay
   }
   console.log(url)
     const response =

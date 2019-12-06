@@ -44,8 +44,10 @@ class Filters extends React.Component
             major: 'computer-science', /*hyphenated no-caps string */
             gpa: 0.0, /*nonnegative floating point; accepted values can be ints or decimals, e.g. 1 or 1.0 or 1.5 */
             amount: 0, /*int; cannot be negative*/
+            max_amount: null,
             sex: null, /*string; Male, Female, or Other*/
-            citizenship: null /*string (bool); required (true) or not required (false) */
+            citizenship: null, /*string (bool); required (true) or not required (false) */
+            essay: null
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -74,6 +76,28 @@ class Filters extends React.Component
             if(target.value.length === 0)
             {
                 value = 0;
+            }
+            else
+            {
+                value = target.value;
+            }
+        }
+        else if(target.name ==='max_amount')
+        {
+            if(target.value.length === 0)
+            {
+                value = null;
+            }
+            else
+            {
+                value = target.value;
+            }
+        }
+        else if(target.name ==='essay')
+        {
+            if(target.value.localeCompare("null") === 0)
+            {
+                value = null;
             }
             else
             {
@@ -109,7 +133,6 @@ class Filters extends React.Component
         const str2 = str.replace(/\s+/g, "-").toLowerCase();
         return str2;
     }
-
 
     validate(event)
     {
@@ -509,6 +532,11 @@ class Filters extends React.Component
                         Amount
                         <input type="number" name="amount" placeholder="None" onChange={this.handleChange}/>
                     </label>
+                    <br />
+                    <label>
+                        Maximum amount
+                        <input type="number" name="max_amount" placeholder="None" onChange={this.handleChange}/>
+                    </label>
                     <br/>
                     <p>Sex</p>
                         <label>
@@ -528,6 +556,18 @@ class Filters extends React.Component
                         <label>
                             <input type="radio" name="citizenship" value="False" onChange={this.handleChange}/>Not required<br/>
                         </label>
+                    <br />
+                    <p>Essay</p>
+                        <label>
+                            <input type="radio" name="essay" value="True" onChange={this.handleChange}/>Required<br/>
+                        </label>
+                        <label>
+                            <input type="radio" name="essay" value="False" onChange={this.handleChange}/>Not required<br/>
+                        </label>
+                        <label>
+                            <input type="radio" name="essay" value="null" onChange={this.handleChange}/>No preference<br/>
+                        </label>
+                    <br />
                     <input type="submit" value="Apply" onClick={this.handleSubmit}/>
                 </form>
             </div>
