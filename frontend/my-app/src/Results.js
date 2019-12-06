@@ -173,10 +173,6 @@ class Filters extends React.Component
         });
     }
 
-    /* Checkboxes for keywords. Src: http://react.tips/checkboxes-in-react-16/ */
-    /*keywordCheckboxes = option => (
-        
-    )*/
 
     /*Prevent page from reloading and handle submitted data. Called when user clicks 'Apply.'*/
     handleSubmit(event)
@@ -600,12 +596,12 @@ class Filters extends React.Component
                         <input type="number" name="max_amount" placeholder="None" onChange={this.handleChange}/>
                     </label>
                     <br/>
-                    <p>Sex</p>
+                    <p>Gender</p>
                         <label>
-                            <input type="radio" name="sex" value="Female" onChange={this.handleChange}/>Female<br/>
+                            <input type="radio" name="sex" value="Female" onChange={this.handleChange}/>Women<br/>
                         </label>
                         <label>
-                            <input type="radio" name="sex" value="Male" onChange={this.handleChange}/>Male<br/>
+                            <input type="radio" name="sex" value="Male" onChange={this.handleChange}/>Men<br/>
                         </label>
                         <label>
                             <input type="radio" name="sex" value="Other" onChange={this.handleChange}/>Other<br/>
@@ -630,7 +626,6 @@ class Filters extends React.Component
                             <input type="radio" name="essay" value="null" onChange={this.handleChange}/>No preference<br/>
                         </label>
                     <br />
-                    {/*{this.keywordCheckboxes()}*/}
                     <br />
                     <input type="submit" value="Apply" onClick={this.handleSubmit}/>
                 </form>
