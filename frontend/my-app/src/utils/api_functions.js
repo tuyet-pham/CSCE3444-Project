@@ -1,26 +1,47 @@
 
 export async function fetchScholarships(filters){
-  var url = 'http://localhost:5000/scholarships?major='
-  url += filters.major
+    /**
+     * Fetch scholarships based on filters
+     */
+    var url = 'http://localhost:5000/scholarships?major='
+    url += filters.major
     const response =
-      await fetch(url, {
+        await fetch(url, {
         method: 'POST',
         headers:
-          {
+            {
             'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        }
-      )
+            }
+        })
     return response.json()
 
 }
 
+export async function reportScholarship(idScholarship) {
+    /* Report a specific scholarship.
+
+    Returns:
+        json: response from api
+    */
+    var url = 'http://localhost:5000/scholarship?idScholarship='
+    url += idScholarship
+
+    const response = await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+    })
+
+
+    return response.json()
+}
 // export const register = newUser => {
-//     
+//
 // }
 
 export async function login(user){
- 
+
     const response = await fetch(post, {
       headers:{'Content-Type': 'application/x-www-form-urlencoded'},
       method: 'POST', // or 'PUT'
@@ -30,7 +51,7 @@ export async function login(user){
 }
 
 // export const getProfile = user => {
-//   
+//
 // }
 
 //-- Scholarship API call ---
@@ -40,7 +61,7 @@ export async function submitScholarship(data){
     post += "&url=" + data.url
     post += "&desc=" + data.description
     post += "&amount=" + data.amount
-    
+
     if (data.deadline != null)
     {
         post += "&deadline=" + data.deadline
