@@ -13,11 +13,13 @@ import {FaUserCircle} from "react-icons/fa";
 import {FaUserShield} from "react-icons/fa";
 import {IoMdLogOut} from "react-icons/io";
 
+
+
 class NavBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          bgColor: "#07bd65",
+          bgColor: "",
           disableTopNav: ""
         }
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Recaptcha from "react-recaptcha"
-import { sendData } from './utils/api_functions'
+import { submitScholarship } from './utils/api_functions'
 
 
 
@@ -11,24 +11,26 @@ class Submit extends React.Component {
         //The state of the user's submission.
         this.state = {
             isVerified: false,
-            name: "",
-            url: "",
-            amount: 0,
-            GPA: 0.0,
-            deadline: "",
-            ethnicity: "",
-            sex: "",
-            citizenship: "",
-            essay: "",
-            major: "",
-            description: "",
-            accp_status: -1
+            name: null,
+            url: null,
+            amount: null,
+            GPA: null,
+            deadline: null,
+            ethnicity: null,
+            sex: null,
+            citizenship: null,
+            essay: null,
+            major: null,
+            description: null,
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.recaptchaLoaded = this.recaptchaLoaded.bind(this);
         this.verifyHuman = this.verifyHuman.bind(this);
+            // submitScholarship({name: 'test', url:'test', description:'test', amount: 123}).then(api_response => {
+            //     console.log(api_response);
+            // })
     }
 
     //Make sue the Recaptcha loaded correctly
@@ -47,43 +49,38 @@ class Submit extends React.Component {
 
     //Handles the state change of values when submit clicked.
     handleChange(e) {
+        const target = e.target;
+        const value = target.value;
+        const name = target.name;
+
         this.setState({
-            [e.target.name] : e.target.value
+            [name] : value
         });
     }
 
     //Handles the submission button when clicked. Validating the values. 
     handleSubmit = (e) => {
+        e.preventDefault();
         const errormsg = "Please verify that you are a human";
         const goodmsg = "Thank you for contributing.\nWe will review your submission shortly!";
         const db_errormsg = "Uh no! Looks like something went wrong. Give it another go."
 
-        if(this.isVerified === false)
+        if(this.state.isVerified === false)
         {
             alert(errormsg);
         }
         else
         {
-            const ldata = {
-                name: this.state.name,
-                url: this.state.url,
-                amount: this.state.amount,
-                GPA: this.state.GPA,
-                deadline: this.state.deadline,
-                ethnicity: this.state.ethnicity,
-                sex: this.state.sex,
-                citizenship: this.state.citizenship,
-                essay: this.state.essay,
-                major: this.state.major,
-                description: this.state.description,
-                accp_status:this.state.accp_status
-            }
-            console.log(ldata.name);
-
-            // obSubmitScholarship(ldata).then(api_response => {
-            //     console.log(api_response);
-
-            // })
+            submitScholarship(this.state)
+            .then(api_response => {
+                alert(goodmsg);
+                console.log(api_response);
+                window.location.reload(false)
+            })
+            .catch(api_response => {
+                alert(db_errormsg);
+                console.log(api_response);
+            })
         }
     }
 
@@ -102,8 +99,8 @@ class Submit extends React.Component {
                                     <input type="url"  max="300" name="url" class="admininput2" placeholder="scholarship url" value={this.state.value} onChange={this.handleChange} required/><strong><abbr title="required">*</abbr></strong>
                                 </div>
                                 <div class="column">
-                                    <input type="text" style={{width:"50%"}} pattern="[0-9]*" name="amount" class="admininput2" placeholder="amount" value={this.state.value} onChange={this.handleChange}/>
-                                    <input type="amount"  max="4.0" style={{width:"50%"}} pattern="[0-4]\.[0-9]?[0-9]" name="GPA" class="admininput2" placeholder="Minimum GPA" value={this.state.value} onChange={this.handleChange}/>
+                                    <input type="text" style={{width:"50%"}} pattern="[0-9]*" name="amount" class="admininput2" placeholder="amount" value={this.state.value} onChange={this.handleChange} required/>
+                                    <input type="amount"  max="4.0" style={{width:"50%"}} pattern="[0-4]\.[0-9]?[0-9]" name="GPA" class="admininput2" placeholder="Minimum GPA" value={this.state.value} onChange={this.handleChange} required/>
                                 </div>
                                 <div class="column">
                                     Ethnicity<br/>
@@ -494,7 +491,7 @@ class Submit extends React.Component {
                             <div class="row3">
                                 <div style={{marginLeft:"10px"}} class="columnBottom">
                                     Add a description of the scholarship.. <strong><abbr title="required">*</abbr></strong>
-                                    <textarea placeholder="." max="1000" name="description" rows="100" cols="30" required/>
+                                    <textarea placeholder="." max="1000" name="description" rows="100" cols="30" value={this.state.value} onChange={this.handleChange} required/>
                                 </div>
                                 <div style={{textAlign:"right"}} class="columnBottom">
                                     <input type="submit" class="flatButton" value="Submit Listing"/>
