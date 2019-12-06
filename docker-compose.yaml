@@ -34,7 +34,8 @@ services:
       MYSQL_USER: ${MYSQL_USER_1}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD_1}
       MYSQL_DB_NAME: ${MYSQL_DB_NAME}
-
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      ADMIN_PASS: ${ADMIN_PASS}
   frontend:
     build: ./frontend
     volumes:
