@@ -14,14 +14,71 @@ class Result extends React.Component
 
     render()
     {
+        let gpa;
+        if(this.props.gpa === null)
+        {
+            gpa = <span>None</span>
+        }
+        else
+        {
+            gpa = <span>{this.props.gpa}</span>
+        }
+
+        let essay;
+        if(this.props.essay === null)
+        {
+            essay = <span>Not Required</span>
+        }
+        else
+        {
+            essay = <span>Required</span>
+        }
+
+        let citizenship;
+        if(this.props.citizenship !== null && this.props.title.localeCompare("Loading Data") !== 0)
+        {
+            citizenship = <span><br /><br /><strong>Citizenship Required</strong></span>
+        }
+        else
+        {
+            citizenship = <span> </span>
+        }
+
+        let result;
+        if(this.props.title.localeCompare("Loading Data") !== 0)
+        {
+            result = (
+                <span>
+                    <span className="column-30">
+                        ${this.props.amount}
+                    </span>
+                    <span className="column-30">
+                        GPA: {gpa}
+                    </span>
+                    <span className="column-30">
+                        Essay: {essay}
+                    </span>
+                    <div style={{clear:"both"}}></div>
+                </span>
+            );
+        }
+        else
+        {
+            result = <span></span>
+        }
+
         return(
             //<div className={this.state.activeClasses[0]? "floatingBox3-active":"floatingBox3-inactive"} onClick={() => this.addActiveClass(0)}>}
             <div className={this.state.active ? "floatingBox3-active" : "floatingBox3-inactive"} onClick={this.updateClass}>
                 <h2>
                     {this.props.title}
                 </h2>
+                    {result}
                 <span>
                     {this.props.description}
+                </span>
+                <span>
+                    {citizenship}
                 </span>
             </div>
         );
@@ -104,7 +161,7 @@ class Filters extends React.Component
                 value = target.value;
             }
         }
-        else //this should never be called, but CYA protocol dictates it stays in.
+        else
         {
             value = target.value;
         }
@@ -115,6 +172,11 @@ class Filters extends React.Component
             [name] : value
         });
     }
+
+    /* Checkboxes for keywords. Src: http://react.tips/checkboxes-in-react-16/ */
+    /*keywordCheckboxes = option => (
+        
+    )*/
 
     /*Prevent page from reloading and handle submitted data. Called when user clicks 'Apply.'*/
     handleSubmit(event)
@@ -568,6 +630,8 @@ class Filters extends React.Component
                             <input type="radio" name="essay" value="null" onChange={this.handleChange}/>No preference<br/>
                         </label>
                     <br />
+                    {/*{this.keywordCheckboxes()}*/}
+                    <br />
                     <input type="submit" value="Apply" onClick={this.handleSubmit}/>
                 </form>
             </div>
@@ -618,10 +682,10 @@ class Results extends React.Component
     render () {
         let scholarships;
         if(this.state.response.length === 0) {
-            scholarships = <Result isActive={false}title="Loading Data" description="This will take a few seconds..." />
+            scholarships = <Result isActive={false} title="Loading Data" description="This will take a few seconds..." />
         } else {
             scholarships = this.state.response.map((value, index) => {
-                    return (<Result key={index} isActive={false} title={value.name} description={value.description} />)
+                    return (<Result key={index} isActive={false} title={value.name} gpa={value.GPA} amount={value.amount} essay={value.essay} citizenship={value.citizenship} description={value.description} />)
                 })
         }
 
