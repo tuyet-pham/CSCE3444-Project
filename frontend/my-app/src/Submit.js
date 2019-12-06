@@ -1,15 +1,16 @@
 import React from 'react';
 import './App.css';
 import Recaptcha from "react-recaptcha"
+import { sendData } from './utils/api_functions'
+
+
 
 class Submit extends React.Component {
     constructor(){
         super();
-
         //The state of the user's submission.
         this.state = {
             isVerified: false,
-            post: "http://localhost:5000/scholarships?",
             name: "",
             url: "",
             amount: 0,
@@ -28,7 +29,6 @@ class Submit extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.recaptchaLoaded = this.recaptchaLoaded.bind(this);
         this.verifyHuman = this.verifyHuman.bind(this);
-
     }
 
     //Make sue the Recaptcha loaded correctly
@@ -47,57 +47,46 @@ class Submit extends React.Component {
 
     //Handles the state change of values when submit clicked.
     handleChange(e) {
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
-
         this.setState({
-            [name] : value
+            [e.target.name] : e.target.value
         });
-        
     }
-
 
     //Handles the submission button when clicked. Validating the values. 
     handleSubmit = (e) => {
-        const errormsg = "Please verify that you are a hooman";
-        if(this.isVerified === false){
+        const errormsg = "Please verify that you are a human";
+        const goodmsg = "Thank you for contributing.\nWe will review your submission shortly!";
+        const db_errormsg = "Uh no! Looks like something went wrong. Give it another go."
+
+        if(this.isVerified === false)
+        {
             alert(errormsg);
         }
-        else{
-            const goodmsg = "Thank you for contributing.\nWe will review your submission shortly!";
-            
-            if(this.validate(e)) {
-                alert(goodmsg);
+        else
+        {
+            const ldata = {
+                name: this.state.name,
+                url: this.state.url,
+                amount: this.state.amount,
+                GPA: this.state.GPA,
+                deadline: this.state.deadline,
+                ethnicity: this.state.ethnicity,
+                sex: this.state.sex,
+                citizenship: this.state.citizenship,
+                essay: this.state.essay,
+                major: this.state.major,
+                description: this.state.description,
+                accp_status:this.state.accp_status
             }
+            console.log(ldata.name);
+
+            // obSubmitScholarship(ldata).then(api_response => {
+            //     console.log(api_response);
+
+            // })
         }
     }
 
-
-    //Validating the amount and GPA - NEED Deadline
-    validate(e) {
-
-        if(this.state.amount <= 0) {
-            alert("Amount not valid.");
-            return false;
-        }
-        else if(this.state.GPA <= 0.0 || this.state.GPA > 4.0) {
-            alert("GPA not valid.")
-            return false;
-        }
-        return true;
-    }
-    
-    //Posting to flask via string parsing.
-    async sendData(e){
-        const response = await fetch(this.state.post, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ example: 'data' }),
-          })
-        console.log(await response.json())
-        // e.preventDefault();
-    }
 
     render () {
         return (

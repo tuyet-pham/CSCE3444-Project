@@ -2,7 +2,6 @@
 import React from 'react';
 import './App.css';
 import {
-    BrowserRouter as Router,
     Link
 } from "react-router-dom";
 
@@ -75,7 +74,7 @@ class NavBar extends React.Component {
 
         return (
             <nav className="Navbar">
-                {localStorage.usertoken ? loginRegLink : userLink}
+                {localStorage.usertoken ? userLink : loginRegLink}
             </nav>
         );
     }
