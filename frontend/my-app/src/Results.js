@@ -3,20 +3,6 @@ import './App.css';
 
 import { fetchScholarships } from './utils/api_functions';
 
-function ResultsList(props)
-{
-    const list = props.itemsList;
-    const updatedList = list.map((listItems)=>{
-        return<li key={listItems.toString()}>
-            {listItems.title}
-            {listItems.description}
-        </li>
-    });
-    return(
-        <ul>{updatedList}</ul>
-    );
-}
-
 class Result extends React.Component
 {
     constructor(props)
@@ -28,8 +14,6 @@ class Result extends React.Component
 
     render()
     {
-        const isActive = this.props.active;
-
         return(
             //<div className={this.state.activeClasses[0]? "floatingBox3-active":"floatingBox3-inactive"} onClick={() => this.addActiveClass(0)}>}
             <div className={this.state.active ? "floatingBox3-active" : "floatingBox3-inactive"} onClick={this.updateClass}>
@@ -57,9 +41,11 @@ class Filters extends React.Component
     {
         super(props);
         this.state = {
-            major: 'computer-science',
-            gpa: 0.0,
-            amount: 0
+            major: 'computer-science', /*hyphenated no-caps string */
+            gpa: 0.0, /*nonnegative floating point; accepted values can be ints or decimals, e.g. 1 or 1.0 or 1.5 */
+            amount: 0, /*int; cannot be negative*/
+            sex: null, /*string; Male, Female, or Other*/
+            citizenship: null /*string (bool); required (true) or not required (false) */
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -81,14 +67,7 @@ class Filters extends React.Component
         }
         else if(target.name === 'gpa')
         {
-            if(target.value === 'NA')
-            {
-                value = 0;
-            }
-            else
-            {
-                value = target.value;
-            }
+            value = target.value;
         }
         else if(target.name ==='amount')
         {
@@ -144,7 +123,7 @@ class Filters extends React.Component
             alert("GPA not valid.");
             return false;
         }
-        else if(typeof this.state.major !== 'string' && !(this.state.major instanceof String) || !this.state.major.length)
+        else if((typeof this.state.major !== 'string' && !(this.state.major instanceof String)) || !this.state.major.length)
         {
             alert("Major must be a valid string.");
             return false;
@@ -515,20 +494,40 @@ class Filters extends React.Component
                     <br />
                     <label>
                         GPA
-                        <select name="gpa" onChange={this.handleChange}>
-                            <option value="NA">None</option> {/*Default value*/}
-                            <option value="2.0">2.0-2.5</option>
-                            <option value="2.5">2.5-3.0</option>
-                            <option value="3.0">3.0-3.5</option>
-                            <option value="3.5">3.5-4.0</option>
-                            <option value="4.0">4.0</option>
-                        </select>
+                        <input type="amount"  
+                            max="4.0" 
+                            style={{width:"50%"}} 
+                            pattern="[0-9]*(\.[0-9]+)?" 
+                            name="gpa" 
+                            placeholder="0.0" 
+                            value={this.state.value} 
+                            onChange={this.handleChange}
+                        />
                     </label>
                     <br />
                     <label>
                         Amount
                         <input type="number" name="amount" placeholder="None" onChange={this.handleChange}/>
                     </label>
+                    <br/>
+                    <p>Sex</p>
+                        <label>
+                            <input type="radio" name="sex" value="Female" onChange={this.handleChange}/>Female<br/>
+                        </label>
+                        <label>
+                            <input type="radio" name="sex" value="Male" onChange={this.handleChange}/>Male<br/>
+                        </label>
+                        <label>
+                            <input type="radio" name="sex" value="Other" onChange={this.handleChange}/>Other<br/>
+                        </label>
+                    <br />
+                    <p>Citizenship</p>
+                        <label>
+                            <input type="radio" name="citizenship" value="True" onChange={this.handleChange}/>Required<br/>
+                        </label>
+                        <label>
+                            <input type="radio" name="citizenship" value="False" onChange={this.handleChange}/>Not required<br/>
+                        </label>
                     <input type="submit" value="Apply" onClick={this.handleSubmit}/>
                 </form>
             </div>
@@ -537,12 +536,11 @@ class Filters extends React.Component
 }
 
 
-{/* Forms reference: https://reactjs.org/docs/forms.html */}
+/* Forms reference: https://reactjs.org/docs/forms.html */
 class Results extends React.Component
 {
     constructor(props){
         super(props);
-        this.hipsterIpsum = "Lorem ipsum dolor amet godard jianbing you probably haven't heard of them, bicycle rights ennui everyday carry portland yuccie fixie cronut organic poke. Pabst williamsburg YOLO, blog austin iceland dreamcatcher you probably haven't heard of them cold-pressed tousled prism art party semiotics asymmetrical. Jean shorts glossier PBR&B heirloom. Synth pinterest farm-to-table coloring book pug tofu. Meditation vexillologist offal, hell of microdosing pug aesthetic intelligentsia knausgaard hoodie tumblr. Flannel flexitarian ethical chia taiyaki, gochujang street art fam mlkshk. Migas biodiesel selvage wolf. Authentic cold-pressed gentrify roof party letterpress +1 polaroid humblebrag keffiyeh meggings shaman. Hammock iceland green juice, art party cliche pork belly pug you probably haven't heard of them fixie hell of. Crucifix blue bottle vegan, selfies put a bird on it trust fund normcore. Blog listicle celiac, farm-to-table fixie shoreditch deep v hell of mlkshk plaid. Fashion axe drinking vinegar green juice kickstarter. 8-bit cliche you probably haven't heard of them hammock, mixtape XOXO shoreditch biodiesel selvage seitan. Fanny pack roof party etsy echo park, woke kickstarter irony asymmetrical pabst actually leggings snackwave +1 messenger bag wolf. Chartreuse fashion axe echo park single-origin coffee shaman meggings banh mi. Pop-up gastropub literally iPhone, tilde woke vinyl hoodie live-edge YOLO godard. Hexagon fashion axe yr cold-pressed offal la croix kinfolk food truck. Food truck yuccie dreamcatcher mustache, tattooed wolf edison bulb gastropub.";
         this.state = {
             listItems: this.props.listItems,
             all: this.props.all,
@@ -583,7 +581,7 @@ class Results extends React.Component
             scholarships = <Result isActive={false}title="Loading Data" description="This will take a few seconds..." />
         } else {
             scholarships = this.state.response.map((value, index) => {
-                    return (<Result key={index} isActive={false}title={value.name} description={value.description} />)
+                    return (<Result key={index} isActive={false} title={value.name} description={value.description} />)
                 })
         }
 
