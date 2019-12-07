@@ -150,7 +150,7 @@ class Filters extends React.Component
                 value = target.value;
             }
         }
-        else if(target.name ==='essay')
+        else if(target.name ==='essay' || target.name === "citizenship")
         {
             if(target.value.localeCompare("null") === 0)
             {
@@ -614,6 +614,9 @@ class Filters extends React.Component
                         <label>
                             <input type="radio" name="citizenship" value="False" onChange={this.handleChange}/>Not required<br/>
                         </label>
+                        <label>
+                            <input type="radio" name="citizenship" value="null" onChange={this.handleChange}/>No preference<br/>
+                        </label>
                     <br />
                     <p>Essay</p>
                         <label>
@@ -644,18 +647,106 @@ class Results extends React.Component
             listItems: this.props.listItems,
             all: this.props.all,
             response: [],
-            filters: {
-                keywords: null,
-                gpa: null,
-                amount: null,
-                major: 'computer-science'
-            },
-        };
+            keywords: null,
+            gpa: null,/*nonnegative floating point; accepted values can be ints or decimals, e.g. 1 or 1.0 or 1.5 */
+            amount: null, /*int; cannot be negative*/
+            max_amount: null,
+            major: 'computer-science', /*hyphenated no-caps string */
+            sex: null, /*string; Male, Female, or Other*/
+            citizenship: null, /*string (bool); required (true) or not required (false) */
+            essay: null
+            };
     }
 
     getNewQuery(filters) {
+        let qfilters = this.state;
         console.log(filters);
-        fetchScholarships(filters).then(api_response => {
+        if(filters.gpa)
+        {
+            this.setState({
+                    gpa: filters.gpa
+            });
+            qfilters.gpa = filters.gpa
+            console.log(qfilters.gpa)
+        }
+        else
+        {
+            qfilters.gpa = null
+        }
+        if(filters.amount)
+        {
+            this.setState({
+                    amount: filters.amount
+            });
+            qfilters.amount = filters.amount
+        }
+        else
+        {
+            qfilters.amount = null
+        }
+        if(filters.max_amount)
+        {
+            this.setState({
+                    max_amount: filters.max_amount
+            });
+            qfilters.max_amount = filters.max_amount
+        }
+        else
+        {
+            qfilters.max_amount = null
+        }
+        if(filters.major)
+        {
+            this.setState({
+                    major: filters.major
+            });
+            qfilters.major = filters.major
+        }
+        else
+        {
+            qfilters.major = null
+        }
+        if(filters.sex)
+        {
+            this.setState({
+                    sex: filters.sex
+            });
+            qfilters.sex = filters.sex
+        }
+        else
+        {
+            qfilters.sex = null
+        }
+        if(filters.citizenship)
+        {
+            this.setState({
+                    citizenship: filters.citizenship
+            });
+            qfilters.citizenship = filters.citizenship
+        }
+        else
+        {
+            qfilters.citizenship = null
+        }
+        if(filters.essay)
+        {
+            this.setState({
+                    essay: filters.essay
+            });
+            qfilters.essay = filters.essay
+        }
+        else
+        {
+            qfilters.essay = null
+        }
+        if(filters.keywords)
+        {
+            this.setState({
+                    keywords: filters.keywords
+            });
+        }
+        console.log(1)
+        fetchScholarships(qfilters).then(api_response => {
             console.log(api_response);
             this.setState({
                 response: api_response
@@ -664,14 +755,13 @@ class Results extends React.Component
     }
 
     componentWillMount() {
-        fetchScholarships(this.state.filters).then(api_response => {
+        fetchScholarships(this.state).then(api_response => {
             console.log(api_response);
             this.setState({
                 response: api_response
             });
         })
     }
-
 
 
     render () {
