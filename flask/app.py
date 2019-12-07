@@ -301,12 +301,24 @@ class Scholarship(Resource):
         except Exception as e:
             abort(400, "{0}".format(str(e)))
 
-    # def delete(id):
-    #     id = id
-    #     db, cursor =db_connect()
-    #     json_data = []
-    #     return json.dumps(json_data, default=json_converter)
+    def delete(self):
+        #parsing the Scholarship ID argument and assigning idNum to it
+        parser = reqparse.RequestParser()
+        parser.add_argument('id', required=True, help="{error_msg} - id")
+        args = parser.parse_args()
+        idNum = args['id']
 
+        db, cursor = db_connect()
+
+        # Deleting row from Scholarship and Reqtag dbs that contain the scholarship ID
+        cursor.execute("DELETE FROM Scholarship where idScholarship = %s", (idNum,))
+        cursor.execute("DELETE FROM Reqtag where idScholarship = %s", (idNum,))
+
+        db.commit()
+        cursor.close()
+        db.close()
+
+        return {'success': 'Delete success!'}
 
 class UserLogin(Resource):
     """Class for /user/login route."""
