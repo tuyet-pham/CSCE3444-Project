@@ -39,36 +39,33 @@ class AdminLogin extends React.Component {
         });
     }
 
-    //Handles the submission button when clicked. Validating the values. 
+    //Handles the submission button when clicked. Validating the values.
     handleSubmit = (e) => {
+        // window.location.reload(false)
+        e.preventDefault();
         const errormsg = "Please verify that you are a human";
         if(this.state.isVerified === false){
             alert(errormsg);
         }
-        else{                    
+        else{
             const user = {
                 username: this.state.username,
                 password: this.state.password
             }
-            
+
             login(user).then(res => {
                 if (!res.error) {
-                    this.props.history.push(`/profile`)
+                    console.log(res);
+                    localStorage.setItem('usertoken', res.token)
+                    this.props.history.push(`/adminhome`)
                 }
                 else{
-                    e.preventDefault()
                     alert("Incorrect Login. Please Try again");
-                    this.setState({
-                        username: "",
-                        password: "",
-                        isVerified: false
-                    })
-                    
                 }
             })
         }
     }
-    
+
     onRegister(){
         //go to register page
     }
@@ -78,7 +75,7 @@ class AdminLogin extends React.Component {
             <div className="AdminBackground" >
                 <div class="App-header-login">
                     <h1 class="App-header-contents" >
-                        <img class="App-logo" src={process.env.PUBLIC_URL + "scraper_logo.png"} alt="ScholarScraper logo"/> 
+                        <img class="App-logo" src={process.env.PUBLIC_URL + "scraper_logo.png"} alt="ScholarScraper logo"/>
                         <br />
                         Admin Login
                     </h1>
@@ -102,7 +99,7 @@ class AdminLogin extends React.Component {
                         />
                     </div>
                     <a class="forgotpassword" href="Forgotpassword.page">forgot password or username?</a>
-                    <br /><br />  
+                    <br /><br />
                 </div>
             </div>
         );

@@ -19,8 +19,7 @@ class NavBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          bgColor: "",
-          disableTopNav: ""
+          bgColor: ""
         }
     }
 
@@ -48,14 +47,13 @@ class NavBar extends React.Component {
     }
 
     logout(e) {
-        e.preventDefault()
         localStorage.removeItem('usertoken')
         this.props.history.push('/')
     }
 
     render() {
         const loginRegLink = (
-            <div style={{backgroundColor: this.state.bgColor, display:this.state.disableTopNav}} class="nav2">
+            <div style={{backgroundColor: this.state.bgColor}} class="nav2">
                 <Link onClick={this.navClick.bind(this,1)} title="Home" to ="/"><AiFillHome/></Link>
                 <Link onClick={this.navClick.bind(this,1)} title="Search for scholarships" to ="/results"><FaSearch/></Link>
                 <Link onClick={this.navClick.bind(this,0)} title="Add a listing" to ="/submit"><MdAddCircle/></Link>

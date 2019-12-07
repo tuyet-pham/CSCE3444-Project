@@ -41,13 +41,16 @@ export async function reportScholarship(idScholarship) {
 // }
 
 export async function login(user){
+    var url="http://localhost:5000/users/login?username=" + user.username + "&password=" + user.password
+    const response =
+        await fetch(url, {
+            headers:{'Content-Type': 'application/x-www-form-urlencoded'},
+            method: 'POST', // or 'PUT'
+            // body: data  // a FormData will automatically set the 'Content-Type'
+        })
 
-    const response = await fetch(post, {
-      headers:{'Content-Type': 'application/x-www-form-urlencoded'},
-      method: 'POST', // or 'PUT'
-      // body: data  // a FormData will automatically set the 'Content-Type'
-    })
-    return response.json();
+    return response.json()
+
 }
 
 // export const getProfile = user => {

@@ -2,16 +2,17 @@
 """Flask App for Scholarscrape."""
 
 import json
-from symbol import parameters
 from os import environ
+from symbol import parameters
+from urllib import response
 
-from flask import Flask, jsonify, abort
+from flask import Flask, abort, jsonify
 from flask_restful import Api, Resource, reqparse
-from flask_bcrypt import Bcrypt
-from flask_jwt_extended import JWTManager, create_access_token
 
 from app_helper import MyJSONEncoder, date_today_s, db_connect, init_admin_user
+from flask_bcrypt import Bcrypt
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager, create_access_token
 
 app = Flask(__name__)
 app.config['BUNDLE_ERRORS'] = True
@@ -331,9 +332,13 @@ class UserLogin(Resource):
 
         if bcrypt.check_password_hash(password, args['password']):
             access_token = create_access_token(identity=args['username'])
-            return access_token, 200
+            response = jsonify({"token": access_token})
+            response.status_code = 200
+            return response
         else:
-            return jsonify({"error": "Invalid username and password"}), 400
+            response = jsonify({"error": "Invalid username and password"})
+            response.status_code = 200
+            return response
 
 
 api.add_resource(Scholarships, '/scholarships')
