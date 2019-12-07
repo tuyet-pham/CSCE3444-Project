@@ -27,6 +27,7 @@ class NavBar extends React.Component {
         this.props.history.push('/')
     }
 
+
     render() {
         const loginRegLink = (
             <div class="nav2">
@@ -46,10 +47,9 @@ class NavBar extends React.Component {
                 <Link title="Admin Home" to ="/adminHome"><FaUserShield/></Link>
             </div>
         )
-
         return (
             <nav className="Navbar">
-                {localStorage.usertoken ? userLink : loginRegLink}
+                {localStorage.usertoken? userLink : loginRegLink}
             </nav>
         );
     }

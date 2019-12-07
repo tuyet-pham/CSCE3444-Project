@@ -17,6 +17,7 @@
     --ss-gold: #b69504;
     --ss-dark-gold: #997d00;
     --ss-light-light-gray: #e0e0e0;
+    --ss-off-black: #161816;
 }
 
 .App {
@@ -54,7 +55,6 @@
         width: 78%;
     }
 }
-
 hr.new1 {
     color: var(--ss-dark-medium-gray);
     border-top: 1px solid;
@@ -64,7 +64,6 @@ hr.new1 {
 }
 
 #scholarScrapeDescription {
-    background-color: white;
     position: relative;
     width: 65%;
     margin:auto;
@@ -78,13 +77,13 @@ p.howto {
     padding-top: 10px;
     opacity: 80%;
     font-size: 20px;
-    color: var(--ss-dark-green)
+    color: var(--ss-off-black)
 }
 
 .howto2 {
     font-size: 17px;
     opacity: 80%;
-    color: black;
+    color: white;
 }
 
 
@@ -101,7 +100,7 @@ p.howto {
 }
 
 .App-footer {
-    background-color: black;
+    background-color: var(--ss-off-black);
     color: white;
     width: 100%;
     bottom: 0px !important;
@@ -165,7 +164,7 @@ p.howto {
     font-size: 17px;
     float: left;
     border: 1px solid black;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 5px;
     min-width: 90%;
 }
 
@@ -179,7 +178,7 @@ p.howto {
     background: var(--ss-light-teal);
     font-size: 17px;
     border: 1px solid black;
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 5px;
     cursor: pointer;
     min-width: 6%;
 }
@@ -270,50 +269,27 @@ p.howto {
 }
 
 /**************** Meet the team section ****************/
-.aestheticDiv {
-    background-color: rgb(145, 221, 179);
-    width: 100%;
-    height: 70%;
-    position: relative;
-    overflow: hidden;
-    z-index: -1;
-    bottom: 0;
-}
 
 .meetTheTeam {
     padding: 10px 50px 100px 0px;
+    position: relative;
+    height: 100%;
     background: var(--ss-medium-green)
 }
 
 .usericon {
-    color: var(--ss-dark-gray);
+    color: var(--ss-off-black);
     margin: 30px;
     font-size: 4em;
 }
 
 .divteamSize {
-    padding: 20px 50px 20px 200px;
+    height: 100%;
+    padding: 20px 50px 20px 0px;
     width: 60%;
     border-radius: 8px;
-    bottom: 100px;
-    background-color: var(--ss-medium-green);
+    /* background-color: whitesmoke; */
     box-shadow: 0 12px 16px 0 rgba(70, 70, 70, 0.4), 0 17px 50px 0 rgba(0,0,0,0.14);
-}
-
-
-@media only screen and (max-width: 1300px) {
-    .divteamSize {
-        padding: 0px 50px 0px 50px;
-        width: 80%;
-    }
-
-    .meetTheTeam {
-        padding: 10px 50px 100px 0px;
-    }
-
-    .aestheticDiv {
-        top: 15%
-    }
 }
 
 .userdescText {
@@ -339,15 +315,16 @@ p.howto {
 }
 
 .dot {
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.19), 0 17px 50px 0 rgba(0,0,0,0.14);
     opacity: 90%;
     height: 200px;
     min-height: 10%;
     width: 200px;
-    background-color: whitesmoke;
+    /* background-color: var(--ss-medium-green); */
     border-radius: 50%;
     display: inline-block;
     margin: 10px 20px 10px 20px;
-    transition: .7s;
+    transition: .5s;
 }
  
 .container {
@@ -367,6 +344,21 @@ p.howto {
     background-color: whitesmoke;
 }
 
+
+
+@media only screen and (max-width: 1300px) {
+    .divteamSize {
+        padding: 10px 20px 0px 5px;
+        width: 70%;
+    }
+
+    .meetTheTeam {
+        padding: 10px 50px 100px 0px;
+    }
+}
+
+
+
 .floatingBox3-inactive { /* Used in results page */
     /*sizing and placement*/
     float: left;
@@ -375,7 +367,6 @@ p.howto {
     overflow: hidden;
     min-height: 50px;
     max-height: 150px; 
-    display: -webkit-box;
     margin: 10px;
     padding: 10px 30px 30px 30px;
     box-sizing: border-box;
@@ -389,17 +380,13 @@ p.howto {
     background-color: white;
     border-radius: 5px;
     box-shadow: 0px 0px 0px 2px black;
-    /*overflow properties*/
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
 }
 
 .floatingBox3-active { /* Used in results page */
     /*sizing and placement*/
     float: left;
     width: 100%;
-    min-height: 50px;
-    display: -webkit-box;
+    min-height: 150px;
     margin: 10px;
     padding: 10px 30px 30px 30px;
     box-sizing: border-box;
@@ -413,8 +400,6 @@ p.howto {
     background-color: white;
     box-shadow: 0px 0px 0px 2px var(--ss-medium-green);
     border-radius: 5px;
-    /*overflow properties*/
-    -webkit-box-orient: vertical;
 }
 
 
@@ -484,13 +469,12 @@ p.howto {
     vertical-align: middle;
 }
 
-.AdminHomeHeader {
-    width: 100%;
-    background-color: whitesmoke;
-    color: var(--ss-dark-gray);
-    text-align: center;
+.AddminHomeHeader {
+    background-color : var(--ss-dark-green);
+    color: var(--ss-light-gray);
+    text-align: right;
     font-size: 20px;
-    padding : 10px;
+    padding : 20px;
 }
 
 
@@ -502,11 +486,13 @@ p.howto {
 
 .nav {
     list-style-type: none;
+    margin : 0px;
+    padding: 0px;
     background-color: var(--ss-dark-gray);
     height: 100%;
     width: 260px;
     float: left;
-    font-size: 25px;
+    font-size: 17px;
     text-align: center;
     overflow: auto;
 }
@@ -569,7 +555,7 @@ button:focus {
 
 
 .button-red {
-    background-color: var(--ss-light-red);
+    background-color: var(--ss-red);
     color: whitesmoke;
 }
 
@@ -752,14 +738,14 @@ button:focus {
 /* NAVBAR - references : https://www.w3schools.com/css/css_navbar.asp */
 
 .nav2 {
-    background-color: var(--ss-dark-medium-gray);
     list-style-type: none;
-    padding: 0px 1% 0px 0px;
+    padding: 0px 5% 0px 0px;
     height: 100%;
     width: 100%;
     font-size: 25px;
     box-sizing: border-box;
     text-align: right;
+    background-color: var(--ss-off-black);
 }
 
 .nav2 a {
@@ -789,6 +775,7 @@ button:focus {
     max-height: 100%;
     min-height: 100%;
     width: 100%;
+    padding-top: 3%;
     overflow: hidden;
 }
 
@@ -805,7 +792,7 @@ button:focus {
     width: 65%;
     padding: 30px 40px 30px 40px;
     background-color: whitesmoke;
-    margin: 5px 10px 10px 15%;
+    margin: auto;
     border-radius: 20px;
     box-shadow: 10px 30px 70px -7px rgba(0,0,0,0.20), 7px 5px 10px 0 rgba(0,0,0,0.14);
 }

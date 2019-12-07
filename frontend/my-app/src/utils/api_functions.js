@@ -26,11 +26,44 @@ export async function deleteScholarships(id_list) {
 
 
 export async function fetchScholarships(filters){
-    /**
-     * Fetch scholarships based on filters
-     */
-    var url = 'http://localhost:5000/scholarships?major='
-    url += filters.major
+  var url = 'http://localhost:5000/scholarships?major='
+  url += filters.major
+  if(filters.gpa > 0)
+  {
+    url += "&gpa="
+    url += filters.gpa
+  }
+  if(filters.amount > 0)
+  {
+    url += "&min_amount="
+    url += filters.amount
+  }
+  if(filters.max_amount != null)
+  {
+    url += "&max_amount="
+    url += filters.max_amount
+  }
+  if(filters.sex != null)
+  {
+    url += "&sex="
+    url += filters.sex
+  }
+  if(filters.citizenship != null)
+  {
+    url += "&citizenship="
+    url += filters.citizenship
+  }
+  if(filters.essay != null)
+  {
+    url += "&essay="
+    url += filters.essay
+  }
+  if(filters.keywords != null)
+  {
+    url += "&keywords="
+    url += filters.keywords
+  }
+  console.log(url)
     const response =
         await fetch(url, {
         method: 'POST',
