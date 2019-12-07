@@ -1,3 +1,16 @@
+export async function approveScholarships(id_list) {
+    var url = "http://localhost:5000/admin-table";
+    const response = await fetch(url, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify({idList: id_list})
+    });
+
+    return response.json()
+}
+
 
 export async function fetchScholarships(filters){
     /**
@@ -108,3 +121,4 @@ export async function fetchAdminTable() {
 
     return response.json()
 }
+

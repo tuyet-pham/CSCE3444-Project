@@ -8,6 +8,7 @@ from urllib import response
 
 from flask import Flask, abort, jsonify
 from flask_restful import Api, Resource, reqparse
+from flask_restful.reqparse import RequestParser
 
 from app_helper import MyJSONEncoder, date_today_s, db_connect, init_admin_user
 from flask_bcrypt import Bcrypt
@@ -290,12 +291,13 @@ class Scholarship(Resource):
             print(args["idScholarship"], flush=True)
             cursor.execute(query, (args["idScholarship"],))
 
-            db.commit()
-            cursor.close()
-            db.close()
 
             if cursor.rowcount == 0:
                 abort(400, message="ID does not exist.")
+
+            db.commit()
+            cursor.close()
+            db.close()
 
             return {'message': 'Successfully reported scholarship.'}
         except Exception as e:
@@ -380,6 +382,41 @@ class AdminTable(Resource):
         except Exception as e:
             abort(400, "{0}".format(str(e)))
         return jsonify(json_data)
+
+    def put(self):
+        """Approve scholarships."""
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('idList', type=int, required=True, help="{error_msg} - List of IDs to approve", action="append")
+        args = parser.parse_args()
+
+        query = '''
+            UPDATE Scholarship SET accp_status = 0 WHERE idScholarship IN
+        '''
+
+        try:
+            for i in range(len(args['idList'])):
+                if i == 0:
+                    query += '''(%s'''
+                else:
+                    query += ''', %s'''
+            query += ''')'''
+
+            qargs = tuple(args['idList'],)
+            print(query % qargs, flush=True)
+            db, cursor = db_connect()
+
+            cursor.execute(query, qargs)
+
+
+            db.commit()
+            cursor.close()
+            db.close()
+
+        except Exception as e:
+            abort(400, "{0}".format(str(e)))
+
+        return {'message': 'Successfully approved.'}
+
 
 api.add_resource(Scholarships, '/scholarships')
 api.add_resource(Scholarship, '/scholarship')

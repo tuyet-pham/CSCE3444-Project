@@ -23,9 +23,23 @@ function TableList(props)
 class Listing extends React.Component {
     constructor(props){
         super(props);
+        this.state = {
+            isSelected: false,
+        }
+    }
+
+    selectCheckbox() {
+        const { id, toggleCheckbox } = this.props
+
+        this.setState(({ isSelected }) => ({
+            isSelected: !isSelected,
+        }))
+
+        toggleCheckbox(id);
     }
 
     render (){
+        const {isSelected} = this.state
         var status;
         if (this.props.status > 0) {
             status = "Reported"
@@ -34,7 +48,7 @@ class Listing extends React.Component {
         }
         return (
             <tr>
-                <td><input type="checkbox" name="RowT" value="value"></input></td>
+                <td><input type="checkbox" name="RowT" value="value" checked={isSelected} onChange={this.selectCheckbox.bind(this)}></input></td>
                 <td>{status}</td>
                 <td>{this.props.name}</td>
                 <td>{this.props.URL}</td>
@@ -69,17 +83,22 @@ class TableP extends React.Component{
                 response: api_response
             });
         });
+
+        // this.props.toggleCheckbox(1)
+    }
+
+    toggleCheckbox = id => {
+        this.props.toggleCheckbox(id)
     }
 
     render(){
         let display;
-        let display2;
         if(this.state.response === null) {
             display = <Listing status="Awaiting Approval" name="Pedro" URL="https://youtube.com" amount="69420" description="a piece of writing that partakes of the nature of both speech and song that is nearly always rhythmical, usually metaphorical, and often exhibits such formal elements as meter, rhyme, and stanzaic structure.a piece of writing that partakes of the nature of both speech and song that is nearly always rhythmical, usually metaphorical, and often exhibits such formal elements as meter, rhyme, and stanzaic structure.a piece of writing that partakes of the nature of both speech and song that is nearly always rhythmical, usually metaphorical, and often exhibits such formal elements as meter, rhyme, and stanzaic structure." deadline="2019-12-06"/>
             // display2 = <Table URL="https://youtube.com" amount="69420" description="Good Meme" deadline="2019-12-06"/>
         } else {
-            display = this.state.response.map((value, index) => {
-                return (<Listing key={value.idScholarship} status={value.accp_status} name={value.name} URL={value.url} amount={value.amount} description={value.description} deadline={value.deadline} />)
+            display = this.state.response.map((value) => {
+                return (<Listing toggleCheckbox={this.toggleCheckbox} key={value.idScholarship} id={value.idScholarship} status={value.accp_status} name={value.name} URL={value.url} amount={value.amount} description={value.description} deadline={value.deadline} />)
             })
         }
         return(

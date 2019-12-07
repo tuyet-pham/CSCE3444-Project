@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import TableP from './Table';
 import NavBarAdmin from './NavBarAdmin';
+import { approveScholarships } from './utils/api_functions'
 
 
 // reference : https://www.w3schools.com/react/showreact.asp?filename=demo2_react_lifecycle_componentwillunmount
@@ -16,6 +17,7 @@ class AdminHome extends React.Component {
             all: this.props.all,
             username: '',
             email: '',
+            response: null,
         };
     }
 
@@ -28,6 +30,18 @@ class AdminHome extends React.Component {
         alert('Scraper is scheduled to scrape on ' + x);
         // Realistically the Admin should ask the db to scrape when needed. This
         // Function will be an after thought if we have time.
+    }
+
+    componentWillMount() {
+        this.selectedCheckboxesID = new Set();
+    }
+
+    toggleCheckbox = id => {
+        if(this.selectedCheckboxesID.has(id)) {
+            this.selectedCheckboxesID.delete(id)
+        } else {
+            this.selectedCheckboxesID.add(id)
+        }
     }
 
     componentDidMount(){
@@ -43,6 +57,22 @@ class AdminHome extends React.Component {
             this.setState({all:this.state.all + 1})
 
         }, 1000)
+    }
+
+    handleApprove() {
+        for(const checkbox of this.selectedCheckboxesID) {
+            console.log(checkbox, ' is selected')
+        }
+        approveScholarships(Array.from(this.selectedCheckboxesID)).then(api_response => {
+            console.log(api_response);
+            this.setState({
+                response: api_response
+            });
+            if(api_response.message = "Successfully approved.") {
+                alert(api_response.message);
+                window.location.reload(false);
+            }
+        })
     }
 
     render () {
@@ -83,11 +113,11 @@ class AdminHome extends React.Component {
                         </div>
                     </div>
                     <span>
-                        <span><TableP/></span>
+                        <span><TableP toggleCheckbox={this.toggleCheckbox} /></span>
                     </span>
                     <p>
                         <div style={{textAlign:"center", margin: "auto"}}>
-                            <input type="submit" class="flatButton" value="Accept"/>
+                            <input type="submit" class="flatButton" onClick={this.handleApprove.bind(this)} value="Approve"/>
                             <input type="submit" class="flatButton" style={{background: "red"}} value="Remove"/>
                         </div>
                     </p>
