@@ -44,7 +44,7 @@ class Result extends React.Component
         }
 
         let citizenship;
-        if(this.props.citizenship !== null && this.props.title.localeCompare("Loading Data") !== 0)
+        if(this.props.citizenship !== null && this.props.title.localeCompare("Loading Data") !== 0 && (this.props.title.localeCompare("No data was found. Sorry!") !== 0))
         {
             citizenship = <span><br /><br /><strong>Citizenship Required</strong></span>
         }
@@ -65,7 +65,7 @@ class Result extends React.Component
 
         let result;
         let buttons;
-        if(this.props.title.localeCompare("Loading Data") !== 0)
+        if((this.props.title.localeCompare("Loading Data") !== 0) && (this.props.title.localeCompare("No data was found. Sorry!") !== 0))
         {
             result = (
                 <span>
@@ -88,7 +88,7 @@ class Result extends React.Component
                         <br />
                         <br />
                         <span>
-                            <a class="button button-red" target="_blank" onClick={this.handleReport.bind(this)}>Report</a>
+                            <button class="button button-red" onClick={this.handleReport.bind(this)}>Report</button>
                         </span>
                         <span style={{float:"right"}}>
                             <a class="button button-green" href={this.props.url} target="_blank">Apply</a>
@@ -110,7 +110,7 @@ class Result extends React.Component
         return(
             //<div className={this.state.activeClasses[0]? "floatingBox3-active":"floatingBox3-inactive"} onClick={() => this.addActiveClass(0)}>}
             <div className={this.state.active ? "floatingBox3-active" : "floatingBox3-inactive"} onClick={this.updateClass}>
-                <h2 onClick={this.handleReport}>
+                <h2>
                     {this.props.title}
                 </h2>
                     {result}
@@ -618,13 +618,13 @@ class Filters extends React.Component
                     <br />
                     <label>
                         GPA
-                        <input type="amount"  
-                            max="4.0" 
-                            style={{width:"50%"}} 
-                            pattern="[0-9]*(\.[0-9]+)?" 
-                            name="gpa" 
-                            placeholder="0.0" 
-                            value={this.state.value} 
+                        <input type="amount"
+                            max="4.0"
+                            style={{width:"50%"}}
+                            pattern="[0-9]*(\.[0-9]+)?"
+                            name="gpa"
+                            placeholder="0.0"
+                            value={this.state.value}
                             onChange={this.handleChange}
                         />
                     </label>
@@ -689,7 +689,7 @@ class Results extends React.Component
         this.state = {
             listItems: this.props.listItems,
             all: this.props.all,
-            response: [],
+            response: null,
             keywords: null,
             gpa: null,/*nonnegative floating point; accepted values can be ints or decimals, e.g. 1 or 1.0 or 1.5 */
             amount: null, /*int; cannot be negative*/
@@ -791,7 +791,7 @@ class Results extends React.Component
         })
     }
 
-    componentWillMount() 
+    componentWillMount()
     {
         fetchScholarships(this.state).then(api_response => {
             console.log(api_response);
@@ -801,7 +801,7 @@ class Results extends React.Component
         })
     }
 
-    handleSearchBarChange(event) 
+    handleSearchBarChange(event)
     {
         const target = event.target
         let currStr
@@ -831,8 +831,10 @@ class Results extends React.Component
 
     render () {
         let scholarships;
-        if(this.state.response.length === 0) {
+        if(this.state.response === null) {
             scholarships = <Result isActive={false} title="Loading Data" description="This will take a few seconds..." />
+        } else if (this.state.response.length === 0) {
+            scholarships = <Result isActive={false} title="No data was found. Sorry!" description="Try changing your parameters." />
         } else {
             scholarships = this.state.response.map((value, index) => {
                     return (<Result key={index} isActive={false} title={value.name} gpa={value.GPA} amount={value.amount} essay={value.essay} citizenship={value.citizenship} description={value.description} url={value.url} idScholarship={value.idScholarship} />)
