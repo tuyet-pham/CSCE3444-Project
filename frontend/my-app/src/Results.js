@@ -9,13 +9,16 @@ class Result extends React.Component
     {
         super(props);
         this.updateClass = this.updateClass.bind(this);
+        this.handleReport = this.handleReport.bind(this);
         this.state = {active: false};
     }
 
     handleReport() {
-        reportScholarship(1).then(api_response => { // Update with scholarship ID instead of 1
+        console.log(this.props.idScholarship)
+        reportScholarship(this.props.idScholarship).then(api_response => { // Update with scholarship ID instead of 1
             console.log(api_response);
         });
+        alert("Your report has been documented. Thank you for your input.")
     }
 
     render()
@@ -50,13 +53,24 @@ class Result extends React.Component
             citizenship = <span> </span>
         }
 
+        let amount;
+        if(this.props.amount === null)
+        {
+            amount = <span>Varies</span>
+        }
+        else
+        {
+            amount = <span>${this.props.amount}</span>
+        }
+
         let result;
+        let buttons;
         if(this.props.title.localeCompare("Loading Data") !== 0)
         {
             result = (
                 <span>
                     <span className="column-30">
-                        ${this.props.amount}
+                        {amount}
                     </span>
                     <span className="column-30">
                         GPA: {gpa}
@@ -67,10 +81,30 @@ class Result extends React.Component
                     <div style={{clear:"both"}}></div>
                 </span>
             );
+            if(this.state.active)
+            {
+                buttons = (
+                    <div>
+                        <br />
+                        <br />
+                        <span>
+                            <a class="button button-red" target="_blank" onClick={this.handleReport.bind(this)}>Report</a>
+                        </span>
+                        <span style={{float:"right"}}>
+                            <a class="button button-green" href={this.props.url} target="_blank">Apply</a>
+                        </span>
+                    </div>
+                );
+            }
+            else
+            {
+                buttons = <span></span>
+            }
         }
         else
         {
             result = <span></span>
+            buttons = <span></span>
         }
 
         return(
@@ -85,6 +119,9 @@ class Result extends React.Component
                 </span>
                 <span>
                     {citizenship}
+                </span>
+                <span>
+                    {buttons}
                 </span>
             </div>
         );
@@ -798,7 +835,7 @@ class Results extends React.Component
             scholarships = <Result isActive={false} title="Loading Data" description="This will take a few seconds..." />
         } else {
             scholarships = this.state.response.map((value, index) => {
-                    return (<Result key={index} isActive={false} title={value.name} gpa={value.GPA} amount={value.amount} essay={value.essay} citizenship={value.citizenship} description={value.description} />)
+                    return (<Result key={index} isActive={false} title={value.name} gpa={value.GPA} amount={value.amount} essay={value.essay} citizenship={value.citizenship} description={value.description} url={value.url} idScholarship={value.idScholarship} />)
                 })
         }
 

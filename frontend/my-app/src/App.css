@@ -563,7 +563,7 @@ button:focus {
 
 
 .button-red {
-    background-color: var(--ss-light-red);
+    background-color: var(--ss-red);
     color: whitesmoke;
 }
 
