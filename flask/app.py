@@ -417,6 +417,45 @@ class AdminTable(Resource):
 
         return {'message': 'Successfully approved.'}
 
+    def delete(self):
+        """Delete scholarships in table"""
+
+        parser = reqparse.RequestParser(bundle_errors=True)
+        parser.add_argument('idList', type=int, required=True, help="{error_msg} - List of IDs to approve", action="append")
+        args = parser.parse_args()
+
+        query = '''
+            DELETE Scholarship, R
+            FROM Scholarship
+            INNER JOIN Reqtag R ON Scholarship.idreqtag = R.idreqtag
+            WHERE Scholarship.idScholarship IN
+        '''
+        try:
+            for i in range(len(args['idList'])):
+                if i == 0:
+                    query += '''(%s'''
+                else:
+                    query += ''', %s'''
+            query += ''')'''
+
+            qargs = tuple(args['idList'])
+            print(query % qargs, flush=True)
+            db, cursor = db_connect()
+
+            cursor.execute(query, qargs)
+
+
+            db.commit()
+            cursor.close()
+            db.close()
+
+        except Exception as e:
+            abort(400, "{0}".format(str(e)))
+
+        return {'message': 'Successfully Deleted.'}
+
+
+
 
 api.add_resource(Scholarships, '/scholarships')
 api.add_resource(Scholarship, '/scholarship')

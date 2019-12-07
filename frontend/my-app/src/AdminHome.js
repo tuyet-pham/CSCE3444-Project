@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import TableP from './Table';
 import NavBarAdmin from './NavBarAdmin';
-import { approveScholarships } from './utils/api_functions'
+import { approveScholarships, deleteScholarships } from './utils/api_functions'
 
 
 // reference : https://www.w3schools.com/react/showreact.asp?filename=demo2_react_lifecycle_componentwillunmount
@@ -60,17 +60,31 @@ class AdminHome extends React.Component {
     }
 
     handleApprove() {
-        for(const checkbox of this.selectedCheckboxesID) {
-            console.log(checkbox, ' is selected')
-        }
         approveScholarships(Array.from(this.selectedCheckboxesID)).then(api_response => {
             console.log(api_response);
             this.setState({
                 response: api_response
             });
-            if(api_response.message = "Successfully approved.") {
+            if(api_response.message === "Successfully approved.") {
                 alert(api_response.message);
                 window.location.reload(false);
+            } else {
+                alert("Please try again.");
+            }
+        })
+    }
+
+    handleDelete() {
+        deleteScholarships(Array.from(this.selectedCheckboxesID)).then(api_response => {
+            console.log(api_response);
+            this.setState({
+                response: api_response
+            });
+            if(api_response.message === "Successfully Deleted.") {
+                alert(api_response.message);
+                window.location.reload(false);
+            } else {
+                alert("Please try again.");
             }
         })
     }
@@ -118,7 +132,7 @@ class AdminHome extends React.Component {
                     <p>
                         <div style={{textAlign:"center", margin: "auto"}}>
                             <input type="submit" class="flatButton" onClick={this.handleApprove.bind(this)} value="Approve"/>
-                            <input type="submit" class="flatButton" style={{background: "red"}} value="Remove"/>
+                            <input type="submit" class="flatButton" onClick={this.handleDelete.bind(this)} style={{background: "red"}} value="Remove"/>
                         </div>
                     </p>
                 </div>

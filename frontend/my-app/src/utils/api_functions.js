@@ -11,6 +11,19 @@ export async function approveScholarships(id_list) {
     return response.json()
 }
 
+export async function deleteScholarships(id_list) {
+    var url = "http://localhost:5000/admin-table";
+    const response = await fetch(url, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'DELETE',
+        body: JSON.stringify({idList: id_list})
+    });
+
+    return response.json()
+}
+
 
 export async function fetchScholarships(filters){
     /**
@@ -26,8 +39,8 @@ export async function fetchScholarships(filters){
             'Content-Type': 'application/x-www-form-urlencoded'
             }
         })
-    return response.json()
 
+    return response.json()
 }
 
 export async function reportScholarship(idScholarship) {
