@@ -155,7 +155,7 @@ def ethnicity(desc):
     count = compare(desc, count, temp)
     if (count == 1 and len(store) == 0):
         store = temp[:]
-    temp = ['Black']
+    temp = ['Black', 'African American', 'African-American']
     count = compare(desc, count, temp)
     if (count == 1 and len(store) == 0):
         store = temp[:]

@@ -1,3 +1,29 @@
+export async function approveScholarships(id_list) {
+    var url = "http://localhost:5000/admin-table";
+    const response = await fetch(url, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'PUT',
+        body: JSON.stringify({idList: id_list})
+    });
+
+    return response.json()
+}
+
+export async function deleteScholarships(id_list) {
+    var url = "http://localhost:5000/admin-table";
+    const response = await fetch(url, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'DELETE',
+        body: JSON.stringify({idList: id_list})
+    });
+
+    return response.json()
+}
+
 
 export async function fetchScholarships(filters){
   var url = 'http://localhost:5000/scholarships?major='
@@ -46,8 +72,8 @@ export async function fetchScholarships(filters){
             'Content-Type': 'application/x-www-form-urlencoded'
             }
         })
-    return response.json()
 
+    return response.json()
 }
 
 export async function reportScholarship(idScholarship) {
@@ -69,9 +95,6 @@ export async function reportScholarship(idScholarship) {
 
     return response.json()
 }
-// export const register = newUser => {
-//
-// }
 
 export async function login(user){
     var url="http://localhost:5000/users/login?username=" + user.username + "&password=" + user.password
@@ -85,10 +108,6 @@ export async function login(user){
     return response.json()
 
 }
-
-// export const getProfile = user => {
-//
-// }
 
 //-- Scholarship API call ---
 export async function submitScholarship(data){
@@ -137,3 +156,15 @@ export async function submitScholarship(data){
     })
     return response.json();
 }
+
+export async function fetchAdminTable() {
+    var url = 'http://localhost:5000/admin-table'
+    const response = await fetch(url, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    return response.json()
+}
+
