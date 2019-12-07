@@ -88,7 +88,7 @@ class Result extends React.Component
                         <br />
                         <br />
                         <span>
-                            <a class="button button-red" target="_blank" onClick={this.handleReport.bind(this)}>Report</a>
+                            <button class="button button-red" onClick={this.handleReport.bind(this)}>Report</button>
                         </span>
                         <span style={{float:"right"}}>
                             <a class="button button-green" href={this.props.url} target="_blank">Apply</a>
@@ -689,7 +689,7 @@ class Results extends React.Component
         this.state = {
             listItems: this.props.listItems,
             all: this.props.all,
-            response: [],
+            response: null,
             keywords: null,
             gpa: null,/*nonnegative floating point; accepted values can be ints or decimals, e.g. 1 or 1.0 or 1.5 */
             amount: null, /*int; cannot be negative*/
@@ -831,8 +831,10 @@ class Results extends React.Component
 
     render () {
         let scholarships;
-        if(this.state.response.length === 0) {
-            scholarships = <Result isActive={false} title="Loading Data" description="This will take a few seconds..." />
+        if(this.state.response === null) {
+            scholarships = <Result isActive={false} title="Loading Data..." description="This will take a few seconds..." />
+        } else if (this.state.response.length === 0) {
+            scholarships = <Result isActive={false} title="No data was found. Sorry!" description="Try changing your parameters." />
         } else {
             scholarships = this.state.response.map((value, index) => {
                     return (<Result key={index} isActive={false} title={value.name} gpa={value.GPA} amount={value.amount} essay={value.essay} citizenship={value.citizenship} description={value.description} url={value.url} idScholarship={value.idScholarship} />)

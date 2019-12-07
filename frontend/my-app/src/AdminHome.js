@@ -33,7 +33,7 @@ class AdminHome extends React.Component {
     }
 
     componentWillMount() {
-        this.selectedCheckboxesID = new Set();
+        // this.selectedCheckboxesID = new Set();
     }
 
     toggleCheckbox = id => {
@@ -45,7 +45,12 @@ class AdminHome extends React.Component {
     }
 
     componentDidMount(){
-        const token = localStorage.usertoken
+        // Check logged in
+        if(!localStorage.usertoken) {
+            this.props.history.push('/')
+        }
+
+        this.selectedCheckboxesID = new Set();
 
         this.setState({
             username: this.state.username,

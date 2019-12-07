@@ -56,8 +56,8 @@ class AdminLogin extends React.Component {
             login(user).then(res => {
                 if (!res.error) {
                     console.log(res);
-                    localStorage.setItem('usertoken', res.token)
-                    this.props.history.push(`/adminhome`)
+                    localStorage.setItem('usertoken', res.token);
+                    this.props.history.push(`/adminhome`);
                 }
                 else{
                     alert("Incorrect Login. Please Try again");
