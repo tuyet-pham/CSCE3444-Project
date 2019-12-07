@@ -660,14 +660,19 @@ class Results extends React.Component
 
     getNewQuery(filters) {
         let qfilters = this.state;
-        console.log(filters);
+        if(filters.keywords)
+        {
+            let str = this.searchParamsToCsv(filters.keywords)
+            this.setState({
+                    keywords: str
+            });
+        }
         if(filters.gpa)
         {
             this.setState({
                     gpa: filters.gpa
             });
             qfilters.gpa = filters.gpa
-            console.log(qfilters.gpa)
         }
         else
         {
@@ -702,10 +707,6 @@ class Results extends React.Component
             });
             qfilters.major = filters.major
         }
-        else
-        {
-            qfilters.major = null
-        }
         if(filters.sex)
         {
             this.setState({
@@ -739,13 +740,6 @@ class Results extends React.Component
         {
             qfilters.essay = null
         }
-        if(filters.keywords)
-        {
-            this.setState({
-                    keywords: filters.keywords
-            });
-        }
-        console.log(1)
         fetchScholarships(qfilters).then(api_response => {
             console.log(api_response);
             this.setState({
@@ -754,7 +748,8 @@ class Results extends React.Component
         })
     }
 
-    componentWillMount() {
+    componentWillMount() 
+    {
         fetchScholarships(this.state).then(api_response => {
             console.log(api_response);
             this.setState({
@@ -763,6 +758,33 @@ class Results extends React.Component
         })
     }
 
+    handleSearchBarChange(event) 
+    {
+        const target = event.target
+        let currStr
+        let newStr
+
+        currStr = target.value
+        newStr = this.searchParamsToCsv(currStr)
+
+        this.setState({
+            keywords: newStr
+        })
+    }
+
+    //Turn search parameters into comma-separated values, e.g. "Onua is the best bionicle" to "Onua,is,the,best,Bionicle"
+    searchParamsToCsv(searchParam)
+    {
+        let str = searchParam.split(/[\s]+/).filter(function(v){return v!==''}).join(',')
+        return (str)
+    }
+
+    handleKeywordSubmit(event)
+    {
+        event.preventDefault()
+        this.getNewQuery(this.state)
+
+    }
 
     render () {
         let scholarships;
@@ -786,14 +808,14 @@ class Results extends React.Component
 
                 {/* SEARCH BAR */}
                 <div className="Search-bar-wide">
-                    <input type="text" placeholder="Search scholarships..." name="search" />
-                    <button type="submit">Go</button>
+                    <input type="text" placeholder="Search scholarships by keyword..." name="keywords" onChange={this.handleSearchBarChange.bind(this)}/>
+                    <button type="submit" onClick={this.handleKeywordSubmit.bind(this)}>Go</button>
                 </div>
 
                 <div className="row-flex">
                     {/* FILTERS */}
                     <div className="column-30" style={{backgroundColor:"var(--ss-light-gray)", margin:"10px", textAlign:"left", borderRadius:"5px"}}>
-                        <Filters updateQuery={this.getNewQuery.bind(this)} />
+                        <Filters updateQuery={this.handleSubmit} />
                     </div>
 
                     {/* RESULTS */}

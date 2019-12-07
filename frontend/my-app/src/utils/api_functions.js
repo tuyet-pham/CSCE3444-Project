@@ -31,6 +31,11 @@ export async function fetchScholarships(filters){
     url += "&essay="
     url += filters.essay
   }
+  if(filters.keywords != null)
+  {
+    url += "&keywords="
+    url += filters.keywords
+  }
   console.log(url)
     const response =
       await fetch(url, {
