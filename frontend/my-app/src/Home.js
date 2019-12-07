@@ -14,9 +14,8 @@ class Home extends React.Component {
 
     render () {
         return (
-            <div className="App">
-
-                <div style={{minHeight:"50px"}} class="App-header">
+            <div style={{backgroundImage:`url(${process.env.PUBLIC_URL + "caps.png"})`, height:"100%"}} className="App">
+                <div class="App-header">
                     <h1 class="App-header-contents">
                         <img class="App-logo" src={process.env.PUBLIC_URL + "scraper_logo.png"} alt="ScholarScraper logo"/> 
                         ScholarScrape 
@@ -52,7 +51,7 @@ class Home extends React.Component {
                     {/* user description area */}
                     <div class="row" style={{margin:"auto"}}>
                     <div class="container">
-                        <div class="userdescText userdesc">
+                        <div style={{backgroundImage:`url(${process.env.PUBLIC_URL + "tii2.png"})`}} class="userdescText userdesc">
                             <h2>Tii</h2>
                             Wanna be Full stack developer. 
                             <br />Graduated from the University of North 
@@ -65,7 +64,7 @@ class Home extends React.Component {
                     </div>
 
                     <div class="container">
-                        <div class="userdescText userdesc">
+                        <div style={{backgroundImage:`url(${process.env.PUBLIC_URL + "pedro2.png"})`}} class="userdescText userdesc">
                             <h2>Pedro</h2>
                             Game developer. Want to work for
                             <br />an indie game company.
@@ -79,7 +78,7 @@ class Home extends React.Component {
                     </div>
 
                     <div class="container">
-                        <div class="userdescText userdesc">
+                        <div style={{backgroundImage:`url(${process.env.PUBLIC_URL + "joe.png"})`}}  class="userdescText userdesc">
                             <h2>Joe</h2>
                             About to be hired as a real developer.
                             <br />Graduated from the University of North 
@@ -93,7 +92,7 @@ class Home extends React.Component {
                     </div>
                     <div class="row" style={{margin:"auto"}}>
                     <div class="container">
-                        <div class="userdescText userdesc">
+                        <div style={{backgroundImage:`url(${process.env.PUBLIC_URL + "avery.png"})`}} class="userdescText userdesc">
                             <h2>Avery</h2>
                             Game developer. Want to work 
                             <br />for Blizzard. Graduated from the
@@ -105,7 +104,7 @@ class Home extends React.Component {
                         </div>
                     </div>
                     <div class="container">
-                        <div class="userdescText userdesc">
+                        <div style={{backgroundImage:`url(${process.env.PUBLIC_URL + "peyton2.png"})`}} class="userdescText userdesc">
                             <h2>Peyton</h2>
                             Awesome developer with a lot of 
                             <br />stickers. You know where to go. 
