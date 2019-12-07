@@ -736,6 +736,7 @@ button:focus {
 /* NAVBAR - references : https://www.w3schools.com/css/css_navbar.asp */
 
 .nav2 {
+    background-color: var(--ss-dark-medium-gray);
     list-style-type: none;
     padding: 0px 1% 0px 0px;
     height: 100%;

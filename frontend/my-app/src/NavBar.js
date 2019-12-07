@@ -19,30 +19,6 @@ class NavBar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          bgColor: ""
-        }
-    }
-
-    navClick (e) {
-        if(e === 0){
-            this.setState({
-            bgColor: "rgb(133, 255, 164, .5)"
-            })
-        }
-        else if (e === 1){
-            this.setState({
-                bgColor: "#07bd65"
-            })
-        }
-        else if (e === 2){
-            this.setState({
-                bgColor: "whitesmoke"
-            })
-        }
-        else if(e === 3){
-            this.setState({
-                bgColor: "#06904d"
-            })
         }
     }
 
@@ -53,22 +29,21 @@ class NavBar extends React.Component {
 
     render() {
         const loginRegLink = (
-            <div style={{backgroundColor: this.state.bgColor}} class="nav2">
-                <Link onClick={this.navClick.bind(this,1)} title="Home" to ="/"><AiFillHome/></Link>
-                <Link onClick={this.navClick.bind(this,1)} title="Search for scholarships" to ="/results"><FaSearch/></Link>
-                <Link onClick={this.navClick.bind(this,0)} title="Add a listing" to ="/submit"><MdAddCircle/></Link>
-                <Link onClick={this.navClick.bind(this,2)} title="Admin Login" to ="/adminlogin"><FaUserCircle/></Link>
-                {/* <Link onClick={this.navClick.bind(this,2)} title="Admin Home" to ="/adminhome"><FaUserShield/></Link> */}
+            <div class="nav2">
+                <Link title="Home" to ="/"><AiFillHome/></Link>
+                <Link title="Search for scholarships" to ="/results"><FaSearch/></Link>
+                <Link title="Add a listing" to ="/submit"><MdAddCircle/></Link>
+                <Link title="Admin Login" to ="/adminlogin"><FaUserCircle/></Link>
             </div>
         )
 
         const userLink = (
-            <div style={{backgroundColor: this.state.bgColor}} class="nav2">
-                <Link onClick={this.navClick.bind(this,1)} title="Home" to ="/"><AiFillHome/></Link>
-                <Link onClick={this.navClick.bind(this,1)} title="Search for scholarships" to ="/results"><FaSearch/></Link>
-                <Link onClick={this.navClick.bind(this,0)} title="Add a listing" to ="/submit"><MdAddCircle/></Link>
+            <div class="nav2">
+                <Link title="Home" to ="/"><AiFillHome/></Link>
+                <Link title="Search for scholarships" to ="/results"><FaSearch/></Link>
+                <Link title="Add a listing" to ="/submit"><MdAddCircle/></Link>
                 <a href="" title="You leaving? :(" onClick={this.logout.bind(this)}><IoMdLogOut/></a>
-                <Link onClick={this.navClick.bind(this,1)} title="Admin Home" to ="/adminHome"><FaUserShield/></Link>
+                <Link title="Admin Home" to ="/adminHome"><FaUserShield/></Link>
             </div>
         )
 
