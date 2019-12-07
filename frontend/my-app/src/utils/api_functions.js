@@ -36,9 +36,6 @@ export async function reportScholarship(idScholarship) {
 
     return response.json()
 }
-// export const register = newUser => {
-//
-// }
 
 export async function login(user){
     var url="http://localhost:5000/users/login?username=" + user.username + "&password=" + user.password
@@ -52,10 +49,6 @@ export async function login(user){
     return response.json()
 
 }
-
-// export const getProfile = user => {
-//
-// }
 
 //-- Scholarship API call ---
 export async function submitScholarship(data){
@@ -103,4 +96,15 @@ export async function submitScholarship(data){
       // body: data  // a FormData will automatically set the 'Content-Type'
     })
     return response.json();
+}
+
+export async function fetchAdminTable() {
+    var url = 'http://localhost:5000/admin-table'
+    const response = await fetch(url, {
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+
+    return response.json()
 }

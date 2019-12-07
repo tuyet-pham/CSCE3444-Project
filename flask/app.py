@@ -352,10 +352,39 @@ class UserLogin(Resource):
             response.status_code = 200
             return response
 
+class AdminTable(Resource):
+    def get(self):
+        """Get scholarships for admin approval table."""
+        try:
+            query = '''
+                SELECT Scholarship.idScholarship, accp_status, name, url, amount, description, deadline
+                FROM Scholarship
+                INNER JOIN Reqtag R ON Scholarship.idreqtag = R.idreqtag
+                WHERE (accp_status < 0 OR accp_status > 0)
+            '''
+
+            db, cursor = db_connect()
+            print(query, flush=True)
+            cursor.execute(query)
+
+            row_headers = [x[0] for x in cursor.description]
+            rv = cursor.fetchall()
+            json_data = []
+
+            for result in rv:
+                json_data.append(dict(zip(row_headers, result)))
+
+
+            cursor.close()
+            db.close()
+        except Exception as e:
+            abort(400, "{0}".format(str(e)))
+        return jsonify(json_data)
 
 api.add_resource(Scholarships, '/scholarships')
 api.add_resource(Scholarship, '/scholarship')
 api.add_resource(UserLogin, '/users/login')
+api.add_resource(AdminTable, '/admin-table')
 
 
 if __name__ == "__main__":

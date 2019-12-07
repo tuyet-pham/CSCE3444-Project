@@ -2,8 +2,6 @@ import React from 'react';
 import './App.css';
 import TableP from './Table';
 import NavBarAdmin from './NavBarAdmin';
-// import { fetchScholarships } from './utils/api_functions';
-
 
 
 // reference : https://www.w3schools.com/react/showreact.asp?filename=demo2_react_lifecycle_componentwillunmount
@@ -55,10 +53,10 @@ class AdminHome extends React.Component {
                 </div>
                 {/* column on the right */}
                 <div class="flex-view">
-                    <span class="AdminHomeHeader">
+                    {/* <span class="AdminHomeHeader">
                         <img class="App-logo2" src={process.env.PUBLIC_URL + "scraper_logo.png"} alt="ScholarScraper logo"/>
                         ScholarScrape Admin Portal
-                    </span >
+                    </span > */}
 
                     <div title="Listing awaiting approval">
                         <h1 style={{color:'#fdd835'}} class="viewdisplay">{this.state.requests}</h1>

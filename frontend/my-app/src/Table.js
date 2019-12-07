@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import {fetchAdminTable} from './utils/api_functions';
 
 
 function TableList(props)
@@ -25,10 +26,16 @@ class Listing extends React.Component {
     }
 
     render (){
+        var status;
+        if (this.props.status > 0) {
+            status = "Reported"
+        } else {
+            status = "Awaiting Approval"
+        }
         return (
             <tr>
                 <td><input type="checkbox" name="RowT" value="value"></input></td>
-                <td>{this.props.status}</td>
+                <td>{status}</td>
                 <td>{this.props.name}</td>
                 <td>{this.props.URL}</td>
                 <td>{this.props.amount}</td>
@@ -55,16 +62,24 @@ class TableP extends React.Component{
         };
     }
 
+    componentWillMount() {
+        fetchAdminTable().then(api_response => {
+            console.log(api_response);
+            this.setState({
+                response: api_response
+            });
+        });
+    }
 
     render(){
         let display;
         let display2;
-        if(this.state.response.length === 0) {
+        if(this.state.response === null) {
             display = <Listing status="Awaiting Approval" name="Pedro" URL="https://youtube.com" amount="69420" description="a piece of writing that partakes of the nature of both speech and song that is nearly always rhythmical, usually metaphorical, and often exhibits such formal elements as meter, rhyme, and stanzaic structure.a piece of writing that partakes of the nature of both speech and song that is nearly always rhythmical, usually metaphorical, and often exhibits such formal elements as meter, rhyme, and stanzaic structure.a piece of writing that partakes of the nature of both speech and song that is nearly always rhythmical, usually metaphorical, and often exhibits such formal elements as meter, rhyme, and stanzaic structure." deadline="2019-12-06"/>
             // display2 = <Table URL="https://youtube.com" amount="69420" description="Good Meme" deadline="2019-12-06"/>
         } else {
             display = this.state.response.map((value, index) => {
-                return (<Listing key={index} name={this.props.name} URL={this.props.URL} amount={this.props.amount} description={this.props.description} deadline={this.props.deadline} />)
+                return (<Listing key={value.idScholarship} status={value.accp_status} name={value.name} URL={value.url} amount={value.amount} description={value.description} deadline={value.deadline} />)
             })
         }
         return(
@@ -80,15 +95,6 @@ class TableP extends React.Component{
                         <th>Deadline</th>
                     </tr>
                     <tbody>
-                        {display}
-                        {display}
-                        {display}
-                        {display}
-                        {display}
-                        {display}
-                        {display}
-                        {display}
-                        {display}
                         {display}
                     </tbody>
                 </table>
