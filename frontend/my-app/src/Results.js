@@ -3,20 +3,6 @@ import './App.css';
 
 import { fetchScholarships, reportScholarship } from './utils/api_functions';
 
-function ResultsList(props)
-{
-    const list = props.itemsList;
-    const updatedList = list.map((listItems)=>{
-        return<li key={listItems.toString()}>
-            {listItems.title}
-            {listItems.description}
-        </li>
-    });
-    return(
-        <ul>{updatedList}</ul>
-    );
-}
-
 class Result extends React.Component
 {
     constructor(props)
@@ -34,7 +20,58 @@ class Result extends React.Component
 
     render()
     {
-        const isActive = this.props.active;
+        let gpa;
+        if(this.props.gpa === null)
+        {
+            gpa = <span>None</span>
+        }
+        else
+        {
+            gpa = <span>{this.props.gpa}</span>
+        }
+
+        let essay;
+        if(this.props.essay === null)
+        {
+            essay = <span>Not Required</span>
+        }
+        else
+        {
+            essay = <span>Required</span>
+        }
+
+        let citizenship;
+        if(this.props.citizenship !== null && this.props.title.localeCompare("Loading Data") !== 0)
+        {
+            citizenship = <span><br /><br /><strong>Citizenship Required</strong></span>
+        }
+        else
+        {
+            citizenship = <span> </span>
+        }
+
+        let result;
+        if(this.props.title.localeCompare("Loading Data") !== 0)
+        {
+            result = (
+                <span>
+                    <span className="column-30">
+                        ${this.props.amount}
+                    </span>
+                    <span className="column-30">
+                        GPA: {gpa}
+                    </span>
+                    <span className="column-30">
+                        Essay: {essay}
+                    </span>
+                    <div style={{clear:"both"}}></div>
+                </span>
+            );
+        }
+        else
+        {
+            result = <span></span>
+        }
 
         return(
             //<div className={this.state.activeClasses[0]? "floatingBox3-active":"floatingBox3-inactive"} onClick={() => this.addActiveClass(0)}>}
@@ -42,8 +79,12 @@ class Result extends React.Component
                 <h2 onClick={this.handleReport}>
                     {this.props.title}
                 </h2>
+                    {result}
                 <span>
                     {this.props.description}
+                </span>
+                <span>
+                    {citizenship}
                 </span>
             </div>
         );
@@ -63,9 +104,13 @@ class Filters extends React.Component
     {
         super(props);
         this.state = {
-            major: 'computer-science',
-            gpa: 0.0,
-            amount: 0
+            major: 'computer-science', /*hyphenated no-caps string */
+            gpa: 0.0, /*nonnegative floating point; accepted values can be ints or decimals, e.g. 1 or 1.0 or 1.5 */
+            amount: 0, /*int; cannot be negative*/
+            max_amount: null,
+            sex: null, /*string; Male, Female, or Other*/
+            citizenship: null, /*string (bool); required (true) or not required (false) */
+            essay: null
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -87,14 +132,7 @@ class Filters extends React.Component
         }
         else if(target.name === 'gpa')
         {
-            if(target.value === 'NA')
-            {
-                value = 0;
-            }
-            else
-            {
-                value = target.value;
-            }
+            value = target.value;
         }
         else if(target.name ==='amount')
         {
@@ -107,7 +145,29 @@ class Filters extends React.Component
                 value = target.value;
             }
         }
-        else //this should never be called, but CYA protocol dictates it stays in.
+        else if(target.name ==='max_amount')
+        {
+            if(target.value.length === 0)
+            {
+                value = null;
+            }
+            else
+            {
+                value = target.value;
+            }
+        }
+        else if(target.name ==='essay' || target.name === "citizenship")
+        {
+            if(target.value.localeCompare("null") === 0)
+            {
+                value = null;
+            }
+            else
+            {
+                value = target.value;
+            }
+        }
+        else
         {
             value = target.value;
         }
@@ -118,6 +178,7 @@ class Filters extends React.Component
             [name] : value
         });
     }
+
 
     /*Prevent page from reloading and handle submitted data. Called when user clicks 'Apply.'*/
     handleSubmit(event)
@@ -137,7 +198,6 @@ class Filters extends React.Component
         return str2;
     }
 
-
     validate(event)
     {
         if(this.state.amount < 0)
@@ -150,7 +210,7 @@ class Filters extends React.Component
             alert("GPA not valid.");
             return false;
         }
-        else if(typeof this.state.major !== 'string' && !(this.state.major instanceof String) || !this.state.major.length)
+        else if((typeof this.state.major !== 'string' && !(this.state.major instanceof String)) || !this.state.major.length)
         {
             alert("Major must be a valid string.");
             return false;
@@ -521,20 +581,61 @@ class Filters extends React.Component
                     <br />
                     <label>
                         GPA
-                        <select name="gpa" onChange={this.handleChange}>
-                            <option value="NA">None</option> {/*Default value*/}
-                            <option value="2.0">2.0-2.5</option>
-                            <option value="2.5">2.5-3.0</option>
-                            <option value="3.0">3.0-3.5</option>
-                            <option value="3.5">3.5-4.0</option>
-                            <option value="4.0">4.0</option>
-                        </select>
+                        <input type="amount"  
+                            max="4.0" 
+                            style={{width:"50%"}} 
+                            pattern="[0-9]*(\.[0-9]+)?" 
+                            name="gpa" 
+                            placeholder="0.0" 
+                            value={this.state.value} 
+                            onChange={this.handleChange}
+                        />
                     </label>
                     <br />
                     <label>
                         Amount
                         <input type="number" name="amount" placeholder="None" onChange={this.handleChange}/>
                     </label>
+                    <br />
+                    <label>
+                        Maximum amount
+                        <input type="number" name="max_amount" placeholder="None" onChange={this.handleChange}/>
+                    </label>
+                    <br/>
+                    <p>Gender</p>
+                        <label>
+                            <input type="radio" name="sex" value="Female" onChange={this.handleChange}/>Women<br/>
+                        </label>
+                        <label>
+                            <input type="radio" name="sex" value="Male" onChange={this.handleChange}/>Men<br/>
+                        </label>
+                        <label>
+                            <input type="radio" name="sex" value="Other" onChange={this.handleChange}/>Other<br/>
+                        </label>
+                    <br />
+                    <p>Citizenship</p>
+                        <label>
+                            <input type="radio" name="citizenship" value="True" onChange={this.handleChange}/>Required<br/>
+                        </label>
+                        <label>
+                            <input type="radio" name="citizenship" value="False" onChange={this.handleChange}/>Not required<br/>
+                        </label>
+                        <label>
+                            <input type="radio" name="citizenship" value="null" onChange={this.handleChange}/>No preference<br/>
+                        </label>
+                    <br />
+                    <p>Essay</p>
+                        <label>
+                            <input type="radio" name="essay" value="True" onChange={this.handleChange}/>Required<br/>
+                        </label>
+                        <label>
+                            <input type="radio" name="essay" value="False" onChange={this.handleChange}/>Not required<br/>
+                        </label>
+                        <label>
+                            <input type="radio" name="essay" value="null" onChange={this.handleChange}/>No preference<br/>
+                        </label>
+                    <br />
+                    <br />
                     <input type="submit" value="Apply" onClick={this.handleSubmit}/>
                 </form>
             </div>
@@ -543,28 +644,109 @@ class Filters extends React.Component
 }
 
 
-{/* Forms reference: https://reactjs.org/docs/forms.html */}
+/* Forms reference: https://reactjs.org/docs/forms.html */
 class Results extends React.Component
 {
     constructor(props){
         super(props);
-        this.hipsterIpsum = "Lorem ipsum dolor amet godard jianbing you probably haven't heard of them, bicycle rights ennui everyday carry portland yuccie fixie cronut organic poke. Pabst williamsburg YOLO, blog austin iceland dreamcatcher you probably haven't heard of them cold-pressed tousled prism art party semiotics asymmetrical. Jean shorts glossier PBR&B heirloom. Synth pinterest farm-to-table coloring book pug tofu. Meditation vexillologist offal, hell of microdosing pug aesthetic intelligentsia knausgaard hoodie tumblr. Flannel flexitarian ethical chia taiyaki, gochujang street art fam mlkshk. Migas biodiesel selvage wolf. Authentic cold-pressed gentrify roof party letterpress +1 polaroid humblebrag keffiyeh meggings shaman. Hammock iceland green juice, art party cliche pork belly pug you probably haven't heard of them fixie hell of. Crucifix blue bottle vegan, selfies put a bird on it trust fund normcore. Blog listicle celiac, farm-to-table fixie shoreditch deep v hell of mlkshk plaid. Fashion axe drinking vinegar green juice kickstarter. 8-bit cliche you probably haven't heard of them hammock, mixtape XOXO shoreditch biodiesel selvage seitan. Fanny pack roof party etsy echo park, woke kickstarter irony asymmetrical pabst actually leggings snackwave +1 messenger bag wolf. Chartreuse fashion axe echo park single-origin coffee shaman meggings banh mi. Pop-up gastropub literally iPhone, tilde woke vinyl hoodie live-edge YOLO godard. Hexagon fashion axe yr cold-pressed offal la croix kinfolk food truck. Food truck yuccie dreamcatcher mustache, tattooed wolf edison bulb gastropub.";
         this.state = {
             listItems: this.props.listItems,
             all: this.props.all,
             response: [],
-            filters: {
-                keywords: null,
-                gpa: null,
-                amount: null,
-                major: 'computer-science'
-            },
-        };
+            keywords: null,
+            gpa: null,/*nonnegative floating point; accepted values can be ints or decimals, e.g. 1 or 1.0 or 1.5 */
+            amount: null, /*int; cannot be negative*/
+            max_amount: null,
+            major: 'computer-science', /*hyphenated no-caps string */
+            sex: null, /*string; Male, Female, or Other*/
+            citizenship: null, /*string (bool); required (true) or not required (false) */
+            essay: null
+            };
     }
 
     getNewQuery(filters) {
-        console.log(filters);
-        fetchScholarships(filters).then(api_response => {
+        let qfilters = this.state;
+        if(filters.keywords)
+        {
+            let str = this.searchParamsToCsv(filters.keywords)
+            this.setState({
+                    keywords: str
+            });
+        }
+        if(filters.gpa)
+        {
+            this.setState({
+                    gpa: filters.gpa
+            });
+            qfilters.gpa = filters.gpa
+        }
+        else
+        {
+            qfilters.gpa = null
+        }
+        if(filters.amount)
+        {
+            this.setState({
+                    amount: filters.amount
+            });
+            qfilters.amount = filters.amount
+        }
+        else
+        {
+            qfilters.amount = null
+        }
+        if(filters.max_amount)
+        {
+            this.setState({
+                    max_amount: filters.max_amount
+            });
+            qfilters.max_amount = filters.max_amount
+        }
+        else
+        {
+            qfilters.max_amount = null
+        }
+        if(filters.major)
+        {
+            this.setState({
+                    major: filters.major
+            });
+            qfilters.major = filters.major
+        }
+        if(filters.sex)
+        {
+            this.setState({
+                    sex: filters.sex
+            });
+            qfilters.sex = filters.sex
+        }
+        else
+        {
+            qfilters.sex = null
+        }
+        if(filters.citizenship)
+        {
+            this.setState({
+                    citizenship: filters.citizenship
+            });
+            qfilters.citizenship = filters.citizenship
+        }
+        else
+        {
+            qfilters.citizenship = null
+        }
+        if(filters.essay)
+        {
+            this.setState({
+                    essay: filters.essay
+            });
+            qfilters.essay = filters.essay
+        }
+        else
+        {
+            qfilters.essay = null
+        }
+        fetchScholarships(qfilters).then(api_response => {
             console.log(api_response);
             this.setState({
                 response: api_response
@@ -572,8 +754,9 @@ class Results extends React.Component
         })
     }
 
-    componentWillMount() {
-        fetchScholarships(this.state.filters).then(api_response => {
+    componentWillMount() 
+    {
+        fetchScholarships(this.state).then(api_response => {
             console.log(api_response);
             this.setState({
                 response: api_response
@@ -581,15 +764,41 @@ class Results extends React.Component
         })
     }
 
+    handleSearchBarChange(event) 
+    {
+        const target = event.target
+        let currStr
+        let newStr
 
+        currStr = target.value
+        newStr = this.searchParamsToCsv(currStr)
+
+        this.setState({
+            keywords: newStr
+        })
+    }
+
+    //Turn search parameters into comma-separated values, e.g. "Onua is the best bionicle" to "Onua,is,the,best,Bionicle"
+    searchParamsToCsv(searchParam)
+    {
+        let str = searchParam.split(/[\s]+/).filter(function(v){return v!==''}).join(',')
+        return (str)
+    }
+
+    handleKeywordSubmit(event)
+    {
+        event.preventDefault()
+        this.getNewQuery(this.state)
+
+    }
 
     render () {
         let scholarships;
         if(this.state.response.length === 0) {
-            scholarships = <Result isActive={false}title="Loading Data" description="This will take a few seconds..." />
+            scholarships = <Result isActive={false} title="Loading Data" description="This will take a few seconds..." />
         } else {
             scholarships = this.state.response.map((value, index) => {
-                    return (<Result key={index} isActive={false}title={value.name} description={value.description} />)
+                    return (<Result key={index} isActive={false} title={value.name} gpa={value.GPA} amount={value.amount} essay={value.essay} citizenship={value.citizenship} description={value.description} />)
                 })
         }
 
@@ -605,8 +814,8 @@ class Results extends React.Component
 
                 {/* SEARCH BAR */}
                 <div className="Search-bar-wide">
-                    <input type="text" placeholder="Search scholarships..." name="search" />
-                    <button type="submit">Go</button>
+                    <input type="text" placeholder="Search scholarships by keyword..." name="keywords" onChange={this.handleSearchBarChange.bind(this)}/>
+                    <button type="submit" onClick={this.handleKeywordSubmit.bind(this)}>Go</button>
                 </div>
 
                 <div className="row-flex">

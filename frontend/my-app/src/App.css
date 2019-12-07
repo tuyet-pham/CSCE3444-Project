@@ -165,7 +165,7 @@ p.howto {
     font-size: 17px;
     float: left;
     border: 1px solid black;
-    border-radius: 10px 0px 0px 10px;
+    border-radius: 5px;
     min-width: 90%;
 }
 
@@ -179,7 +179,7 @@ p.howto {
     background: var(--ss-light-teal);
     font-size: 17px;
     border: 1px solid black;
-    border-radius: 0px 10px 10px 0px;
+    border-radius: 5px;
     cursor: pointer;
     min-width: 6%;
 }
@@ -375,7 +375,6 @@ p.howto {
     overflow: hidden;
     min-height: 50px;
     max-height: 150px; 
-    display: -webkit-box;
     margin: 10px;
     padding: 10px 30px 30px 30px;
     box-sizing: border-box;
@@ -389,17 +388,13 @@ p.howto {
     background-color: white;
     border-radius: 5px;
     box-shadow: 0px 0px 0px 2px black;
-    /*overflow properties*/
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
 }
 
 .floatingBox3-active { /* Used in results page */
     /*sizing and placement*/
     float: left;
     width: 100%;
-    min-height: 50px;
-    display: -webkit-box;
+    min-height: 150px;
     margin: 10px;
     padding: 10px 30px 30px 30px;
     box-sizing: border-box;
@@ -413,8 +408,6 @@ p.howto {
     background-color: white;
     box-shadow: 0px 0px 0px 2px var(--ss-medium-green);
     border-radius: 5px;
-    /*overflow properties*/
-    -webkit-box-orient: vertical;
 }
 
 
