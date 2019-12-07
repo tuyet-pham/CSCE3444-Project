@@ -84,6 +84,15 @@ class AdminHome extends React.Component {
                             <button class="button button-green">Show me</button>
                         </div>
                     </div>
+                    <span>
+                        <span><TableP/></span>
+                    </span>
+                    <p>
+                        <div style={{textAlign:"center", margin: "auto"}}>
+                            <input type="submit" class="flatButton" value="Accept"/>
+                            <input type="submit" class="flatButton" style={{background: "red"}} value="Remove"/>
+                        </div>
+                    </p>
                 </div>
             </div>
         );
