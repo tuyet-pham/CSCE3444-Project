@@ -815,7 +815,7 @@ class Results extends React.Component
                 <div className="row-flex">
                     {/* FILTERS */}
                     <div className="column-30" style={{backgroundColor:"var(--ss-light-gray)", margin:"10px", textAlign:"left", borderRadius:"5px"}}>
-                        <Filters updateQuery={this.handleSubmit} />
+                        <Filters updateQuery={this.getNewQuery.bind(this)} />
                     </div>
 
                     {/* RESULTS */}
