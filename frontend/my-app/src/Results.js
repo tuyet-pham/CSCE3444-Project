@@ -44,7 +44,7 @@ class Result extends React.Component
         }
 
         let citizenship;
-        if(this.props.citizenship !== null && this.props.title.localeCompare("Loading Data") !== 0)
+        if(this.props.citizenship !== null && this.props.title.localeCompare("Loading Data") !== 0 && (this.props.title.localeCompare("No data was found. Sorry!") !== 0))
         {
             citizenship = <span><br /><br /><strong>Citizenship Required</strong></span>
         }
@@ -65,7 +65,7 @@ class Result extends React.Component
 
         let result;
         let buttons;
-        if(this.props.title.localeCompare("Loading Data") !== 0)
+        if((this.props.title.localeCompare("Loading Data") !== 0) && (this.props.title.localeCompare("No data was found. Sorry!") !== 0))
         {
             result = (
                 <span>
@@ -832,7 +832,7 @@ class Results extends React.Component
     render () {
         let scholarships;
         if(this.state.response === null) {
-            scholarships = <Result isActive={false} title="Loading Data..." description="This will take a few seconds..." />
+            scholarships = <Result isActive={false} title="Loading Data" description="This will take a few seconds..." />
         } else if (this.state.response.length === 0) {
             scholarships = <Result isActive={false} title="No data was found. Sorry!" description="Try changing your parameters." />
         } else {
