@@ -17,6 +17,7 @@
     --ss-gold: #b69504;
     --ss-dark-gold: #997d00;
     --ss-light-light-gray: #e0e0e0;
+    --ss-off-black: #161816;
 }
 
 .App {
@@ -64,7 +65,6 @@ hr.new1 {
 }
 
 #scholarScrapeDescription {
-    background-color: white;
     position: relative;
     width: 65%;
     margin:auto;
@@ -78,13 +78,13 @@ p.howto {
     padding-top: 10px;
     opacity: 80%;
     font-size: 20px;
-    color: var(--ss-dark-green)
+    color: var(--ss-off-black)
 }
 
 .howto2 {
     font-size: 17px;
     opacity: 80%;
-    color: black;
+    color: white;
 }
 
 
@@ -101,7 +101,7 @@ p.howto {
 }
 
 .App-footer {
-    background-color: black;
+    background-color: var(--ss-off-black);
     color: white;
     width: 100%;
     bottom: 0px !important;
@@ -270,7 +270,7 @@ p.howto {
 }
 
 /**************** Meet the team section ****************/
-.aestheticDiv {
+/* .aestheticDiv {
     background-color: rgb(145, 221, 179);
     width: 100%;
     height: 70%;
@@ -278,7 +278,7 @@ p.howto {
     overflow: hidden;
     z-index: -1;
     bottom: 0;
-}
+} */
 
 .meetTheTeam {
     padding: 10px 50px 100px 0px;
@@ -485,13 +485,12 @@ p.howto {
     vertical-align: middle;
 }
 
-.AdminHomeHeader {
-    width: 100%;
-    background-color: whitesmoke;
-    color: var(--ss-dark-gray);
-    text-align: center;
+.AddminHomeHeader {
+    background-color : var(--ss-dark-green);
+    color: var(--ss-light-gray);
+    text-align: right;
     font-size: 20px;
-    padding : 10px;
+    padding : 20px;
 }
 
 
@@ -503,11 +502,13 @@ p.howto {
 
 .nav {
     list-style-type: none;
+    margin : 0px;
+    padding: 0px;
     background-color: var(--ss-dark-gray);
     height: 100%;
     width: 260px;
     float: left;
-    font-size: 25px;
+    font-size: 17px;
     text-align: center;
     overflow: auto;
 }
@@ -736,14 +737,14 @@ button:focus {
 /* NAVBAR - references : https://www.w3schools.com/css/css_navbar.asp */
 
 .nav2 {
-    background-color: var(--ss-dark-medium-gray);
     list-style-type: none;
-    padding: 0px 1% 0px 0px;
+    padding: 0px 5% 0px 0px;
     height: 100%;
     width: 100%;
     font-size: 25px;
     box-sizing: border-box;
     text-align: right;
+    background-color: var(--ss-off-black);
 }
 
 .nav2 a {
@@ -773,6 +774,7 @@ button:focus {
     max-height: 100%;
     min-height: 100%;
     width: 100%;
+    padding-top: 3%;
     overflow: hidden;
 }
 
@@ -789,7 +791,7 @@ button:focus {
     width: 65%;
     padding: 30px 40px 30px 40px;
     background-color: whitesmoke;
-    margin: 5px 10px 10px 15%;
+    margin: auto;
     border-radius: 20px;
     box-shadow: 10px 30px 70px -7px rgba(0,0,0,0.20), 7px 5px 10px 0 rgba(0,0,0,0.14);
 }
