@@ -1,13 +1,11 @@
 .vscode
 *.csv
-run.py
-run1.py
 .env
 env
 venv
 .mypy_cache
 __pycache__
-
+nuser.txt
 
 # dependencies
 /node_modules

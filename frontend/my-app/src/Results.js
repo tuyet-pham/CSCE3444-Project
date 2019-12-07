@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 
-import { fetchScholarships } from './utils/api_functions';
+import { fetchScholarships, reportScholarship } from './utils/api_functions';
 
 class Result extends React.Component
 {
@@ -10,6 +10,12 @@ class Result extends React.Component
         super(props);
         this.updateClass = this.updateClass.bind(this);
         this.state = {active: false};
+    }
+
+    handleReport() {
+        reportScholarship(1).then(api_response => { // Update with scholarship ID instead of 1
+            console.log(api_response);
+        });
     }
 
     render()
@@ -70,7 +76,7 @@ class Result extends React.Component
         return(
             //<div className={this.state.activeClasses[0]? "floatingBox3-active":"floatingBox3-inactive"} onClick={() => this.addActiveClass(0)}>}
             <div className={this.state.active ? "floatingBox3-active" : "floatingBox3-inactive"} onClick={this.updateClass}>
-                <h2>
+                <h2 onClick={this.handleReport}>
                     {this.props.title}
                 </h2>
                     {result}

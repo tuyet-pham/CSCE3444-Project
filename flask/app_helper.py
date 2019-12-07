@@ -9,7 +9,10 @@ from flask.json import JSONEncoder
 
 import mysql.connector as sql
 
+
 class MyJSONEncoder(JSONEncoder):
+    """JSON encoder for app."""
+
     def default(self, o):
         """Convert datetime and date objects to string for JSON serialization.
 
@@ -34,6 +37,28 @@ class MyJSONEncoder(JSONEncoder):
         return JSONEncoder.default(self, o)
 
 
+def init_admin_user(bcrypt):
+    """Ensure the admin user is created or create new account."""
+    # Gnerate hashed password
+    password = bcrypt.generate_password_hash(environ['ADMIN_PASS']).decode('utf-8')
+
+    db, cursor = db_connect()
+    query = """
+        INSERT INTO Account (username, hashpass, idAdmin)
+        SELECT "admin", %s, 1 FROM DUAL
+        WHERE NOT EXISTS(
+            SELECT * FROM Account
+            WHERE username = "admin"
+            LIMIT 1
+        )
+    """
+    cursor.execute(query, (password,))
+
+    db.commit()
+    cursor.close()
+    db.close()
+
+
 def db_connect():
     """Connect to database.
 
@@ -54,6 +79,7 @@ def db_connect():
             print("Database does not exit")
         else:
             print(er)
+
 
 def date_today_s():
     """Get current date in SQL search format.
