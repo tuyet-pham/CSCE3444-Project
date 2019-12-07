@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import Recaptcha from "react-recaptcha"
+import { login } from './utils/api_functions';
 
 class AdminLogin extends React.Component {
     constructor(props){
@@ -10,6 +11,7 @@ class AdminLogin extends React.Component {
             username: "",
             password: ""
         };
+
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.recaptchaLoaded = this.recaptchaLoaded.bind(this);
@@ -32,40 +34,40 @@ class AdminLogin extends React.Component {
 
     //Handles the state change of values when submit clicked.
     handleChange(e) {
-        const target = e.target;
-        const value = target.value;
-        const name = target.name;
-
         this.setState({
-            [name] : value
+            [e.target.name] : e.target.value
         });
     }
 
-    //Handles the submission button when clicked. Validating the values. 
+    //Handles the submission button when clicked. Validating the values.
     handleSubmit = (e) => {
-        const errormsg = "Please verify that you are a hooman";
+        // window.location.reload(false)
+        e.preventDefault();
+        const errormsg = "Please verify that you are a human";
         if(this.state.isVerified === false){
             alert(errormsg);
-            e.preventDefault();
         }
         else{
-            const incorrectmsg = "Incorrect Username or Password";
-            if(this.validate(e)) {
+            const user = {
+                username: this.state.username,
+                password: this.state.password
             }
-            else
-            {
-                alert(incorrectmsg);
-                e.preventDefault();
-            }
+
+            login(user).then(res => {
+                if (!res.error) {
+                    console.log(res);
+                    localStorage.setItem('usertoken', res.token)
+                    this.props.history.push(`/adminhome`)
+                }
+                else{
+                    alert("Incorrect Login. Please Try again");
+                }
+            })
         }
     }
-    
+
     onRegister(){
         //go to register page
-    }
-
-    validate(e){
-        return true;
     }
 
     render () {
@@ -73,17 +75,17 @@ class AdminLogin extends React.Component {
             <div className="AdminBackground" >
                 <div class="App-header-login">
                     <h1 class="App-header-contents" >
-                        <img class="App-logo" src={process.env.PUBLIC_URL + "scraper_logo.png"} alt="ScholarScraper logo"/> 
+                        <img class="App-logo" src={process.env.PUBLIC_URL + "scraper_logo.png"} alt="ScholarScraper logo"/>
                         <br />
                         Admin Login
                     </h1>
                 </div>
                 <div>
                     <form onSubmit={this.handleSubmit}>
-                        <input class="admininput" type="text" id="username" name="userinfo" placeholder="Username" value={this.state.value} onChange={this.handleChange} required/> <br />
-                        <input class="admininput" type="password" id="password " name="userinfo" placeholder="Password" value={this.state.value} onChange={this.handleChange} required/> <br />
+                        <input class="admininput" type="text" name="username" placeholder="Username" value={this.state.value} onChange={this.handleChange} required/> <br />
+                        <input class="admininput" type="password" name="password" placeholder="Password" value={this.state.value} onChange={this.handleChange} required/> <br />
                         <br />
-                        <input type="submit" class="flatButton"  value="Login"/>
+                        <input type="submit" class="flatButton" value="Login"/>
                         <button onClick={this.onRegister} class="flatButton">Register</button>
                         <br /><br /><br />
                     </form>
@@ -97,7 +99,7 @@ class AdminLogin extends React.Component {
                         />
                     </div>
                     <a class="forgotpassword" href="Forgotpassword.page">forgot password or username?</a>
-                    <br /><br />  
+                    <br /><br />
                 </div>
             </div>
         );

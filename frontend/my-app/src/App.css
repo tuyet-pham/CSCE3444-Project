@@ -484,12 +484,13 @@ p.howto {
     vertical-align: middle;
 }
 
-.AddminHomeHeader {
-    background-color : var(--ss-dark-green);
-    color: var(--ss-light-gray);
-    text-align: right;
+.AdminHomeHeader {
+    width: 100%;
+    background-color: whitesmoke;
+    color: var(--ss-dark-gray);
+    text-align: center;
     font-size: 20px;
-    padding : 20px;
+    padding : 10px;
 }
 
 
@@ -501,13 +502,11 @@ p.howto {
 
 .nav {
     list-style-type: none;
-    margin : 0px;
-    padding: 0px;
     background-color: var(--ss-dark-gray);
     height: 100%;
     width: 260px;
     float: left;
-    font-size: 17px;
+    font-size: 25px;
     text-align: center;
     overflow: auto;
 }
@@ -753,8 +752,9 @@ button:focus {
 /* NAVBAR - references : https://www.w3schools.com/css/css_navbar.asp */
 
 .nav2 {
+    background-color: var(--ss-dark-medium-gray);
     list-style-type: none;
-    padding: 0px 5% 0px 0px;
+    padding: 0px 1% 0px 0px;
     height: 100%;
     width: 100%;
     font-size: 25px;

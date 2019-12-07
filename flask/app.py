@@ -2,19 +2,37 @@
 """Flask App for Scholarscrape."""
 
 import json
+from os import environ
 from symbol import parameters
+from urllib import response
 
-from flask import Flask, jsonify
+from flask import Flask, abort, jsonify
 from flask_restful import Api, Resource, reqparse
 
-from app_helper import MyJSONEncoder, date_today_s, db_connect
+from app_helper import MyJSONEncoder, date_today_s, db_connect, init_admin_user
+from flask_bcrypt import Bcrypt
 from flask_cors import CORS
+from flask_jwt_extended import JWTManager, create_access_token
 
 app = Flask(__name__)
 app.config['BUNDLE_ERRORS'] = True
+app.config['JWT_SECRET_KEY'] = environ['JWT_SECRET_KEY']
 api = Api(app)
 CORS(app)
+bcrypt = Bcrypt(app)
+jwt = JWTManager(app)
+
 app.json_encoder = MyJSONEncoder
+
+
+@app.before_first_request
+def startup():
+    """Flask Startup Script.
+
+    Runs before first request.
+
+    """
+    init_admin_user(bcrypt)
 
 
 class Scholarships(Resource):
@@ -161,7 +179,7 @@ class Scholarships(Resource):
             cursor.close()
             db.close()
         except Exception as e:
-            abort(400, message="{0}".format(str(e)))
+            abort(400, "{0}".format(str(e)))
 
         return jsonify(json_data)
 
@@ -171,6 +189,10 @@ class Scholarship(Resource):
 
     Args:
         Resource: /scholarship route
+
+    post: creates a new scholarship.
+    put: report a scholarship
+    delete: delete a scholarship
 
     """
 
@@ -251,18 +273,89 @@ class Scholarship(Resource):
             db.close()
 
         except Exception as e:
-            abort(400, message="{0}".format(str(e)))
+            abort(400, "{0}".format(str(e)))
         return {'success': 'Write success!'}
 
-    # def delete(id):
-    #     id = id
-    #     db, cursor =db_connect()
-    #     json_data = []
-    #     return json.dumps(json_data, default=json_converter)
+    def put(self):
+        """Report Scholarship."""
+        parser = reqparse.RequestParser()
+        parser.add_argument('idScholarship', type=int, required=True, help="{error_msg} - Scholarship ID")
+        args = parser.parse_args()
+
+        try:
+            db, cursor = db_connect()
+
+            # Check if ID exists
+            query = """ UPDATE Scholarship SET accp_status = accp_status + 1 WHERE idScholarship = %s """
+            print(args["idScholarship"], flush=True)
+            cursor.execute(query, (args["idScholarship"],))
+
+            db.commit()
+            cursor.close()
+            db.close()
+
+            if cursor.rowcount == 0:
+                abort(400, message="ID does not exist.")
+
+            return {'message': 'Successfully reported scholarship.'}
+        except Exception as e:
+            abort(400, "{0}".format(str(e)))
+
+    def delete(self):
+        #parsing the Scholarship ID argument and assigning idNum to it
+        parser = reqparse.RequestParser()
+        parser.add_argument('id', required=True, help="{error_msg} - id")
+        args = parser.parse_args()
+        idNum = args['id']
+
+        db, cursor = db_connect()
+
+        # Deleting row from Scholarship and Reqtag dbs that contain the scholarship ID
+        cursor.execute("DELETE FROM Scholarship where idScholarship = %s", (idNum,))
+        cursor.execute("DELETE FROM Reqtag where idScholarship = %s", (idNum,))
+
+        db.commit()
+        cursor.close()
+        db.close()
+
+        return {'success': 'Delete success!'}
+
+class UserLogin(Resource):
+    """Class for /user/login route."""
+
+    def post(self):
+        """Login User."""
+        parser = reqparse.RequestParser()
+        parser.add_argument('username', type=str, required=True, help="{error_msg}: Admin Username")
+        parser.add_argument('password', type=str, required=True, help="{error_msg}: Password")
+        args = parser.parse_args()
+
+        db, cursor = db_connect()
+
+        query = """
+            SELECT * FROM Account WHERE username=%s
+        """
+        cursor.execute(query, (args['username'],))
+        userData = cursor.fetchone()
+        password = userData[2]
+
+        cursor.close()
+        db.close()
+
+        if bcrypt.check_password_hash(password, args['password']):
+            access_token = create_access_token(identity=args['username'])
+            response = jsonify({"token": access_token})
+            response.status_code = 200
+            return response
+        else:
+            response = jsonify({"error": "Invalid username and password"})
+            response.status_code = 200
+            return response
 
 
 api.add_resource(Scholarships, '/scholarships')
 api.add_resource(Scholarship, '/scholarship')
+api.add_resource(UserLogin, '/users/login')
 
 
 if __name__ == "__main__":
