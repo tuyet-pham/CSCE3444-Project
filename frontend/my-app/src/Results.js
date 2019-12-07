@@ -110,7 +110,7 @@ class Result extends React.Component
         return(
             //<div className={this.state.activeClasses[0]? "floatingBox3-active":"floatingBox3-inactive"} onClick={() => this.addActiveClass(0)}>}
             <div className={this.state.active ? "floatingBox3-active" : "floatingBox3-inactive"} onClick={this.updateClass}>
-                <h2 onClick={this.handleReport}>
+                <h2>
                     {this.props.title}
                 </h2>
                     {result}
@@ -618,13 +618,13 @@ class Filters extends React.Component
                     <br />
                     <label>
                         GPA
-                        <input type="amount"  
-                            max="4.0" 
-                            style={{width:"50%"}} 
-                            pattern="[0-9]*(\.[0-9]+)?" 
-                            name="gpa" 
-                            placeholder="0.0" 
-                            value={this.state.value} 
+                        <input type="amount"
+                            max="4.0"
+                            style={{width:"50%"}}
+                            pattern="[0-9]*(\.[0-9]+)?"
+                            name="gpa"
+                            placeholder="0.0"
+                            value={this.state.value}
                             onChange={this.handleChange}
                         />
                     </label>
@@ -791,7 +791,7 @@ class Results extends React.Component
         })
     }
 
-    componentWillMount() 
+    componentWillMount()
     {
         fetchScholarships(this.state).then(api_response => {
             console.log(api_response);
@@ -801,7 +801,7 @@ class Results extends React.Component
         })
     }
 
-    handleSearchBarChange(event) 
+    handleSearchBarChange(event)
     {
         const target = event.target
         let currStr
