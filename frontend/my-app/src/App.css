@@ -472,7 +472,6 @@ p.howto {
 
 /***************************** Admin Home Page  ****************************/
 .AppAdmin{
-    height: 100vh;
     max-height: 100%;
     min-height: 100%;
     min-width: 20%;
@@ -616,25 +615,34 @@ button:focus {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    overflow: scroll;
 }
 
 .flex-view > div {
     height: 250px;
     width: 300px;
     background-color: whitesmoke;
-    margin: 50px 20px 0px 10px;
+    margin: 2%;
     padding: 5px;
     font-size: 17px;
     text-align: center;
     box-shadow: 3px 10px 20px -7px rgba(0,0,0,0.19), 0 10px 20px 0 rgba(0,0,0,0.14);
 }
 
-.flex-view > table {
-    width:30%;
+.flex-view > span{
+    margin: 2%;
+    width: 70%;
+    height: 1000px;
+    overflow: auto;
+    background-color: whitesmoke;
+    margin-top: auto;
+    padding: 5px;
+    font-size: 17px;
+    box-shadow: 3px 10px 20px -7px rgba(0,0,0,0.19), 0 10px 20px 0 rgba(0,0,0,0.14);
 }
 
-.flex-view > span{
-    margin-top: 1%;
+.flex-view > p{
+    margin: 2%;
 }
 
 .viewdisplay {
@@ -858,27 +866,19 @@ textarea {
     color: black;
 }
 
-.tableMake{
-    height: 20%;
-    width: 70%;
-    background-color: whitesmoke;
-    margin-top: auto;
-    padding: 5px;
-    font-size: 17px;
-    text-align: center;
-    box-shadow: 3px 10px 20px -7px rgba(0,0,0,0.19), 0 10px 20px 0 rgba(0,0,0,0.14);
-}
-
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
     width: 100%;
-  }
+}
   
   td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
+    height: 20px;
+    /* word-break: break-all; */
+    overflow: auto;
   }
   
   tr:nth-child(even) {
