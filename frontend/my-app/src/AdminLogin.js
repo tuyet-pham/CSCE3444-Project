@@ -86,7 +86,7 @@ class AdminLogin extends React.Component {
                         <input class="admininput" type="password" name="password" placeholder="Password" value={this.state.value} onChange={this.handleChange} required/> <br />
                         <br />
                         <input type="submit" class="flatButton" value="Login"/>
-                        <button onClick={this.onRegister} class="flatButton">Register</button>
+                        {/* <button onClick={this.onRegister} class="flatButton">Register</button> */}
                         <br /><br /><br />
                     </form>
                     <div class="recaptchaDiv">
@@ -98,7 +98,7 @@ class AdminLogin extends React.Component {
                             onloadCallback={this.recaptchaLoaded}
                         />
                     </div>
-                    <a class="forgotpassword" href="Forgotpassword.page">forgot password or username?</a>
+                    {/* <a class="forgotpassword" href="Forgotpassword.page">forgot password or username?</a> */}
                     <br /><br />
                 </div>
             </div>

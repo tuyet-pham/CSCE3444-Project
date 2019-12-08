@@ -107,7 +107,7 @@ class AdminHome extends React.Component {
                         ScholarScrape Admin Portal
                     </span > */}
 
-                    <div title="Listing awaiting approval">
+                    {/* <div disabled="true" title="Listing awaiting approval">
                         <h1 style={{color:'#fdd835'}} class="viewdisplay">{this.state.requests}</h1>
                                 Search for Scholarships
                                 Requested listing
@@ -116,7 +116,7 @@ class AdminHome extends React.Component {
                         </div>
                     </div>
 
-                    <div title="Listing reported">
+                    <div disabled="true" title="Listing reported">
                         <h1 style={{color:'#e53935'}} class="viewdisplay">{this.state.reported}</h1>
                         Reported Listing
                         <div>
@@ -124,13 +124,13 @@ class AdminHome extends React.Component {
                         </div>
                     </div>
 
-                    <div title="Total listing count">
+                    <div disabled="true" title="Total listing count">
                         <h1 style={{color:'#80cbc4'}} class="viewdisplay">{this.state.all}</h1>
                         Total listing
                         <div>
                             <button class="button button-green">Show me</button>
                         </div>
-                    </div>
+                    </div> */}
                     <span>
                         <span><TableP toggleCheckbox={this.toggleCheckbox} /></span>
                     </span>

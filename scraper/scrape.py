@@ -17,14 +17,9 @@ from mysql.connector import errorcode
 import csv
 from datetime import date
 import datetime
-from adduser import adduser
 
 #re : regular expression
 import re
-
-
-
-
 
 # scrape
 # @param username, password, host IP or name
@@ -95,7 +90,7 @@ def scrape(usern, passwd, hostl, databasen):
         cursor.execute("UPDATE Reqtag set essay = NULL where essay = '0'")
         cursor.execute("UPDATE Reqtag set citizenship = NULL where citizenship = '0'")
 
-        
+
         # adduser(usern, passwd, hostl, databasen,"nuser.csv")
 
 
@@ -229,14 +224,14 @@ def tagBuilder(idscholarship, url, desc):
 
         if any(c in desc for c in result):
             s[0] = 1
-                
+
         elif any(c in desc for c in results):
             s[0] = 2
         # Finding whether citizenship is required from description
         result = ['Citizen', 'citizen']
         if any(c in desc for c in result):
             s[2] = 1
-        # Getting GPA requirements from description 
+        # Getting GPA requirements from description
         s[4] = GPA(desc)
         #Find whether an essay is required
         result = ['essay', 'Essay']
