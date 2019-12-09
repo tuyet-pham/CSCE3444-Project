@@ -58,6 +58,7 @@ class AdminLogin extends React.Component {
                     console.log(res);
                     localStorage.setItem('usertoken', res.token);
                     this.props.history.push(`/adminhome`);
+                    window.location.reload(false);
                 }
                 else{
                     alert("Incorrect Login. Please Try again");
