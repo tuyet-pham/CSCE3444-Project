@@ -91,7 +91,7 @@ class Result extends React.Component
                             <button class="button button-red" onClick={this.handleReport.bind(this)}>Report</button>
                         </span>
                         <span style={{float:"right"}}>
-                            <a class="button button-green" href={this.props.url} target="_blank">Apply</a>
+                            <a href={this.props.url} ><button class="button button-green" target="_blank">Apply</button></a>
                         </span>
                     </div>
                 );

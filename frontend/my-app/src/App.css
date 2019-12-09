@@ -529,13 +529,13 @@ button:focus {
     border: none;
     border-style: none;
     border-radius: 20px;
-    margin-top: 30px;
     height: 30px;
     padding: 0px 10px 0px 10px;
     margin-right: 15px 0 10px 0px;
     font-size: 17px; ;
+    bottom:0;
     /* -webkit-transition-duration: 0.2s;
-    transition-duration: 0.2s;    */
+    transition-duration: 0.2s;   */
 }
 
 .button-yellow {
@@ -572,7 +572,7 @@ button:focus {
 }
 
 
-.button-green {
+.button-green{
     background-color: var(--ss-dark-green);
     color: whitesmoke;
 }
