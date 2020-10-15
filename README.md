@@ -6,7 +6,10 @@ Created on : November 2019
 
 
 ## About ScholarScrape ##
-```For some, the process of applying for Scholarships is on the level of intimidating to extremely intimidating. Apart from applying for Scholarships, the process of finding the scholarships to apply to can be just as difficult. With public scholarships being in abundant, ScholarScrape was made to make to public scholarships more available using our webscraping program.
+```
+For some, the process of applying for Scholarships is on the level of intimidating to extremely intimidating. 
+Apart from applying for Scholarships, the process of finding the scholarships to apply to can be just as difficult. 
+With public scholarships being in abundant, ScholarScrape was made to make to public scholarships more available using our webscraping program.
 ```
 
 **Our processs**
