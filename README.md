@@ -12,35 +12,14 @@ Apart from applying for Scholarships, the process of finding the scholarships to
 With public scholarships being in abundant, ScholarScrape was made to make to public scholarships more available using our webscraping program.
 ```
 
-**Our processs**
+### Software
+1. ReactJs
+2. Docker
+
+### Others
 <br>
 
-
-**<h3>Software<h3>**
-<br>
-
-
-***Specification***
-<br>
-
-
-**<h3>Hardware<h3>**
-<br>
-
-
-***Specification***
-<br>
-
-
-**<h3>Bugs<h3>**
-<br>
-
-
-
-**Other**
-<br>
-
-**Dev Setup**
+### Dev Setup
 * Clone repository
 * [Install Docker on your machine](https://hub.docker.com/)
 * Build docker instances:
